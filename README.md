@@ -21,6 +21,7 @@ Esta aplicación hace uso de:
 * [Bower](https://bower.io/) - Dependencias de JS
 * [D3.js](https://d3js.org/) - Visualizaciones interactivas en web
 * [Gulp](http://gulpjs.com/) - Build y despliegue del sistema
+* [NodeWebkitBuilder](https://www.npmjs.com/package/node-webkit-builder) - Build de la aplicación con NodeWebkit
 
 Para desplegar la aplicación en un servidor de desarrollo (Windows)
 

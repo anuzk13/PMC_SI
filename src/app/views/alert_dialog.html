@@ -1,0 +1,30 @@
+<md-dialog aria-label="Mango (Fruit)"  ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h1>{{ title | translate}}</h1>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="close()">
+          <md-icon>close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <p>
+          {{ content | translate}}
+        </p>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="confirm()">
+        {{ acceptText | translate}}
+      </md-button>
+      <md-button ng-show="cancelText" ng-click="close()">
+        {{ cancelText | translate}}
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

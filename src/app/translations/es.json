@@ -1,0 +1,1208 @@
+{
+  "Warnings":{
+    "RequiredMssg":"Este campo es obligatorio.",
+    "EmailFormatMssg":"Formato inválido.",
+    "PasswordFormatMssg":"Su Contraseña debe contener al menos un número.",
+    "PasswordMinLenghtMssg":"Su Contraseña debe tener mínimo 7 caracteres.",
+    "PasswordMaxLenghtMssg":"Su Contraseña debe máximo 30 caracteres.",
+    "PasswordMacthMssg":"Sus Contraseñas deben coincidir.",
+    "FieldMatchMssg":"Los campos deben coincidir",
+    "DateFormatIncorrect":"El formato de la fecha no es válido",
+    "NumberError":"El valor debe estar entre {{min}} y {{max}} {{units}}",
+    "RegisterError":"Hubo un problema durante el registro",
+    "IncorrectUser":"El usuario o la contraseña están equivocados",
+    "AuthError": "La URL indicada no corresponde a una base de datos",
+    "InvalidFormatMessage":"El formato no es correcto",
+    "NetworkError":"Hubo un problema en la conexión de internet o la URL especificada",
+    "WrongProtocol" : "Url Incorrecta",
+    "NotFound":"No se encontró un servidor de base de datos soportado en la dirección"
+  },
+  "Suggestions": {
+    "IncorrectUser":"Por favor verifique su usario, contrseña y la dirección remota",
+    "NetworkError":"Por favor verifique su conexión a internet y la dirección de la base de datos",
+    "WrongProtocol":"Solo esta soportado http y https. Verifique que la URL comience por http o https",
+    "NotFound":"Verifique que la dirección es correcta"
+  },
+  "Alerts":{
+    "UserExists": {
+      "Title": "Usuario Repetido",
+      "Content": "El nombre de usuario elegido ya esta registrado"
+    },
+    "LoginFailed": {
+      "Title": "Usuario Incorrecto",
+      "Content": "El nombre de usuario o la contraseña son incorrectos"
+    },
+    "Accept":"Acceptar"
+  },
+  "PMC_Unit_Fields":{
+    "PMCUNIT_ID":"ID Unidad PMC",
+    "PMCUNIT_Name":"Nombre de la Unidad PMC",
+    "PMCUNIT_Address":"Dirección de la Unidad PMC"
+  },
+  "DailyRegs":{
+    "Title":"Registros Diarios",
+    "NotFound":"Paciente no encontrado",
+    "SearchPatient":"Buscar paciente ... ",
+    "AttentionDate":"Fecha de atención",
+    "RegisterAttentions":"Guardar Atenciones",
+    "SelectedPatients":"Pacientes seleccionados",
+    "Success":{
+      "Title":"Registro exitoso",
+      "Mssg":"Se registraron los eventos correctamente para los pacientes"
+    },
+    "Error":{
+      "Title":"Registro fallido",
+      "Mssg":"No se logró completar el registro"
+    }
+  },
+  "PMCUnitRegister": {
+    "Title":"Sistema Indicadores PMC",
+    "Continue":"Continuar",
+    "Back":"Regresar",
+    "RegisterSection": {
+      "Title":"Registro Unidad PMC",
+      "PMCUnitNameFld":"Nombre Unidad PMC",
+      "PMCUnitAddressFld":"Dirección Unidad",
+      "QualityIndicators":{
+        "Title":"Datos calidad unidad PMC",
+        "ParentAccess":"Horas de acceso de los padres en adaptación canguro a la unidad"
+      },
+      "PMCConfiguration":{
+        "Title":"Configuración del sistema",
+        "Stages":"Etapas a registrar por cada paciente"
+      }
+    },
+    "RemoteRegister":{
+      "ConenctionType":"Tipo de conexión a la base de datos",
+      "Access":"La unidad posee acceso a un servidor de datos remoto",
+      "NoAccess":"Trabajar localmente",
+      "Dialog":"Se validará el acceso al servidor remoto para continuar con el registro ...",
+      "Title":"Registro Servidor remoto",
+      "VerifyConnection":"Para poder registrar la unidad debe verificar la conexión con la base de datos. Se guardará base de datos una vez sea verificada",
+      "URL":"Dirección servidor remoto",
+      "Admin":"Usuario Servidor",
+      "Pass":"Contraseña Servidor",
+      "Verify":"Verificar",
+      "SuccessTitle":"Se ha verificado correctamente el servidor remoto",
+      "SuccessMessage":"Se ha iniciado sesión",
+      "PMCDataNotFound":"No se han encontrado datos de la unidad en la base de datos. Por favor registar datos de la unidad",
+      "PMCDataFound":"Se encontraron datos existentes de la unidad en la base de datos"
+    },
+    "AcceptBtn":"Registrar Unidad"
+  },
+  "Login":{
+    "Title":"Login",
+    "UserName":"Nombre Usuario",
+    "Password":"Contraseña",
+    "AccessBtn":"Ingresar",
+    "KeepOffline":"Continuar en modo Offline"
+  },
+  "PatientsDashboard":{
+    "Title":"Actualización Datos Pacientes",
+    "PhaseEndLabel":"Pacientes que finalizaron la fase"
+  },
+  "Right_Menu":{
+    "OpenMenu": "Abrir Menú",
+    "CloseMenu": "Cerrar Menú",
+    "PMCPatients": {
+      "Title":"Pacientes PMC",
+      "RegisterPatient":"Registrar Paciente",
+      "SearchPatient":"Buscar Paciente",
+      "StagesControlPanel":"Etapas Pacientes",
+      "Indicators":"Visualización Indicadores",
+      "DailyRegs":"Registros Diarios"
+    },
+    "PMCUnit": {
+      "Title":"Unidad PMC",
+      "PMCData":"Datos del PMC",
+      "ImportData":"Importar y Exportar",
+      "SystemConfig":"Configuración del Sistema",
+      "IndicatorsConfig" : "Configuración de Indicadores"
+    }
+  },
+  "StagePanel": {
+    "Date":"Cumplida el: ",
+    "Name":"Paciente: ",
+    "AddData":"Actualizar",
+    "NoPatients":"No hay pacientes con datos por actualizar"
+  },
+  "UpdatePatientStageDialog": {
+    "Title":"Actualización datos paciente ",
+    "PatientData":{
+      "History": "Historia",
+      "Registry": "Registro Civil"
+    },
+    "MarkAsCompleted":"Completado",
+    "ExamsVaccinesTab":{
+        "Title":"Exámenes y Vacunas",
+        "Vaccines":"Vacunas",
+        "Exams":"Exámenes"
+      },
+    "DataTab": {
+        "Title":"Datos Paciente",
+        "NutritionType":"Tipo Alimentación",
+        "DeathPlace":"Lugar de defunción",
+        "HadUrgencyAppointment":"Tuvo una Consulta Urgencias durante la etapa",
+        "WasRehospitalized":"Fue rehospitalizado durante la etapa",
+        "HasRiskFactors":"El paciente tiene factores específicos de riesgo",
+        "Deserter":"El paciente he desertado",
+        "Dead":"El paciente ha muerto",
+        "DesertionDate":"Fecha Deserción",
+        "DefunctionDate":"Fecha Defunción",
+        "Weight":"Peso (gramos)",
+        "Height":"Talla (cm)",
+        "HeadPerim":"Perím. cefálico (cm)",
+        "IsDeceased": "El paciente ha muerto",
+        "IsDesertor": "El paciente ha desertado",
+        "DesertorPlaceHolder": "Fecha Deserción",
+        "DeceasedPlaceholder": "Fecha Defunción",
+        "Date": "Fecha"
+      },
+    "Warnings":{
+      "IncompleteRequiredData":"No se han completado los datos requeridos",
+      "IncompleteData":"No todos los datos han sido completados, ¿Desea continuar?"
+    }
+  },
+  "Patientregister":{
+    "Title": "Registro Paciente",
+    "Dialog": {
+      "Title":"Error Registro",
+      "PatientRepeated":"Ya existe el paciente con el registro de nacimiento",
+      "DateFormatInvalid": "El formato de la fehca no es válido",
+      "Accept":"Aceptar",
+      "TitleS":"Registro Exitoso",
+      "Success":"Se ha registrado correctamente el paciente"
+    },
+    "PatientData": {
+      "Title":"Datos Paciente",
+      "NameFld":"Nombre Paciente",
+      "RegisterNumberFld":"Registro de Nacimiento (req)",
+      "RegisterType": "Tipo registro",
+      "RegisterNumberConfirmFld":"Confirmar Registro de Nacimiento",
+      "GenderFld":"Género (req)",
+      "GestAgeFld":"Semanas Edad Gestacional(req)",
+      "BirthDateFld":"dd/mm/aaaa",
+      "BirthDate": "Fecha de Nacimiento (req)",
+      "HistoryConsecutive" : "Consecutivo de la Historia Clinica",
+      "BornWeight": "Peso al nacer (gr)",
+      "GestAgeFldC": "Edad Gestacional Corregida"
+    },
+    "ResponsableData": {
+      "Title":"Datos Acudiente",
+      "NameFld":"Nombre",
+      "DocumentTypeFld":"Tipo Documento",
+      "DocumentFld":"Documento de Identidad",
+      "ContactFld":"Contacto",
+      "Age":"Edad"
+    },
+    "SaveBtn": "Guardar Paciente"
+  },
+  "PatientSearch":{
+    "Title":"Pacientes Unidad",
+    "Actions":"Acciones",
+    "SearchPlaceHolder":"Buscar por nombre o documento de identidad",
+    "Colums": {
+      "HistoryConsecutive": "Consecutivo Historia",
+      "Register":" Registro de Nacimiento",
+      "Name": "Nombre Madre",
+      "BirthDate": "Fecha de Nacimiento",
+      "GestAge": "Edad Gestacional",
+      "ResponsableName" : "Nombre Acudiente",
+      "Gender" : "Género",
+      "AddGestAge":"No Disponible",
+      "AddRegister":"No Disponible",
+      "AddName": "No Disponible",
+      "AddBirthDate": "No Disponible",
+      "AddResponsableName" : "No Disponible",
+      "Actions":"Aciones"
+    },
+    "Pagination":{
+      "Page" :"Página",
+      "RowsPerPage":"Filas por Pág",
+      "Of": "De"
+    },
+    "Dialog":{
+      "OK":"Confirmar",
+      "Cancel":"Cancelar",
+      "DeleteDialog":{
+        "Title":"Confirmar Eliminación",
+        "Content":"No se podrán recuperar los datos si los elimnan"
+      },
+      "SaveDialog":{
+        "Title": "Confirmar Modificación",
+        "Content": "Se guardarán los cambios a los pacientes"
+      },
+      "DeletedDialog":{
+        "Title": "Eliminación Exitosa",
+        "Content": "Se eliminaron los pacientes con éxito"
+      },
+      "DeletedErrorDialog":{
+        "Title": "Problema al eliminar",
+        "Content":"Hubo un error al eliminar los datos. Intente más tarde."
+      }
+    },
+    "Errors": {
+      "Date": "El formato de la fecha es DD/MM/AAAA",
+      "Number": "Sólo puede contener números"
+    },
+    "Selection":"Pacientes Seleccionados",
+    "Modification":"Pacientes Modificados",
+    "Search" : "Buscar"
+  },
+  "PatientDetail": {
+    "Title":"Información Paciente",
+    "Actions": "Editar Paciente",
+    "PatientDataTab": {
+      "Observations" :"Observaciones Paciente",
+      "ObservationData":{
+        "TSH":"TSH",
+        "E_SNC": "E SNC",
+        "ECOCARDIO":"ECOCARDIO",
+        "OFTALMOLO":"OFTALMOLOGIA",
+        "DBP":"DBP",
+        "PALIVIZUMA":"PALIVIZUMA",
+        "EPS":"EPS",
+        "Observations":"Observaciones",
+        "DX":"DX"
+      },
+      "LabelTitle":"Datos",
+      "Title":"Datos Paciente",
+      "PatientData" : {
+        "RegisterType":"Tipo de Registro",
+        "NameFld":"Nombre Paciente",
+        "HistoryConsecutive": "Consecutivo Historia",
+        "RegisterNumberFld":"Registro de Nacimiento",
+        "GenderFld":"Género",
+        "BornWeight":"Peso al nacer (gr)",
+        "BirthDateFld":"Fecha de Nacimiento",
+        "GestationalAge":"Edad Gestacional",
+        "GestAgeFldC":"EGC",
+        "FirstLevel" : "El paciente esta en nivel uno",
+        "NeurologicalAlterations": "El paciente presenta alteraciones neurológicas relacinadas con prematurez y/o bajo peso al nacer"
+      },
+      "ResponsableData": {
+        "Title": "Datos Acudiente",
+        "NameFld":"Nombre",
+        "DocumentTypeFld":"Tipo Documento",
+        "DocumentFld":"Documento de Identidad",
+        "ContactFld":"Contacto",
+        "Age":"Edad"
+      }
+    },
+    "HospitalizationTab" : {
+      "LabelTitle": "Atención y Rehospitalización",
+      "Stages": {
+        "STAGE_12WEEKS_C": "0 - 3 meses E.C",
+        "STAGE_24WEEKS_C": "3 - 6 meses E.C",
+        "STAGE_36WEEKS_C": "6 - 9 meses E.C",
+        "STAGE_48WEEKS_C": "9m - 1 año E.C",
+        "STAGE_40WEEKS_G": "nac - 40 semanas E.G"
+      },
+      "Attention": {
+        "Title":"Fechas Atención en Ambulatorio",
+        "Register": "Registrar fecha de atención del paciente en unidad ambulatoria",
+        "ChangeDate" : "Añadir Fecha de Atención",
+        "AttentionDate": "Fecha de atención"
+      },
+      "Hospitalization":{
+        "Title":"Fechas Salida de Rehospitalización",
+        "Register": "Registrar fecha de salida de rehospitalización",
+        "ChangeDate" : "Añadir Fecha de salida de rehospitalización",
+        "AttentionDate": "Fecha de rehospitalización"
+      }
+    },
+    "EventsTab": {
+      "LabelTitle": "Eventos Paciente",
+      "BeforeReaching" : "Antes de alcazar",
+      "AccessTab": {
+        "LabelTitle":"PMC Ambulatorio",
+        "Actions" : "Acciones",
+        "FabTip":"Registrar acceso de paciente a ambulatorio",
+        "Title": "Datos Acceso a PMC Ambulatorio",
+        "AccessData": {
+            "Accessed": "El paciente ingresó al ambulatorio",
+            "Opportunity": "Oportunidad",
+            "Weight":"Peso (gr) a la entrada",
+            "Height":"Talla (cm) a la entrada",
+            "HeadPerim":"Perímetro cefálico (cm) a la entrada",
+            "AccessDate" :"Fecha de Ingreso a la unidad ambulatoria"
+        }
+      },
+      "HospitalaryAccessTab": {
+        "LabelTitle":"Intrahospitalario y Ambulatorio",
+        "Title1": "Datos Acceso a PMC Ambulatorio",
+        "Title2": "Datos Salida de PMC Intrahospitalario",
+        "AccessCriteriaFld": {
+          "Title":"Criterios de Salida",
+          "All":"Seleecionar todos"
+        },
+        "AccessData": {
+            "Weight":"Peso (gr) a la salida",
+            "Origin" : "Origen del paciente",
+            "NutritionTypeFld":"Tipo de Alimentación al egreso",
+            "Height":"Talla (cm) a la salida",
+            "HeadPerim":"Perímetro cefálico (cm) a la salida",
+            "AccessDate" :"Fecha de Ingreso a Intrahospitalario",
+            "ExitDate" : "Fecha de Egreso de Intrahospitalario",
+            "AvgTimeInPos": "Horas promedio en pos canguro",
+            "AvgTimeClue": "Promedio de horas al día en que el paciente se ha tenido en posición canguro durante la adaptación de los tres días previos a la salida",
+            "HospitalaryExit":"El paciente ha sido egresado del intrahospitalario",
+            "AccessCriteria":"Criterios de Salida del Intrahospitalario"
+        }
+      },
+      "DeceaseTab":{
+        "LabelTitle":"Muerte de Paciente",
+        "Title": "Datos de Defunción",
+        "DeceaseData": {
+            "Deceased": "El paciente ha Fallecido",
+            "DeceaseDate" :"Fecha de Defunción",
+            "DeceasePlace" :"Lugar de Defunción",
+            "DeceaseStage" :"Etapa de la Defunción"
+        }
+      },
+      "DesertionTab":{
+        "LabelTitle":"Deserción o Traslado",
+        "Title": "Datos de Deserción",
+        "Title2" : "Datos de Traslado",
+        "DesertionData": {
+            "DesertionDate" :"Fecha de Deserción",
+            "DesertionStage" :"Etapa de la Deserción"
+        },
+        "TraslateData":{
+          "TraslateDate" :"Fecha del Traslado",
+          "TraslateStage" :"Etapa del Traslado"
+        }
+      }
+    },
+    "StagesTab":{
+      "LabelTitle":"Etapas",
+      "Title": "Etapas del Paciente",
+      "NoStages":"No hay datos de etapas actualizados para el paciente. Si quiere que se muestren los datos de una etapa márquela como Completada (oprimir botón completada)"
+    },
+    "GrowthChart":{
+      "LabelTitle":"Crecimiento",
+      "Title": "Gráficas de Crecimiento",
+      "NoStages":"No hay datos de peso, altura y perímetro cefálico actualizados para las etapas del paciente",
+      "NoSex": "Para ver las gráficas de crecimiento es necesario tener el género del paciente"
+    }
+  },
+  "PMCUnitDetail":{
+    "Title":"Datos de la Unidad",
+    "Actions":"Editar Unidad",
+    "DataTab": {
+      "LabelTitle":"Información de las instalaciones"
+    },
+    "IndicatorsTab":{
+      "LabelTitle":"Indicadores de las instalaciones"
+    }
+  },
+  "ProgramSettings":{
+    "Title": "Configuración del sistema",
+    "DataTab": {
+      "LabelTitle":"Base de Datos",
+      "Actions":"Acciones",
+      "Title":"Conexión a la base de datos",
+      "KeepOffline":"Continuar en Modo Offline",
+      "URL": "Url de la base de datos",
+      "Admin" : "Nombre de usuario",
+      "Pass" : "Contraseña",
+      "Continue" : "Guardar Cambios",
+      "Back" : "Cancelar Cambios",
+      "Dialog" :{
+        "Title":" Confirmar eliminación",
+        "Content" : "Si elimina la conexión los datos que se han sincronizado hasta el momento permanecerán y se eliminará la información de conexión",
+        "Accept": "Si, eliminar",
+        "Cancel" : "Cancelar"
+      }
+    },
+    "ExportTab":{
+      "LabelTitle":"Configuración Exportación",
+      "Title":"Configuración variables exportación",
+      "ColumnExports":"Columnas a Exportar",
+      "ColumnTotal": "Columnas sin Importar",
+      "SuccessTitle":"Configuración Guardada",
+      "SuccessMsg":"Se han cambiado las variables de exportación",
+      "Save":"Guardar Cambios"
+    }
+  },
+  "StageOverview":{
+    "GrowthVars":"Variables de Crecimiento",
+    "Nutrition":"Tipo Alimentación",
+    "Weight":"Peso (gramos)",
+    "Size":"Talla (cm)",
+    "HeadPerim":"Perímetro cefálico (cm)",
+    "HadUrgencyAppointment":"El paciente tuvo una consulta de urgencias",
+    "WasRehospitalized":"El paciente fue rehospitalizado",
+    "Exams":"Exámenes",
+    "Vaccines":"Vacunas",
+    "MeanValue":"Promedio según OMS:",
+    "HasRiskFactors":"El paciente presenta factores específicos de riesgo"
+  },
+  "GrowthChart":{
+    "ChangeGraph":"Cambiar Gráfica",
+    "Who":{
+      "Lines":{
+        "50":"0",
+        "15":"-1 DE",
+        "2":"-2 DE",
+        "98":"2 DE",
+        "85":"1 DE",
+        "99_9":"3 DE",
+        "0_1":"-3 DE"
+      },
+      "hcfa":{
+        "BoysTitle":"Perímetro cefálico vs Edad Niños (OMS)",
+        "GirlsTitle":"Perímetro cefálico vs Edad Niñas (OMS)",
+        "XAxis":"meses",
+        "YAxis":"cm",
+        "Ytag":"Perímetro",
+        "Xtag":"Edad"
+      },
+      "wfa":{
+        "BoysTitle":"Peso vs Edad Niños (OMS)",
+        "GirlsTitle":"Peso vs Edad Niñas (OMS)",
+        "XAxis":"meses",
+        "YAxis":"gr",
+        "Ytag":"Peso",
+        "Xtag":"Edad"
+      },
+      "lhfa":{
+        "BoysTitle":"Talla vs Edad Niños (OMS)",
+        "GirlsTitle":"Talla vs Edad Niñas (OMS)",
+        "XAxis":"meses",
+        "YAxis":"cm",
+        "Ytag":"Talla",
+        "Xtag":"Edad"
+      }
+    }
+  },
+  "ImportData": {
+    "Title":"Datos PMC",
+    "ImportOption":"Importar Datos",
+    "ExportOption":"Exportar Todos los Datos",
+    "Year":"Año",
+    "Month":"Mes",
+    "ExportCustomOption": "Exportación Customizada",
+    "Actions":"Acciones",
+    "FirstRowIsHeader":"Incluir Encabezado",
+    "ReplaceOriginal": "Reemplazar datos existentes",
+    "ImportAsComplete":"No mostrar pacientes en panel de etapas",
+    "Saving":"Guardando",
+    "Loading":"Cargando",
+    "Column": "Columna ",
+    "ImportAs":"Importar como: ",
+    "KeepCol":"Mantener la columna",
+    "Values":"Valores",
+    "EmptyValue":"Vacío",
+    "Import": "Importar",
+    "IgnoreColumn": "Ignorar Columna",
+    "IgnoreValue": "Ignorar Valor",
+    "SheetList":"Seleccione la hoja a importar",
+    "SelectSheet" : "Seleccionar",
+    "FileSelect" : {
+      "Title":"Selección de archivos",
+      "Instructions":"Arrastre el archivo de excel que desea importar a esta hoja o haga click aquí para seleccionar el archivo"
+    },
+    "ImportReport":{
+      "Title": "Reporte Importación de datos",
+      "ErrorDescription":"Descripción del error",
+      "ColumnsWithError":"Columnas con error",
+      "RowsWithError":"Filas con el error",
+      "RowFail": "No se pudieron importar {{rowNum}} filas",
+      "RowSuccess": "Se han importado exitosamente {{rowNum}} filas",
+      "RowSuffix": "Fila",
+      "Value": "Valor",
+      "MissingValue": "Faltante",
+      "Help":"Selecciona una columna para ver las filas que presentan el error",
+      "Warnings": {
+        "Title":"Error de importación",
+        "Accept":"Aceptar",
+        "EmptySheet":"La hoja de excel a importar se encuentra vacía",
+        "MissingRequired":"Es necesario asignar las columnas de Registro Civil, Fecha de nacimiento y Edad Gestacional"
+      },
+      "RowErrors": {
+        "Title":"Errores de importación",
+        "MissingRequired": "Falta la columna requerida",
+        "DateFormat":"Formato de fecha inválido.",
+        "NumberFormat":"Formato numérico inválido",
+        "NumberQtity":"El número ingresado es muy pequeño o muy grande "
+      }
+    }
+  },
+  "IndicatorVisualization":{
+    "Title":"Visualización de Indicadores",
+    "KMCTab":"Indicadores Ministerio de Salud",
+    "MeissenTab":"Otros Indicadores",
+    "SelectIndicator":"Seleccione un Indicador",
+    "MissingData":"No hay datos en el indicador",
+    "Anual": "Mostrar Anualmente",
+    "Export":"Exportar todos a Excel",
+    "Exporting":"Exportando",
+    "Date":"Fecha Indicador",
+    "Value": "Valor Indicador",
+    "Empty":"No hay datos para este indicador"
+  },
+  "ColumnTips":{
+    "PMC_UNIT":{
+      "Name":"Nombre de la Unidad",
+      "Address":"Dirección de la Unidad",
+      "ParentAccess":"Horas de Acceso Padres en adaptación canguro"
+    },
+    "PATIENT":{
+      "SocialRegistry":"Registro Civil del Paciente o Documento de la Madre",
+      "RegType":"Tipo de registro del paciente",
+      "BirthDate":"Fecha de Nacimiento",
+      "Sex":"Género del Paciente",
+      "GestationalAge":"Edad Gestacional",
+      "Name":"Nombre del Paciente",
+      "HistoryConsecutive": "Consecutivo en la historia del paciente",
+      "Traslated":"El paciente fue trasladado",
+      "FirstLevel": "El paciente esta en primer nivel",
+      "NeurologicalAlterations": "Alteraciones neurologicas relacionadas con prematurez",
+      "BornWeight":"Peso al nacer (gr)"
+    },
+    "OBSERVATION":{
+      "Weight40Weeks":"El paciente tiene 2.5 K a las 40 semanas",
+      "TSH":"TSH",
+      "E_SNC":"E SNC",
+      "ECOCARDIO":"Ecocardio",
+      "OFTALMOLO":"Oftalmología",
+      "DBP":"DBP",
+      "PALIVIZUMA":"Palivizuma",
+      "EPS":"EPS",
+      "Observations":"Observaciones",
+      "DX": "DX"
+    },
+    "DECEASE":{
+      "Date": "Fecha en la que falleció el paciente",
+      "Place": "Lugar en el que Falleció el Paciente",
+      "Stage":"Etapa en la que falleció el paciente"
+    },
+    "DESERTION":{
+      "Date": "Fecha de Deserción del Paciente",
+      "Stage":"Etapa en la que Desertó el paciente"
+    },
+    "TRASLATION":{
+      "Date": "Fecha de Traslado del Paciente",
+      "Stage":"Etapa en la que se trasladó el paciente"
+    },
+    "INTRAHOSPITALARY_PROGRAM":{
+      "DateAccess": "Fecha acceso a Intrahospitalario",
+      "DateExit" : "Fecha en la que fue Egresado",
+      "Origin": "Origen del Paciente",
+      "Nutrition": "Nutrición al Egreso del Intrahospitalario",
+      "AvgTimeInPos" : "Número de horas al día en que el paciente se ha tenido en posición canguro durante la adaptación de los tres días previos a la salida",
+      "Weight" : "Peso al egreso del intrahorpitalario (gr)",
+      "Size" : "Talla (cm) al egreso del intrahorpitalario",
+      "HeadPerim": "Perímetro cefálico (cm) al egreso del intrahorpitalario",
+      "AccessCriteria": {
+        "WeightGain": "El paciente presentó ganancia de peso adecuada",
+        "SBDCoordination": "El paciente tiene coordinación de Succión-Deglución-Respiración",
+        "TreatmentsEnded": "El paciente terminó con sus tratamientos",
+        "LevelOfOxygen": "El paciente maneja una satruación adecuada de oxígeno",
+        "TempRegulation": "El paciente regula su temperatura en posición canguro",
+        "AccessToPMC": "Familia comprometida con el PMC"
+      }
+    },
+    "AMBULATORY_PROGRAM":{
+      "DateAccess": "Fecha De Acceso a Ambulatorio",
+      "Opportunity":"Oportunidad",
+      "GestationalAgeCorrected":"Edad Gestacional Corregida",
+      "Weight" : "Peso al Ingresar (gr)",
+      "Size" : "Talla (cm) al Ingresar",
+      "HeadPerim": "Perímetro cefálico (cm) al ingresar"
+    },
+    "STAGES":{
+      "DeathPlace": "Lugar en el que el paciente falleció a las 40 sem",
+      "Nutrition": "Tipo de Nutrición",
+      "Weight": "Peso (gr) al terminar",
+      "PatientSex": "Género Paciente",
+      "Size": "Talla (cm) al terminar",
+      "HeadPerim": "Perímetro cefálico (cm) ",
+      "HadUrgencyAppointment" : "El paciente tuvo una consulta de urgencias ",
+      "WasHospitalized": "El paciente fue hospitalizado ",
+      "HasRiskFactors": "El paciente tiene factores específicos de riesgo",
+      "MonthReachedName":"Mes alcanzado",
+      "StageExamns": {
+        "Oftalmology":"Tuvo examen de oftalmología  ",
+        "BrainScan":" Tuvo ecografía cerebral ",
+        "NeuroEval":"Tuvo evaluación neurológica  ",
+        "Audiometry":"Tuvo audiometría  ",
+        "PsMotEval":"Tuvo evaluación psicomotora  ",
+        "Optometry":"Tuvo examen de optometría  "
+      },
+      "StageVaccines": {
+        "BCG": "BCG  ",
+        "HepatitisB":"Hepatitis ",
+        "CompleteScheme":"Esquema de vacunación completo  "
+      },
+      "HasCorrectGrowth":"El paciente tiene peso, talla y perimetro cefálico por encima de 2 desviaciones estandar bajo la media ",
+      "DateStageReached": "Fecha en la que el paciente terminó la etapa"
+    },
+    "RESPONSABLE": {
+      "Name": "Nombre de la madre",
+      "Document" : "Documento de identidad de la madre",
+      "DocumentType" : "Tipo de documento de la madre",
+      "Contact" : "Información de contacto de la madre",
+      "Age":"Edad de la madre"
+    }
+  },
+  "ColumnExports":{
+    "PMC_UNIT":{
+      "Name":"NOMBRE UNIDAD",
+      "Address":"DIRECCION UNIDAD",
+      "ParentAccess":"HORAS ACCESO PADRES"
+    },
+    "PATIENT":{
+      "SocialRegistry":"R CIVIL",
+      "RegType":"TIPO REG PACIENTE",
+      "BirthDate":"F NACIMIENTO",
+      "Sex":"GENERO PACIENTE",
+      "GestationalAge":"E GESTAC",
+      "Name":"NOMBRE PACIENTE",
+      "HistoryConsecutive": "CONSECUTIVO",
+      "NeurologicalAlterations" : "ALTERACIONES NEUROLOGICAS",
+      "BornWeight":"PESO"
+    },
+    "OBSERVATION":{
+      "Died":"MORTALID",
+      "Deserted":"DESERC",
+      "HasHospitalization":"HOSPITALIZ",
+      "Weight40Weeks":"2.5K 40 SEMANAS",
+      "TSH":"TSH",
+      "E_SNC":"E SNC",
+      "ECOCARDIO":"ECOCARDIO",
+      "OFTALMOLO":"OFTALMOLO",
+      "DBP":"DBP",
+      "PALIVIZUMA":"PALIVIZUMA",
+      "EPS":"EPS",
+      "Observations":"OBSERVA",
+      "DX": "DX"
+    },
+    "DECEASE":{
+      "Date": "FECHA MUERTE",
+      "Place": "LUGAR MUERTE",
+      "Stage":"ETAPA MUERTE"
+    },
+    "DESERTION":{
+      "Date": "FECHA DESERCION",
+      "Stage":"ETAPA DESERCION"
+    },
+    "TRASLATION":{
+      "Date": "FECHA TRASLADO",
+      "Stage":"ETAPA TRASLADO"
+    },
+    "INTRAHOSPITALARY_PROGRAM":{
+      "DateAccess": "FECHA INGRESO INTRAHOSP",
+      "DateExit" : "F EGRESO",
+      "AvgTimeInPos" : "PROM TIEMPO POS CANGURO PREVIO EGRESO",
+      "Nutrition": "NUTRICION EGRESO INSTRAHOSPITALARIO",
+      "Origin": "PROVENIEN",
+      "Weight" : "PESO EGRESO INTRAHOSPITALARIO",
+      "Size" : "TALLA EGRESO INTRAHOSPITALARIO",
+      "HeadPerim": "PERIM EGRESO INTRAHOSPITALARIO",
+      "AccessCriteria": {
+        "WeightGain": "GANANCIA PESO EGRESO INTRAHOSP",
+        "SBDCoordination": "COORDINACION SDR EGRESO INTRAHOSP",
+        "TreatmentsEnded": "TRATAMIENTOS TERMINADOS EGRESO INTRAHOSP",
+        "LevelOfOxygen": "SATURACIÓN OXIGENO OK EGRESO INTRAHOSP",
+        "TempRegulation": "REGULA TEMPERATURA EGRESO INTRAHOSP",
+        "AccessToPMC": "COMPROMISO FAMILIA CON PMC"
+      }
+    },
+    "AMBULATORY_PROGRAM":{
+      "DateAccess": "INGRESO",
+      "Opportunity":"OPORTUNI",
+      "Weight" : "PESO INGRESO AMBULATORIO",
+      "Size" : "TALLA INGRESO AMBULATORIO",
+      "HeadPerim": "PERIM INGRESO AMBULATORIO",
+      "GestationalAgeCorrected":"EGC"
+    },
+    "STAGES":{
+      "DeathPlace": "LUGAR DEFUNCION",
+      "Nutrition": "NUTRICION",
+      "Weight": "PESO",
+      "PatientSex": "GENERO",
+      "Size": "TALLA",
+      "HeadPerim": "PERIM CEFALICO",
+      "HadUrgencyAppointment" : "CONSULTA URG",
+      "WasHospitalized": "HOSPITALIZADO",
+      "HasRiskFactors": "FACTORES RIESGO",
+      "MonthReachedName":"",
+      "StageExamns": {
+        "Oftalmology":"OFTALMOLOGIA",
+        "BrainScan":"ECO CEREBRAL",
+        "NeuroEval":"NEUROEVAL",
+        "Audiometry":"AUDIOMETRIA",
+        "PsMotEval":"EVALPSICOMOT",
+        "Optometry":"OPTOMETRIA"
+      },
+      "StageVaccines": {
+        "BCG": "BCG",
+        "HepatitisB":"HEPB",
+        "CompleteScheme":"VACUNAS COMP"
+      },
+      "HasCorrectGrowth":"CRECIMIENTO CORRECTO",
+      "DateStageReached": "FECHA FIN ETAPA"
+    },
+    "RESPONSABLE": {
+      "Name": "NOMBRE DE LA MADRE",
+      "Document" : "DOC ACUDIENTE",
+      "DocumentType" : "TIPO DOC ACUDIENTE",
+      "Contact" : "CONTACTO ACUDIENTE",
+      "Age": "EDAD"
+    }
+  },
+  "Columns":{
+    "PMC_UNIT":{
+      "Name":"Nombre de la Unidad",
+      "Address":"Dirección de la Unidad",
+      "ParentAccess":"Horas de Acceso Padres"
+    },
+    "PATIENT":{
+      "SocialRegistry":"Registro Civil / Documento Madre",
+      "RegType":"Tipo de registro",
+      "BirthDate":"Fecha de Nacimiento",
+      "Sex":"Género",
+      "GestationalAge":"Edad Gestacional",
+      "Name":"Nombre",
+      "HistoryConsecutive": "Consecutivo Historia",
+      "FirstLevel" : "Paciente en primer nivel",
+      "NeurologicalAlterations": "Alteraciones Neurológicas",
+      "BornWeight":"Peso al Nacer"
+    },
+    "OBSERVATION":{
+      "Died":"Muerte",
+      "Deserted":"Deserción",
+      "HasHospitalization":"Hospitalización",
+      "Weight40Weeks":"2.5K (40 sem)",
+      "TSH":"TSH",
+      "E_SNC":"E SNC",
+      "ECOCARDIO":"Ecocardio",
+      "OFTALMOLO":"Oftalmología",
+      "DBP":"DBP",
+      "PALIVIZUMA":"Palivizuma",
+      "EPS":"EPS",
+      "Observations":"Observaciones",
+      "DX": "DX"
+    },
+    "RESPONSABLE": {
+      "Name": "Nombre Madre",
+      "Document" : "Documento de Identidad",
+      "DocumentType" : "Tipo Doc",
+      "Contact" : "Contacto",
+      "Age":"Edad"
+    },
+    "DECEASE":{
+      "Date": "Fecha de Defunción",
+      "Place": "Lugar de Defunción",
+      "Stage":"Etapa de Defunción"
+    },
+    "DESERTION":{
+      "Date": "Fecha de Deserción",
+      "Stage":"Etapa de Deserción"
+    },
+    "TRASLATION":{
+      "Date": "Fecha de Traslado",
+      "Stage":"Etapa de Traslado"
+    },
+    "INTRAHOSPITALARY_PROGRAM":{
+      "DateAccess": "Fecha acceso a Intrahospitalario",
+      "DateExit" : "Fecha en la que fue Egresado",
+      "Origin": "Origen del Paciente",
+      "Nutrition": "NUtrición a la salida",
+      "AvgTimeInPos" : "Horas prom en pos Canguro",
+      "Weight" : "Peso (gr) a la salida",
+      "Size" : "Talla (cm) a la salida",
+      "HeadPerim": "Perim Cef (cm) a la salida",
+      "AccessCriteria": {
+        "WeightGain": "Ganancia de peso adecuada",
+        "SBDCoordination": "Coordinación de SDR",
+        "TreatmentsEnded": "Tratamientos Terminados",
+        "LevelOfOxygen": "Saturación Oxígeno Adecuada",
+        "TempRegulation": "Regula Temperatura en Pos Canguro",
+        "AccessToPMC": "Familia Comprometida con PMC"
+      }
+    },
+    "AMBULATORY_PROGRAM":{
+      "DateAccess": "Fecha De Acceso a Ambulatorio",
+      "Opportunity":"Oportunidad",
+      "Weight" : "Peso (gr) Ingreso",
+      "Size" : "Talla (cm) Ingreso",
+      "HeadPerim": "Perim Cef (cm) Ingreso",
+      "GestationalAgeCorrected":"Edad Gestacinal Corregida"
+    },
+    "STAGES":{
+      "DeathPlace": "Lugar de defunción",
+      "Nutrition": "Nutrición",
+      "Weight": "Peso (gr)",
+      "PatientSex": "Género Paciente",
+      "Size": "Talla (cm)",
+      "HeadPerim": "Perím Cef (cm)",
+      "HadUrgencyAppointment" : "Consulta Urgencias",
+      "WasHospitalized": "Hospitalizado",
+      "HasRiskFactors": "Tiene factores específicos de riesgo",
+      "MonthReachedName":"Mes alcanzado",
+      "StageExamns": {
+        "Oftalmology":"Oftalmología",
+        "BrainScan":"Ecografía cerebral",
+        "NeuroEval":"Evaluación neurológica",
+        "Audiometry":"Audiometría",
+        "PsMotEval":"Evaluación psicomotora",
+        "Optometry":"Optometría"
+      },
+      "StageVaccines": {
+        "BCG": "BCG",
+        "HepatitisB":"Hepatitis B",
+        "CompleteScheme":"Vacunación completa"
+      },
+      "HasCorrectGrowth":"Crecimiento adecuado",
+      "DateStageReached":"Fecha fin etapa"
+    }
+  },
+  "Indicators":{
+    "Types":{
+      "Days":"días",
+      "Hours":"horas"
+    },
+    "IndexOption":{
+      "FixedNumber": "Valor numérico",
+      "PredefinedIndex" : "Índice predefinido"
+    },
+    "IndexTypes":{
+      "Count": "Conteo",
+      "Avg": "Promedio"
+    },
+    "StagesUnion":{
+      "All": "Todas",
+      "Some":"Alguna"
+    },
+    "ConditionUnion":{
+      "All": "Todas",
+      "Some":"Alguna"
+    },
+    "KMCIndicators": {
+      "Names":{
+        "InitialDesertionWeight" : "Deserción Inicial por peso",
+        "InitialDesertionGestAge" : "Deserción Inicial por edad gestacional",
+        "InitialDesertionTotal" : "Deserción Inicial (todos los candidatos)",
+        "InitialDelay":"Retraso inicial en el ingreso a un PMC ambulatorio",
+        "ExitWithoutCriteria":"Criterios de salida de un PMC hospitalario no respetados",
+        "ParentAccess":"Accesibilidad de los padres (familia) a la Unidad de Cuidado Neonatal",
+        "IntraHospExitLME":"LME Lactancia materna exclusiva a la salida de adaptación canguro hospitalaria",
+        "PositionExposition":"Exposición en Posición Canguro en la Unidad de Cuidado Neonatal",
+        "StageIDesertion":"Deserción a las 40 semanas",
+        "StageIOftamology34Weeks":"Oftalmología 40 semanas (menores de 34 semanas de E.G al nacer)",
+        "StageIOftamologyByRisk34":"Oftalmología 40 semanas (mayores de 34 semanas de E.G al nacer con factores de riesgo)",
+        "StageIOftamology32Weeks":"Oftalmología 40 semanas (menores de 32 semanas de E.G al nacer)",
+        "StageIOftamologyByRisk32":"Oftalmología 40 semanas (mayores de 32 semanas de E.G al nacer con factores de riesgo)",
+        "StageIEcography":"Ecografía 40 semanas",
+        "StageINeuroEval":"Evaluación neurológica en la semana 40 de edad gestacional",
+        "StageIVaccines":"Vacunas a 40 semanas",
+        "StageILME":"Lactancia Materna Exclusiva a las 40 semanas",
+        "StageIHospitalization":"Re-hospitalización 40 semanas",
+        "StageIDeath":"Mortalidad 40 semanas",
+        "StageIDeathHome":"Mortalidad evitable en casa a 40 semanas",
+        "StageIGrowth":"Crecimiento en peso niños y  niñas",
+        "StageIBoysGrowth":"Crecimiento en peso, talla y perímetro cefálico a 40 semanas niños",
+        "StageIGirlsGrowth":"Crecimiento en peso, talla y perímetro cefálico a 40 semanas niñas",
+        "StageIUrgency":"Consultas a servicios de urgencias antes de la semana 40 de edad gestacional",
+        "StageIIDesertion":"Deserción 1 año de edad corregida",
+        "StageIIOptometry":"Optometría",
+        "StageIIAudiometry":"Audiometría",
+        "StageIIPsicoMotor":"Desarrollo neurológico y desarrollo psicomotor a 1 año de edad corregida",
+        "StageIIVaccines":"Vacunación completa a 1 año de edad corregida",
+        "LME3Months":"Lactancia Materna a los 3 meses",
+        "LME6Months":"Lactancia Materna a los 6 meses",
+        "StageIIHospitalization":"Re hospitalización a 1 año de edad corregida",
+        "StageIIDeath":"Mortalidad a 1 año de edad corregida",
+        "StageIIBoysGrowth":"Crecimiento en peso, talla y perímetro cefálico 1 año de edad corregida niños",
+        "StageIIGirlsGrowth":"Crecimiento en peso, talla y perímetro cefálico 1 año de edad corregida niñas",
+        "PatientAtention":"Pacientes atendidos en la unidad"
+      },
+      "Descriptions":{
+        "InitialDesertionWeight" : "Pacientes captados por el PMC intrahospitalario (menores o iguales de 1800 gr ) pero no ingresados al PMC ambulatorio",
+        "InitialDesertionGestAge" : "Pacientes captados por el PMC intrahospitalario (menos o iguales de 34 semanas de EG al nacer) pero no ingresados al PMC ambulatorio",
+        "InitialDesertionTotal" : "Pacientes captados por el PMC intrahospitalario (todos los candidatos) pero no ingresados al PMC ambulatorio",
+        "InitialDelay":"Número de pacientes que ingresan al PMC ambulatorio después de las primeras 48 horas luego del egreso de un PMC intrahospitalario sobre número de pacientes que egresan de un PMC intrahospitalario.",
+        "ExitWithoutCriteria":"número de pacientes que ingresan al PMC ambulatorio sin cumplir los criterios de elegibilidad de egreso de hospitalización sobre número de pacientes canguro que egresan de hospitalización.",
+        "ParentAccess":"Número de horas diarias de acceso de los padres en adaptación canguro a la unidad de cuidado neonatal sobre 24 horas.",
+        "IntraHospExitLME":"Número de pacientes que egresan del PMC intrahospitalario con leche materna exclusiva sobre número de pacientes que egresan del PMC intrahospitalario.",
+        "PositionExposition":"Número de horas al día en que el paciente se ha tenido en posición canguro durante la adaptación de los tres días previos a la salida.",
+        "StageIDesertion":"Número de pacientes que desertaron del PMC ambulatorio en la Fase I sobre número de pacientes que ingresaron al PMC ambulatorio.",
+        "StageIOftamology34Weeks":"Número de pacientes a quienes se les realizó examen de oftalmología (menores de 34 semanas de E.G al nacer) al terminar la Fase I, sobre número de niños que culminaron la Fase I del programa.",
+        "StageIOftamologyByRisk34":"Número de pacientes a quienes se les realizó examen de oftalmología (mayores de 34 semanas de E.G al nacer con factores específicos de riesgo) al terminar la Fase I, sobre número de niños que culminaron la Fase I del programa.",
+        "StageIOftamology32Weeks":"Número de pacientes a quienes se les realizó examen de oftalmología (menores de 32 semanas de E.G al nacer) al terminar la Fase I, sobre número de niños que culminaron la Fase I del programa.",
+        "StageIOftamologyByRisk32":"Número de pacientes a quienes se les realizó examen de oftalmología (mayores de 32 semanas de E.G al nacer con factores específicos de riesgo) al terminar la Fase I, sobre número de niños que culminaron la Fase I del programa.",
+        "StageIEcography":"Número de pacientes a quienes se les realizó ecografía cerebral al terminar la Fase I sobre número de pacientes que culminaron la Fase I del programa.",
+        "StageINeuroEval":"Número de pacientes que recibieron valoración neurológica para evaluación de tono al terminar la Fase I sobre número de niños que culminaron la Fase I del programa.",
+        "StageIVaccines":"Número de pacientes que han recibido vacunación con hepatitis B y BCG al terminar la Fase I sobre número de niños que terminaron la Fase I.",
+        "StageILME":"Número de niños alimentados con leche materna exclusiva a las 40 semanas, sobre número de niños que culminaron la Fase I del Programa",
+        "StageIHospitalization":"Número de pacientes que asisten al PMC ambulatorio, finalizaron Fase I y que se re-hospitalizan por lo menos en una ocasión durante la primera fase del programa canguro ambulatorio, sobre número de niños que culminaron la Fase I del Programa.",
+        "StageIDeath":"Número de pacientes quienes ingresaron al PMC ambulatorio y que fallecen antes de 40 semanas vs número de niños que ingresan al PMC ambulatorio.",
+        "StageIDeathHome":"Número de pacientes que mueren en casa, sobre número total de pacientes que fallecen durante el seguimiento hasta 40 semanas.",
+        "StageIGrowth":"Número de pacientes que alcanzan más de 2500 gr a las 40 semanas",
+        "StageIBoysGrowth":"Número de pacientes que alcanzan más de los 2500 g de peso, 46.1 cm de talla y 31.9 cm de perímetro cefálico para los niños a las 40 semanas de edad gestacional sobre el número total de niños que participan a la Fase I.",
+        "StageIGirlsGrowth":"Número de pacientes que alcanzan más de los 2400 g, 42.4 de talla y 31.5 cm de perímetro cefálico para las niñas a las 40 semanas de edad gestacional sobre el número total de niños que participan a la Fase I.",
+        "StageIUrgency":"Número de pacientes que consultan los servicios de urgencias por lo menos en una ocasión sobre número de pacientes que ingresan a la Fase I del PMC ambulatorio.",
+        "StageIIDesertion":"Número de pacientes que desertaron del PMC en la Fase II, sobre número de pacientes que ingresaron al PMC Fase II",
+        "StageIIOptometry":"Número de pacientes a quienes se les realizó examen de optometría al terminar la Fase II, sobre número de niños que culminaron la Fase II del programa.",
+        "StageIIAudiometry":"Número de pacientes a quienes se les realizó examen de audiometría al terminar la Fase II sobre número de niños que culminaron la Fase II del programa.",
+        "StageIIPsicoMotor":"Número de pacientes que tienen evaluación neurológica y psicomotora al terminar la Fase II sobre número de pacientes que culminaron la Fase II del programa.",
+        "StageIIVaccines":"Número de pacientes que han recibido esquema de vacunación completa para el primer año de edad al terminar la Fase II sobre número de pacientes que culminaron la Fase II del programa.",
+        "LME3Months":"Número de pacientes que reciben leche materna a los 3 meses de edad corregida sobre número de pacientes que culminaron este punto de corte del programa.",
+        "LME6Months":"Número de pacientes que reciben leche materna a los 6 meses de edad corregida sobre número de pacientes que culminaron este punto de corte del programa.",
+        "StageIIHospitalization":"Número de pacientes que al terminar la Fase II se re-hospitalizaron al menos una vez durante la segunda fase del programa sobre número de niños que culminaron la Fase II del programa.",
+        "StageIIDeath":"Número de pacientes que fallecen durante la Fase II, sobre número de niños que ingresan al PMC a Fase II.",
+        "StageIIBoysGrowth":"Número de pacientes que alcanzan más de los 7700 g de peso, 71.0 cm de talla y 43.5 cm de perímetro cefálico para los niños al cumplir la Fase II (12 meses de edad corregida) sobre el número total de niños que culminaron la Fase II del programa.",
+        "StageIIGirlsGrowth":"Número de pacientes que alcanzan más de 7000 g, 68.9 de talla y 42.2 cm de perímetro cefálico para las niñas al cumplir la Fase II (12 meses de edad corregida) sobre el número total de niñas que culminaron la Fase II del programa.",
+        "PatientAtention":"Número de pacientes atendidos en la unidad ambulatoria"
+      }
+    },
+    "MeissenIndicators": {
+      "Names":{
+        "AccessPercentage": "Porcentaje de Acceso PMC Ambulatorio",
+        "AdherencePercentage" : "Porcentaje de Adherencia",
+        "OportunityPercentage" : "Porcentaje de Oportunidad",
+        "PhaseIHospitalization" : "Porcentaje de Hospitalización Fase I",
+        "PhaseIMortality" : "Porcentaje de Mortalidad Fase I",
+        "PhaseIIHospitalization" : "Porcentaje de Hospitalización Fase II",
+        "PhaseIIMortality" : "Porcentaje de Mortalidad Fase II",
+        "PhaseIIIHospitalization" : "Porcentaje de Hospitalización Fase III",
+        "PhaseIIIMortality" : "Porcentaje de Mortalidad Fase III",
+        "NeuroDevSquels" : "Porcentaje de secuelas del neurodearrollo",
+        "Desnutrition" : "Porcentaje de desnutrición"
+      },
+      "Descriptions":{
+        "AccessPercentage": "Porcentaje de Acceso PMC Ambulatorio",
+        "AdherencePercentage" : "Porcentaje de Adherencia",
+        "OportunityPercentage" : "Porcentaje de Oportunidad",
+        "PhaseIHospitalization" : "Porcentaje de Hospitalización Fase I",
+        "PhaseIMortality" : "Porcentaje de Mortalidad Fase I",
+        "PhaseIIHospitalization" : "Porcentaje de Hospitalización Fase II",
+        "PhaseIIMortality" : "Porcentaje de Mortalidad Fase II",
+        "PhaseIIIHospitalization" : "Porcentaje de Hospitalización Fase III",
+        "PhaseIIIMortality" : "Porcentaje de Mortalidad Fase III",
+        "NeuroDevSquels" : "Porcentaje de secuelas del neurodearrollo",
+        "Desnutrition" : "Porcentaje de desnutrición"
+      }
+    },
+    "Indexes" : {
+      "accessByWeight": "Número de pacientes con peso menor a 1800 gramos al egresar del intrahospitalario que ingresan al PMC ambulatorio",
+      "exitByWeight": "Número de pacientes con peso menor a 1800 gramos al egresar, que egresan de PMC intrahospitalario",
+      "accessByGestAge": "Número de pacientes con edad gestacional menor a 34 semanas que ingresan al PMC ambulatorio",
+      "exitByGestAge":"Número de pacientes con edad gestacional menor a 34 semanas al nacer que egresan de PMC intrahospitalario",
+      "ambulatoryAccess":"Número de pacientes que ingresan al PMC Ambulatorio",
+      "intrahorpitalaryExit":"Número de pacientes que egresan de PMC intrahospitalario",
+      "lateAmbulatoryAccess":"Número de pacientes que ingresan al ambulatorio después de 48 horas del egreso de un PMC intrahospitalario",
+      "exitWithoutCriteria":"Número de pacientes que egresan del PMC intrahospitalario sin cumplir los criterios de eligibilidad de egreso de hospitalizacion e ingresan al ambulatorio",
+      "parentAccess":"Número de horas de acceso de los padres a la unidad Neonatal",
+      "intrahospExitWithLME":"Número de pacientes que egresan del PMC intrahospitalario con leche materna ",
+      "timeInPos":"Número de horas al día en que el paciente se ha tenido en posición canguro durante la adaptación de los tres días previos a la salida del intrahospitalario ",
+      "stageIDesertion":" Número de pacientes que desertaron del PMC ambulatorio en la Fase I",
+      "stageIOftamology34Weeks": "Número de pacientes (menores de 34 semanas  de edad gestacional al nacer) a quienes se les realizó examen de oftalmología y que terminan la Fase I ",
+      "endedStageOne34Weeks":"Número de pacientes que culminaron la Fase I del programa , niños menores de 34 semanas de edad gestacional al nacer",
+      "stageIOftamologyByRisk34":"Número de pacientes a quienes se les realizó examen de oftalmología al terminar la Fase I, pacientes de 34 o más semanas de edad gestacional que tienen factores específicos de riesgo",
+      "endedStageOneByRisk34":"Número de pacientes que culminaron la Fase I del programa , niños de 34 o mas semanas de edad gestacional al nacer con factores específicos de riesgo",
+      "stageIOftamology32Weeks":"Número de pacientes a quienes se les realizó examen de oftalmología al terminar la Fase I, niños menores de 32 semanas de edad gestacional al nacer",
+      "endedStageOne32Weeks":"Número de pacientes que culminaron la Fase I del programa , niños menores de 32 semanas de edad gestacional al nacer",
+      "stageIOftamologyByRisk32":"Número de pacientes a quienes se les realizó examen de oftalmología al terminar la Fase I, pacientes de 32 o más semanas de edad gestacional que tienen factores específicos de riesgo",
+      "endedStageOneByRisk32":"Número de pacientes que culminaron la Fase I del programa , niños de 32 o mas semanas de edad gestacional al nacer con factores específicos de riesgo",
+      "ecographyStageI":"Número de pacientes a quienes se les realizó ecografía cerebral al terminar la Fase I",
+      "stageIEnded":"Número de pacientes que culminaron la Fase I del programa",
+      "neuroEvalStageI":"Número de pacientes que recibieron valoración neurológica para evaluación de tono al terminar la Fase I",
+      "vaccinesStageI":"Número de pacientes que han recibido vacunación con hepatitis B y BCG al terminar la Fase I",
+      "LME40Weeks":"Número de niños alimentados con leche materna exclusiva a las 40 semanas E.G",
+      "IStageRehospitalized":"Número de pacientes que se re-hospitalizan por lo menos en una ocasión durante la primera fase del programa canguro ambulatorio y finalizan Fase I",
+      "40WeeksDeath":"Número de pacientes quienes ingresaron al  PMC ambulatorio y que fallecen (durante el periodo) antes de 40 semanas",
+      "40WeeksDeathHome":"Número de pacientes que mueren en casa durante el seguimiento hasta 40 semanas.",
+      "40WeeksGrowth": "Número de pacientes con peso superior a 2500 gr a las 40 semanas",
+      "40WeeksBoysGrowth":"Número  de  pacientes que alcanzan más de los 2500 g de peso, 46.1 cm de talla y 31.9 cm de perímetro cefálico para los niños a las 40 semanas",
+      "40WeeksBoys":"Número de niños que alcanzan las 40 semanas",
+      "40WeeksGirlsGrowth":"Número  de  pacientes que alcanzan más de 2400 g, 42.4 de talla y 31.5 cm de perímetro cefálico para las niñas a las 40 semanas",
+      "40WeeksGirls":"Número de niñas que alcanzan las 40 semanas",
+      "UrgencyStageI":"Número de pacientes que consultan los servicios de urgencias por lo menos en una ocasión durante la Fase I",
+      "StageIIDesertion" : "Número de pacientes que desertaron del PMC en la Fase II, sin incluir a los que pierden las aseguradoras",
+      "stageIIEnded" : "Número de pacientes que finalizan la etapa II",
+      "OptometryStageII":"Número de pacientes a quienes se les realizó examen de optometría al terminar la Fase II",
+      "AudiometryStageII":"Número de pacientes a quienes se les realizó examen de audiometría terminar la Fase II",
+      "PsicoMotorStageII":"Número de pacientes que tienen evaluación neurológica y psicomotora al terminar la Fase II",
+      "VaccinesCompleteStageII":"Número de pacientes que han recibido esquema de vacunación completa para el primer año de edad",
+      "LME3Months":"Número  de  pacientes que reciben leche materna a los 3 meses",
+      "12WeeksPatients":"Número de pacientes que alcanzan los 3 meses",
+      "LME6Months":"Número  de  pacientes que reciben leche materna a los 6 meses",
+      "24WeeksPatients":"Número de pacientes que alcanzan los 6 meses",
+      "IIStageRehospitalized":"Número de pacientes que al terminar la Fase II se re-hospitalizaron al menos una vez durante la segunda fase",
+      "DeathStageII":"Número de pacientes que  fallecen durante la Fase II",
+      "48WeeksBoysGrowth":"Número  de  pacientes que alcanzan más de los 7700 g de peso, 71.0 cm de talla y 43.5 cm de perímetro cefálico  para los niños al año E.C",
+      "48WeeksBoys":"Número de niños que alcanzan un año E.C",
+      "48WeeksGirlsGrowth":"Número  de  pacientes que alcanzan más de más de 7000 g, 68.9 de talla y 42.2 cm de perímetro cefálico para las niñas al año E.C",
+      "48WeeksGirls":"Número de niñas que alcanzan un año E.C",
+      "PatientAtention":"Pacientes atendidos en el ambulatorio"
+    },
+    "MeissenIndexes":{
+      "m_ambulatoryAccess":"Niños prematuros o de bajo peso que ingresan al PMC ambulatorio",
+      "m_intrahospitalaryExit":"Niños prematuros y/o bajo peso que egresan del intrahospitalario",
+      "m_stageIEnd":"Niños prematuros y/o de bajo peso que finalizan Fase I",
+      "m_shouldEndStageI" :"Niños prematuros y/o de bajo peso que deberían finalizar la Fase I",
+      "m_accessInTime" : "Niños prematuros y/o de bajo peso que ingresan antes de 72 horas del egreso",
+      "m_phaseIHospitalization" : "Niños Hospitalizados durante la Fase I",
+      "m_phaseIAttended" : "Niños en Fase I (40 semanas E.G) atendidos",
+      "m_phaseIDecease" : "Niños que mueren en la Fase I (40 semanas E.G)",
+      "m_phaseIIHospitalization" : "Niños Hospitalizados durante la Fase II (0 - 6 meses)",
+      "m_phaseIIAttended" : "Niños en Fase II atendidos (0 - 6 meses)",
+      "m_phaseIIDecease" : "Niños que mueren en la Fase II ( 0 - 6 meses)",
+      "m_phaseIIIAttended" : "Niños en Fase III atendidos (1 año)",
+      "m_phaseIIIHospitalization" : "Niños Hospitalizados durante la Fase III (6M - 1 año)",
+      "m_phaseIIIDecease" : "Niños que mueren en la Fase III (6M - 1 año)",
+      "m_kidsWithAlterationsPhaseIII" : "Niños con alteraciones neurologicas relacionadas con prematurez y/o bajo peso al nacer que culminan la Fase III (6M - 1 año)",
+      "m_phaseIIIEnded" : "Niños que terminan la Fase III (6M - 1 año)",
+      "m_kidsUnderweightPhaseIII" : "Nro de niños (as) con peso menor a 2 DS según escala de OMS, al finalizar el programa"
+    },
+    "DeathPlace":{
+      "Home":"Casa",
+      "Hospital":"Hospital"
+    },
+    "PatientIDType":{
+      "Register":"Registro",
+      "MS":"MS"
+    },
+    "DataTypes" : {
+      "OBSERVATION":"Observaciones paciente",
+      "PMC_UNIT":"Datos Unidad",
+      "PATIENT": "Datos del Paciente",
+      "RESPONSABLE": "Datos del Acudiente",
+      "PROGRAM_ACCESS": "Datos de Acceso",
+      "STAGES": "Etapas",
+      "AMBULATORY_PROGRAM": "Programa Ambulatorio",
+      "INTRAHOSPITALARY_PROGRAM": "Programa Intrahospitalario",
+      "DECEASE": "Defunción del paciente",
+      "DESERTION": "Deserción del paciente",
+      "TRASLATION" : "Traslado del paciente",
+      "STAGE_12WEEKS_C": "Datos etapa 3 meses E.C",
+      "STAGE_24WEEKS_C": "Datos etapa 6 meses E.C",
+      "STAGE_36WEEKS_C": "Datos etapa 9 meses E.C",
+      "STAGE_48WEEKS_C": "Datos etapa 1 año E.C",
+      "STAGE_40WEEKS_G": "Datos 40 semanas E.G"
+    },
+    "Stages":{
+      "12WEEKS":"3 Meses E.C",
+      "24WEEKS":"6 Meses E.C",
+      "36WEEKS":"9 Meses E.C",
+      "40WEEKS":"40 Semanas E.G",
+      "48WEEKS":"Año E.C"
+    },
+    "StagesTypes": {
+      "Corrected" : "Edad Corregida",
+      "Gestational" : "Edad gestacional"
+    },
+    "StagesLabels" : {
+      "12WEEKS":"(3 m)",
+      "24WEEKS":"(6 m)",
+      "36WEEKS":"(9 m)",
+      "40WEEKS":"(40 sem eg)",
+      "48WEEKS":"(año)"
+    },
+    "ExportLabels" : {
+      "12WEEKS":" 3 MESES",
+      "24WEEKS":" 6 MESES",
+      "36WEEKS":" 9 MESES",
+      "40WEEKS":" 40 SEMANAS",
+      "48WEEKS":" 1 AÑO"
+    },
+    "Vaccines": {
+      "BCG": "BCG",
+      "HepatitisB":"Hepatitis B",
+      "CompleteScheme":"Esquema de vacunación completo"
+    },
+    "Exams":{
+      "Oftalmology":"Oftalmología",
+      "BrainScan":"Ecografía Cerebral",
+      "NeuroEval":"Evaluación Neurológica",
+      "Audiometry":"Audiometría",
+      "PsMotEval":"Evaluación Psicomotora",
+      "Optometry":"Optometría"
+    },
+    "Nutrition":{
+      "LME":"LME",
+      "Mixed":"Mixta",
+      "Artificial":"Suplemento"
+    },
+    "ExitCriteria":{
+      "WeightGain": "El paciente presentó ganancia de peso adecuada",
+      "SBDCoordination": "El paciente tiene coordinación de Succión-Deglución-Respiración",
+      "TreatmentsEnded": "El paciente terminó con sus tratamientos",
+      "LevelOfOxygen": "El paciente maneja una saturación adecuada de oxígeno",
+      "TempRegulation": "El paciente regula su temperatura en posición canguro",
+      "AccessToPMC": "Familia comprometida con el PMC"
+    },
+    "PatientSex": {
+      "Girl": "Niña",
+      "Boy": "Niño"
+    },
+    "DocumentType": {
+      "IdentityCard":"Tarjeta Identidad",
+      "ID":"Cédula",
+      "Passport":"Pasaporte"
+    },
+    "DX":{
+      "PreTermn":"RNPT",
+      "FullTermn":"RNAT"
+    },
+    "PatientOrigin": {
+      "HospitalNursery": "URN",
+      "Dispatched": "Remitido",
+      "Rooming": "AC",
+      "Other": "Otro"
+    },
+    "GrowthVariables":{
+      "Size": "Talla (cm)",
+      "HeadPerim" : "Perímetro Cefálico (cm)",
+      "Weight": "Peso (gr)"
+    },
+    "CriteriaStrings":{
+      "True": "Cumple",
+      "False": "No Cumple"
+    },
+    "BooleanStrings":{
+      "True": "SI",
+      "False": "NO"
+    },
+    "TypeNames":{
+      "DX": "Recién nacido a término o pretérmino",
+      "DIED":"Paciente Falleció",
+      "WEIGHT_40W":"Mas de 2,5K a las 40 semanas",
+      "HOSPITALIZED":"Paciente fue hospitalizado",
+      "DESERTED":"Paciente desertó",
+      "ORIGIN": "Proveniencia del paciente",
+      "PATIENT_ID_TYPE":"Registro o MS",
+      "DEATH_PLACE" : "Lugar de la muerte",
+      "FOOD_SUPPLY" : "Tipo de alimentación",
+      "STAGE": "Etapa",
+      "ID_TYPE" : "Tipo de id del responsable",
+      "SEX": "Género",
+      "OPTOMETRY":"Realizó Optometría",
+      "OFTALMOLOGY": "Realizó Oftalmología",
+      "BRAINSCAN": "Realizó Ecografía Cerebral",
+      "NEUROEVAL": "Realizó evaluación Neurológica",
+      "AUDIOMETRY": "Realizó Audiometría",
+      "PSMOTOREVAL": "Realizó Evaluación psicomotora",
+      "BCG": "Aplicó Vacuna BCG",
+      "HEPB": "Aplicó Hepatitis B",
+      "COMPLETE_SCHEME": "Esquema de vacunación completo",
+      "WEIGHT_GAIN": "Ganancia de Peso Adecuada",
+      "SBD_COORDINATION" : "Coordinación de Succión-Deglución-Respiración",
+      "TREATMENTS_FINISHED": "Terminaron los tratamientos",
+      "OXYGEN_LEVEL": "Saturación de Oxígeno Adecuada",
+      "TEMP_REGULATION": "Regula Temperatura en Pos Canguro",
+      "PMC_ACCESS" : "Acceso a un programa madre canguro",
+      "LATE_ACCESS" : "Ingreso después de 48 horas",
+      "URGENCY_APPOINTMENT": "Tuvo una consulta de emergencia",
+      "WAS_HOSPITALIZED" : "Fue rehospitalizado",
+      "CORRECT_GROWTH" : "Peso, Talla y Perim cefálico encima de -2DE de las curvas de la OMS.",
+      "RISK_FACTOR" : "Factores específicos de riesgo",
+      "FIRSTSTLEVEL" : "Paciente esta en primer nivel",
+      "NEUROLOGICAL_ALTERATIONS": "Tiene alteraciones neurológicas relacionadas con la premartuez"
+    }
+  }
+}

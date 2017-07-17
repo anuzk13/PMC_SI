@@ -1,0 +1,26 @@
+{
+  "lines": [
+    {
+      "tag":"SD0",
+      "nameKey":"GrowthChart.Who.Lines.50"
+    }, {
+      "tag":"SD1neg",
+      "nameKey":"GrowthChart.Who.Lines.15"
+    }, {
+      "tag":"SD2neg",
+      "nameKey":"GrowthChart.Who.Lines.2"
+    }, {
+      "tag":"SD2",
+      "nameKey":"GrowthChart.Who.Lines.98"
+    }, {
+      "tag":"SD1",
+      "nameKey":"GrowthChart.Who.Lines.85"
+    }, {
+      "tag":"SD3",
+      "nameKey":"GrowthChart.Who.Lines.99_9"
+    }, {
+      "tag":"SD3neg",
+      "nameKey":"GrowthChart.Who.Lines.0_1"
+    }
+  ]
+}

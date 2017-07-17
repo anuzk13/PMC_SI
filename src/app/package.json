@@ -1,0 +1,22 @@
+{
+  "name": "pmc_si_dev",
+  "version": "0.0.0",
+  "description": "AngularElectron",
+  "main": "index.html",
+  "window": {
+    "title": "indicadores PMC",
+    "icon": "logo-PMC.png",
+    "toolbar": true,
+    "frame": true,
+    "width": 1200,
+    "height": 700,
+    "position": "center",
+    "min_width": 500,
+    "min_height": 500,
+    "max_width": 1500,
+    "max_height": 1000
+  },
+  "dependencies": {
+
+  }
+}

@@ -1,0 +1,25 @@
+<md-toolbar layout="row" class="md-hue-2">
+  <div class="md-toolbar-tools">
+    <span>{{ stageData.nameKey | translate }}</span>
+  </div>
+</md-toolbar>
+<!--No patients in stage -->
+<md-content class="statusList md-whiteframe-z2">
+  <md-card md-theme="dark-grey" class="md-hue-2" md-theme-watch ng-show="{{stageData.patients.length == 0}}">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{ 'StagePanel.NoPatients' | translate }}</span>
+      </md-card-title-text>
+    </md-card-title>
+  </md-card>
+  <!-- patients in stage -->
+  <md-list>
+    <md-list-item ng-if="$index < 20" class="md-3-line" ng-repeat="item in stageData.patients">
+      <div class="md-list-item-text" layout="column">
+        <h3 class="listText">{{ 'StagePanel.Date' | translate }}{{item.value.dateReached}}</h3>
+        <h4 class="listText">{{ 'StagePanel.Name' | translate }}{{item.value.historyConsecutive}}</h4>
+        <md-button class="listButton"  ng-click="updatePatient($index)">{{ 'StagePanel.AddData' | translate }}</md-button>
+      </div>
+    </md-list-item>
+  </md-list>
+</md-content>

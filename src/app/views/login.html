@@ -1,0 +1,32 @@
+<div id="popupContainer" layout="column" layout-align="center center" layout-fill="layout-fill">
+  <div layout="column" class="loginBox md-whiteframe-z5">
+    <md-toolbar>
+      <h1 class="md-toolbar-tools"><span>{{unitName}} -{{ 'Login.Title' | translate }}</span></h1>
+    </md-toolbar>
+    <md-content layout="column" class="md-padding">
+      <md-input-container class="md-block">
+        <label>{{ 'Login.UserName' | translate }}</label>
+        <input required md-no-asterisk  name="usrname" ng-model="user.username">
+        <div ng-messages="userRegister.usrname.$error">
+          <div ng-message="required">{{ 'Warnings.RequiredMssg' | translate }}</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>{{ 'Login.Password' | translate }}</label>
+        <input type="password" required md-no-asterisk name="usrpass" ng-model="user.password">
+        <div ng-messages="userRegister.usrpass.$error">
+          <div ng-message="required">{{ 'Warnings.RequiredMssg' | translate }}</div>
+        </div>
+      </md-input-container>
+      <div layout="row" layout-align="center center" style="padding-top:20px;">
+        <md-button ng-disabled="userRegister.$invalid" class="md-raised md-primary" ng-click="loginUser()">
+          {{ 'Login.AccessBtn' | translate }}
+        </md-button>
+        <md-button class="md-raised md-primary" ng-click="loginOffline()">
+          {{ 'Login.KeepOffline' | translate }}
+        </md-button>
+        <div flex="flex"></div>
+      </div>
+    </md-content>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+{ "documents" : [
+    {
+      "DeceaseLocation": null,
+      "Name": "MARTIN RINCON TORRES",
+      "Sex": "SX02",
+      "SocialRegistry": 1029294979,
+      "GestationalAge": 39,
+      "BirthDate": "23/01/2016",
+      "CorrectedBirthDate": "30/01/2016",
+      "_id": "PATIENT%1029294979",
+      "type": "PATIENT"
+    },
+     {
+        "Name":"ANGIE TORRES",
+        "Document":12154554,
+        "Patient_id":"PATIENT%1029294979",
+        "type":"RESPONSABLE",
+        "_id":"RESPONSABLE%PATIENT%1029294979"
+     },
+    {
+       "DateAccess":"05/01/2016",
+       "Nutrition":"FS03",
+       "Origin": "ORI01",
+       "WeightGain":true,
+       "Weight":2.5,
+       "HeadPerim":21.5,
+       "Size":17.69,
+       "AvgTimeInPos":24,
+       "Patient_id":"PATIENT%1029294979",
+       "type":"AMBULATORY_PROGRAM",
+       "_id":"AMBULATORY_PROGRAM%PATIENT%1029294979"
+    },
+    {
+      "_id":"INTRAHOSPITALARY_PROGRAM%PATIENT%1029294979",
+      "Patient_id":"PATIENT%1029294979",
+      "type":"INTRAHOSPITALARY_PROGRAM",
+      "DateAccess":"04/01/2016",
+      "DateExit":"05/01/2016",
+      "AccessCriteria": {
+           "EXC02" : true,
+           "EXC03": true,
+           "EXC04": true
+       }
+    },
+    {
+      "_id":"STAGES%PATIENT%1029294979",
+      "type":"STAGES",
+      "Patient_id":"PATIENT%1029294979",
+      "STAGE_12WEEKS_C" :   {
+          "_id":"STAGE_12WEEKS_C%2016/04/23%PATIENT%1029294979",
+          "DateStageReached":"23/04/2016",
+          "Patient_id":"PATIENT%1029294979",
+          "type":"STAGE_12WEEKS_C",
+          "Complete":false,
+          "PatientSex" : "SX02"
+        },
+      "STAGE_24WEEKS_C" : {
+          "_id":"STAGE_24WEEKS_C%2016/07/16%PATIENT%1029294979",
+          "DateStageReached":"16/07/2016",
+          "Patient_id":"PATIENT%1029294979",
+          "type":"STAGE_24WEEKS_C",
+          "Complete":false,
+          "PatientSex" : "SX02"
+       },
+      "STAGE_36WEEKS_C" : {
+        "_id":"STAGE_36WEEKS_C%2016/10/08%PATIENT%1029294979",
+        "DateStageReached":"08/10/2016",
+        "Patient_id":"PATIENT%1029294979",
+        "type":"STAGE_36WEEKS_C",
+        "Complete":false,
+        "PatientSex" : "SX02"
+      },
+      "STAGE_40WEEKS_G" : {
+        "_id":"STAGE_40WEEKS_G%2016/01/30%PATIENT%1029294979",
+        "DateStageReached":"30/01/2016",
+        "Patient_id":"PATIENT%1029294979",
+        "type":"STAGE_40WEEKS_G",
+        "Complete":false,
+        "PatientSex" : "SX02"
+      },
+      "STAGE_48WEEKS_C": {
+        "_id":"STAGE_48WEEKS_C%2016/12/31%PATIENT%1029294979",
+        "DateStageReached":"31/12/2016",
+        "Patient_id":"PATIENT%1029294979",
+        "type":"STAGE_48WEEKS_C",
+        "Complete":false,
+        "PatientSex" : "SX02"
+      }
+    }
+  ]
+}

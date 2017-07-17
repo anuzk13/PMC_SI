@@ -1,0 +1,87 @@
+{
+  "Warnings":{
+    "RequiredMssg":"This is required.",
+    "EmailFormatMssg":"Your email must be between 10 and 100 characters long and look like an e-mail address.",
+    "PasswordFormatMssg":"Your Password must have at least 1 number.",
+    "PasswordMinLenghtMssg":"Your Password must have minimun 7 characters.",
+    "PasswordMaxLenghtMssg":"Your Password must have maximum 30 characters.",
+    "PasswordMacthMssg":"Your Passwords must match.",
+    "RegisterError":"There was a problem during the registration",
+    "IncorrectUser":"User or Password are wrong"
+  },
+  "Alerts":{
+    "UserExists": {
+      "Title": "Repeated User",
+      "Content": "The username was already registered"
+    },
+    "LoginFailed": {
+      "Title": "Login Failed",
+      "Content": "The username or password are incorrect"
+    },
+    "Accept":"Accept"
+  },
+  "PMC_Unit_Fields":{
+    "PMCUNIT_ID":"ID KMC Unit",
+    "PMCUNIT_Name":"KMC Unit Name",
+    "PMCUNIT_Address":"KMC Unit Address"
+  },
+  "PMCUnitRegister": {
+  	"Title":"KMC Indicators Sistem",
+  	"RegisterSection": {
+  		"Title":"KMC Unit Registration",
+  		"PMCUnitNameFld":"KMC unit Name",
+  		"PMCUnitAddressFld":"KMC Unit Address"
+  	},
+  	"AdminRegisterSection":{
+  		"Title":"Administrator Registration",
+      "AdminNameFld":"Name",
+      "AdminEmailFld":"Email",
+      "AdminPassFld":"Password",
+      "AdminPassConfirm":"Confirm Password",
+      "AdminRememberUser":"Remember Me"
+  	},
+    "AcceptBtn":"Accept"
+  },
+  "Login":{
+    "Title":"Login",
+    "UserName":"Username",
+    "Password":"Password",
+    "AccessBtn":"Login",
+    "Remember":"Recordar Credenciales",
+    "ForgotPassword":"Forgot password"
+  },
+  "PatientsDashboard":{
+	"Title":"Patient Data Uptade",
+	"PhaseEndLabel":"Patients that finished phase"
+  },
+  "Right_Menu":{
+    "OpenMenu": "Open Menu",
+    "CloseMenu": "Close Menu",
+  	"PMCPatients": {
+  	  "Title":"KMC Patients",
+  	  "RegisterPatient":"Register Patient",
+  	  "SearchPatient":"Search Patient"
+  	},
+  	"PMCUnit": {
+  	  "Title":"KMC Unit",
+  	  "PMCData":"KMC Unit Data",
+  	  "RegisterUser":"Register User",
+  	  "ImportData":"Import Data",
+  	  "SystemConfig":"System Configuration"
+  	}
+  },
+  "StagePanel": {
+    "Date":"Reached the: ",
+    "Name":"Patient: ",
+    "AddData":"Update Stage Data"
+  },
+  "Indicators":{
+    "Stages":{
+      "12WEEKS":"3 Months C.A",
+      "24WEEKS":"6 Months C.A",
+      "36WEEKS":"9 Months C.A",
+      "40WEEKS":"40 Months C.A",
+      "48WEEKS":"1 Year C.A"
+    }
+  }
+}

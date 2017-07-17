@@ -1,0 +1,138 @@
+<section layout="row" flex="">
+  <div ng-controller="SidenavCtrl" ng-include="navbartemplate.url">
+  </div>
+  <md-content flex="">
+    <div ng-controller="TopbarCtrl" ng-include="topbartemplate.url">
+    </div>
+    <md-content>
+       <md-tabs md-selected="tabNumber" md-dynamic-height md-border-bottom>
+          <md-tab label="{{'ProgramSettings.DataTab.LabelTitle' | translate }}">
+            <md-toolbar class="actions-bar md-table-toolbar md-default">
+              <div class="md-toolbar-tools">
+                <span> {{ 'ProgramSettings.DataTab.Actions'| translate }}</span>
+                <div flex></div>
+                <md-button class="md-icon-button" ng-hide="databaseEditMode" ng-click="editDatabase()">
+                 <md-icon>edit</md-icon>
+                </md-button>
+              </div>
+            </md-toolbar>
+            <section>
+              <form name="forms.remoteForm">
+
+                <md-card md-theme="orange" ng-show="authError">
+                  <div layout="row" layout-align="center center">
+                    <div flex>
+                      <md-card-title>
+                        <md-card-title-text>
+                          <span class="md-headline">{{ authError.title | translate}}</span>
+                          <span class="md-subhead">{{ authError.message | translate}}</span>
+                        </md-card-title-text>
+                      </md-card-title>
+                    </div>
+                    <div layout-align="end end">
+                      <md-button class="md-icon-button" aria-label="Settings" ng-click="closeError()">
+                        <md-icon>close</md-icon>
+                      </md-button>
+                    </div>
+                  </div>
+                </md-card>
+
+                <md-card md-theme="green" ng-show="authSuccess">
+                  <div layout="row" layout-align="center center">
+                    <div flex>
+                      <md-card-title>
+                        <md-card-title-text>
+                          <span class="md-headline">{{ authSuccess.title | translate}}</span>
+                          <span class="md-subhead">{{ authSuccess.message | translate}}</span>
+                        </md-card-title-text>
+                      </md-card-title>
+                    </div>
+                    <div layout-align="end end">
+                      <md-button class="md-icon-button" aria-label="Settings" ng-click="closeSuccess()">
+                        <md-icon>close</md-icon>
+                      </md-button>
+                    </div>
+                  </div>
+                </md-card>
+                <md-checkbox ng-disabled="!databaseEditMode" ng-model="keepOffline">
+                  {{ 'ProgramSettings.DataTab.KeepOffline' | translate }}
+                </md-checkbox>
+                <br>
+                <md-input-container class="md-block">
+                 <label>{{ 'ProgramSettings.DataTab.URL' | translate }}</label>
+                 <input ng-disabled="keepOffline || !databaseEditMode" ng-required="!keepOffline" md-no-asterisk name="url" ng-model="remote.Url">
+                 <div ng-messages="forms.remoteForm.url.$error">
+                   <div ng-message="required">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                 </div>
+                </md-input-container>
+                <section ng-show="databaseEditMode" >
+                  <md-input-container class="md-block">
+                   <label>{{ 'ProgramSettings.DataTab.Admin' | translate }}</label>
+                   <input ng-disabled="keepOffline" ng-required="!keepOffline" md-no-asterisk name="adminname" ng-model="remote.Username">
+                   <div ng-messages="forms.remoteForm.adminname.$error">
+                     <div ng-message="required">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                   </div>
+                  </md-input-container>
+                  <md-input-container class="md-block">
+                   <label> {{ 'ProgramSettings.DataTab.Pass' | translate }}</label>
+                   <input ng-disabled="keepOffline" type="password" ng-required="!keepOffline" name="password" ng-model="remote.Pasword" />
+                   <div ng-messages="forms.remoteForm.password.$error">
+                     <div ng-message="required">
+                       {{ 'Warnings.RequiredMssg' | translate }}
+                     </div>
+                   </div>
+                  </md-input-container>
+                  <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                     <md-button ng-disabled="forms.remoteForm.$invalid && !keepOffline" class="md-raised md-primary" ng-click="saveChanges()">
+                       {{ 'ProgramSettings.DataTab.Continue' | translate }}
+                     </md-button>
+                     <md-button class="md-raised md-primary" ng-click="cancelChanges()">
+                       {{ 'ProgramSettings.DataTab.Back' | translate }}
+                     </md-button>
+                  </section>
+                </section>
+              </form>
+            </section>
+          </md-tab>
+          <md-tab label="{{'ProgramSettings.ExportTab.LabelTitle' | translate }}">
+            <h1>{{ 'ProgramSettings.ExportTab.Title' | translate}}</h1>
+            <md-card md-theme="green" ng-show="exportCustomSuccess">
+              <div layout="row" layout-align="center center">
+                <div flex>
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-headline">{{ "ProgramSettings.ExportTab.SuccessTitle" | translate}}</span>
+                      <span class="md-subhead">{{ "ProgramSettings.ExportTab.SuccessMsg" | translate}}</span>
+                    </md-card-title-text>
+                  </md-card-title>
+                </div>
+                <div layout-align="end end">
+                  <md-button class="md-icon-button" aria-label="Settings" ng-click="closeExportSuccess()">
+                    <md-icon>close</md-icon>
+                  </md-button>
+                </div>
+              </div>
+            </md-card>
+
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+              <div flex>
+                <h3>{{ "ProgramSettings.ExportTab.ColumnTotal" | translate}}</h3>
+                <div ui-sortable="sortableOptions" class="apps-container" ng-model="unusedCols">
+                  <div class="custom-import-col" ng-repeat="column in unusedCols">{{$index + 1}}. {{column.exportTitle | translate}} {{column.exportLabel | translate}}</div>
+                </div>
+              </div>
+              <div flex>
+                <h3>{{ "ProgramSettings.ExportTab.ColumnExports" | translate}}</h3>
+                <div ui-sortable="sortableOptions" class="apps-container" ng-model="usedCols">
+                  <div class="custom-import-col" ng-repeat="column in usedCols">{{$index + 1}}.  {{column.exportTitle | translate}} {{column.exportLabel | translate}}</div>
+                </div>
+              </div>
+            </section>
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+             <md-button  ng-click="saveExportChanges()">{{"ProgramSettings.ExportTab.Save" | translate}}</md-button>
+            </section>
+          </md-tab>
+       </md-tabs>
+     </md-content>
+  </md-content>
+</section>

@@ -1,0 +1,142 @@
+<div id="popupContainer" layout="column" style="height:100%;" ng-cloak>
+  <section layout="row" flex="">
+    <div ng-controller="SidenavCtrl" ng-include="navbartemplate.url">
+    </div>
+    <md-content flex="">
+      <div ng-controller="TopbarCtrl" ng-include="topbartemplate.url">
+      </div>
+      <section>
+        <md-content flex layout-padding>
+          <form name="forms.form1">
+            <h2>{{ 'Patientregister.PatientData.Title' | translate }}</h2>
+            <div layout-gt-sm="row" flex="90"  flex-offset="5">
+              <md-input-container class="md-block" flex="30" flex-sm="100" flex-xs="100">
+                <label>{{ 'Patientregister.PatientData.NameFld' | translate }}</label>
+                <input name="patientName" ng-model="patient.Name">
+              </md-input-container>
+              <md-input-container class="md-block" flex="30" flex-sm="100" flex-xs="100">
+                <label>{{ 'Patientregister.PatientData.RegisterNumberFld' | translate }}</label>
+                <input name="patientRegister" ng-model="patient.SocialRegistry"
+                             required ng-pattern="/^\d+$/">
+                <div ng-messages="forms.form1.patientRegister.$error" role="alert" multiple>
+                  <div ng-message="required" class="my-message">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                  <div ng-message="pattern" class="my-message">{{ 'Warnings.InvalidFormatMessage' | translate }}</div>
+                </div>
+              </md-input-container>
+              <md-input-container class="md-block" flex="30" flex-sm="100" flex-xs="100">
+                <label>{{ 'Patientregister.PatientData.RegisterType' | translate }}</label>
+                <md-select ng-model="patient.RegType">
+                  <md-option ng-repeat="regType in patRegTypes" value="{{regType.value}}">
+                    {{ regType.nameKey | translate }}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+            </div>
+            <div layout-gt-sm="row" flex="90"  flex-offset="5">
+              <md-input-container class="md-block" flex="30" flex-sm="100" flex-xs="100">
+                      <label>{{ 'Patientregister.PatientData.GenderFld' | translate }}</label>
+                      <md-select ng-model="patient.Sex" required name="gender">
+                        <md-option ng-repeat="gender in sexTypes" value="{{gender.value}}">
+                          {{ gender.nameKey | translate }}
+                        </md-option>
+                      </md-select>
+                      <div ng-messages="forms.form1.gender.$error" ng-show="forms.form1.gender.$touched" multiple >
+                        <div ng-message="required" class="my-message">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                      </div>
+              </md-input-container>
+              <md-input-container class="md-block" flex="30" flex-sm="100" flex-xs="100">
+                <label>{{ 'Patientregister.PatientData.GestAgeFld' | translate }}</label>
+                <input required md-no-asterisk  name="gestAge" ng-model="patient.GestationalAge" type="number" step="1"  min="{{gestationalAgeBounds.min}}" max="{{gestationalAgeBounds.max}}">
+                <div ng-messages="forms.form1.gestAge.$error" >
+                  <div ng-message="required">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                </div>
+                <div ng-messages="forms.form1.gestAge.$error" multiple md-auto-hide="false">
+                  <div ng-message="min">
+                     {{ 'Warnings.NumberError' | translate:gestationalAgeBounds }}
+                  </div>
+                  <div ng-message="max">
+                     {{ 'Warnings.NumberError' | translate:gestationalAgeBounds }}
+                  </div>
+                </div>
+              </md-input-container>
+              <div class="md-block" flex="30" flex-sm="100" flex-xs="100">
+                  <md-datepicker md-max-date="maxDate" name="birthDate" ng-model="BirthDate" md-placeholder="{{ 'Patientregister.PatientData.BirthDate' | translate }}" required ></md-datepicker>
+                  <div class="validation-messages" ng-messages="forms.form1.birthDate.$error" ng-show="forms.form1.birthDate.$touched">
+                    <div ng-message="valid">{{ 'Warnings.DateFormatIncorrect' | translate }}</div>
+                    <div ng-message="required">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                  </div>
+              </div>
+
+            </div>
+            <div layout-gt-sm="row" flex="90"  flex-offset="5">
+                <md-input-container class="md-block"  flex="45"  flex-sm="100" flex-xs="100" >
+                  <label>{{ 'Patientregister.PatientData.HistoryConsecutive' | translate }}</label>
+                  <input name="HistoryConsecutive" ng-model="patient.HistoryConsecutive">
+                </md-input-container>
+
+                <md-input-container flex="45" flex-sm="100" flex-xs="100" class="md-icon-float md-icon-right md-block">
+                   <label> {{'Patientregister.PatientData.BornWeight'| translate }}  </label>
+                   <input ng-model="patient.BornWeight" name="bweight" type="number" step="0.01"  min="{{weightBounds.min}}" max="{{weightBounds.max}}">
+                   <div ng-messages="forms.form1.bweight.$error" multiple>
+                      <div ng-message="min">
+                         {{ 'Warnings.NumberError' | translate:weightBounds }}
+                      </div>
+                      <div ng-message="max">
+                         {{ 'Warnings.NumberError' | translate:weightBounds }}
+                      </div>
+                   </div>
+                </md-input-container>
+            </div>
+
+            <h2>{{ 'Patientregister.ResponsableData.Title' | translate }}</h2>
+            <div layout-gt-sm="row"  flex="90"  flex-offset="5">
+              <md-input-container class="md-block" flex="50"  flex-sm="100" flex-xs="100">
+                <label>{{ 'Patientregister.ResponsableData.NameFld' | translate }}</label>
+                <input  md-no-asterisk  name="respdoc" ng-model="responsable.Name">
+              </md-input-container>
+              <md-input-container class="md-block" flex="50"  flex-sm="100" flex-xs="100">
+                <label>{{ 'Patientregister.ResponsableData.ContactFld' | translate }}</label>
+                <input  md-no-asterisk  name="respdoc" ng-model="responsable.Contact">
+              </md-input-container>
+            </div>
+            <div layout-gt-sm="row"  flex="90"  flex-offset="5">
+              <md-input-container class="md-block" flex="50"  flex-sm="100" flex-xs="100">
+                <label>{{ 'Patientregister.ResponsableData.DocumentTypeFld' | translate }}</label>
+                <md-select ng-model="responsable.DocumentType">
+                  <md-option ng-repeat="docType in docTypes" value="{{docType.value}}">
+                    {{ docType.nameKey | translate }}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+              <md-input-container class="md-block" flex="50"  flex-sm="100" flex-xs="100">
+                <label>{{ 'Patientregister.ResponsableData.DocumentFld' | translate }}</label>
+                <input  md-no-asterisk  name="respdoc" ng-model="responsable.Document">
+              </md-input-container>
+              <md-input-container class="md-block" flex="30"  flex-sm="100" flex-xs="100">
+                <label>{{  'Patientregister.ResponsableData.Age' | translate }}</label>
+                <input md-no-asterisk  name="ageParent" ng-model="responsable.Age" type="number" step="1"  min="{{parentAgeBounds.min}}" max="{{parentAgeBounds.max}}">
+                <div ng-messages="forms.form1.gestAge.$error" multiple md-auto-hide="false">
+                  <div ng-message="min">
+                     {{ 'Warnings.NumberError' | translate:parentAgeBounds }}
+                  </div>
+                  <div ng-message="max">
+                     {{ 'Warnings.NumberError' | translate:parentAgeBounds }}
+                  </div>
+                </div>
+              </md-input-container>
+            </div>
+          </form>
+
+          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+              <md-button ng-disabled="forms.form1.$invalid" class="md-raised md-primary" ng-click="savePatient()">
+                {{ 'Patientregister.SaveBtn' | translate }}
+              </md-button>
+          </section>
+
+        </md-content>
+
+
+      </section>
+    </md-content>
+  </section>
+</div>

@@ -1,0 +1,95 @@
+
+<div id="popupContainer" layout="column" style="height:100%;" ng-cloak>
+  <section layout="row" flex="">
+    <div ng-controller="SidenavCtrl" ng-include="navbartemplate.url">
+    </div>
+    <md-content flex="">
+      <div ng-controller="TopbarCtrl" ng-include="topbartemplate.url">
+      </div>
+      <md-content>
+        <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom>
+          <md-tab label="{{'IndicatorVisualization.KMCTab' | translate }}">
+            <md-content class="md-padding">
+              <h1 class="md-display-2">{{'IndicatorVisualization.KMCTab' | translate }}</h1>
+
+              <div layout="row">
+                <md-input-container>
+                  <label>{{'IndicatorVisualization.SelectIndicator' | translate }}</label>
+                  <md-select ng-model="selectedItem" >
+                      <md-option ng-value="item" ng-if="item.type == 'TIME' && item.owner == 'KMC'" ng-repeat="item in indicatorMeta"> {{item.name | translate}}</md-option>
+                  </md-select>
+                </md-input-container>
+                <md-switch ng-model="showAnual" aria-label="'IndicatorVisualization.Anual' | translate">
+                  {{"IndicatorVisualization.Anual" | translate}}
+                </md-switch>
+                <md-button ng-hide="exporting" class="md-raised md-primary" ng-click="exportExcel()">{{ 'IndicatorVisualization.Export' | translate}}</md-button>
+                <div ng-show="exporting">{{'IndicatorVisualization.Exporting'| translate }}<md-progress-circular class="md-accent" md-diameter="20px"></md-progress-circular></div>
+              </div>
+
+              <h1>{{selectedItem.name | translate}}</h1>
+
+              <p>{{selectedItem.description | translate}}</p>
+
+            </md-content>
+          </md-tab>
+          <md-tab label="{{'IndicatorVisualization.MeissenTab' | translate }}">
+            <md-content class="md-padding">
+              <h1 class="md-display-2">{{'IndicatorVisualization.MeissenTab' | translate }}</h1>
+
+              <div layout="row">
+                <md-input-container>
+                  <label>{{'IndicatorVisualization.SelectIndicator' | translate }}</label>
+                  <md-select ng-model="meissenItem" >
+                      <md-option ng-value="item" ng-if="item.type == 'TIME' && item.owner == 'Meissen'" ng-repeat="item in indicatorMeta"> {{item.name | translate}}</md-option>
+                  </md-select>
+                </md-input-container>
+                <md-button ng-hide="exporting" class="md-raised md-primary" ng-click="exportExcel()">{{ 'IndicatorVisualization.Export' | translate}}</md-button>
+                <div ng-show="exporting">{{'IndicatorVisualization.Exporting'| translate }}<md-progress-circular class="md-accent" md-diameter="20px"></md-progress-circular></div>
+              </div>
+
+            </md-content>
+
+            <h1>{{meissenItem.name | translate}}</h1>
+
+            <p>{{meissenItem.description | translate}}</p>
+          </md-tab>
+        </md-tabs>
+
+
+        <div id="timeline"></div>
+
+        <div layout="row" layout-align="center center">
+
+
+
+          <div>
+            <div id="selected"></div>
+          </div>
+
+          <md-card md-theme="dark-grey" class="md-hue-2" md-theme-watch ng-show="missingData">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{ 'IndicatorVisualization.MissingData' | translate }}</span>
+              </md-card-title-text>
+            </md-card-title>
+          </md-card>
+
+          <div  layout="column" layout-align="center center">
+            <div layout="row" layout-align="center center">
+              <h3 ng-hide="numberIndex">{{pieDate}} {{ indicatorPercentage}} </h3>
+              <h3 ng-show="numberIndex">{{pieDate}}</h3>
+            </div>
+            <div layout="row" layout-align="center center">
+              <div flex="60" ng-show="upperText" class="upper-index"> {{upperText  | translate}}</div>
+              <div flex="10" ng-show="upperVal || lowerVal" ><p class="index-value index-teal">{{upperVal}}</p></div>
+            </div>
+            <div layout="row" ng-hide="numberIndex" layout-align="center center">
+              <div flex="60"> {{lowerText  | translate}} {{lowerType | translate}}</div>
+              <div flex="10" ng-show="upperVal || lowerVal" ><p class="index-value index-grey">{{lowerVal}}</p></div>
+            </div>
+          </div>
+        </div>
+      </md-content>
+    </md-content>
+  </section>
+</div>

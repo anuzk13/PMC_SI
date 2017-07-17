@@ -1,0 +1,115 @@
+<md-dialog class="wideDialog">
+  <form name="stageUpdate" >
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h3>{{ 'UpdatePatientStageDialog.Title' | translate }} {{stagePatient.Name}}</h3>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <i class="material-icons">close</i>
+        </md-button>
+      </div>
+      <div class="md-toolbar-tools">
+        {{ 'UpdatePatientStageDialog.PatientData.History' | translate }} : {{ stagePatient.HistoryConsecutive }}
+        | {{ 'UpdatePatientStageDialog.PatientData.Registry' | translate }} : {{ stagePatient.SocialRegistry }}
+      </div>
+    </md-toolbar>
+
+    <md-progress-linear ng-show="saving" md-mode="indeterminate"></md-progress-linear>
+    <md-dialog-content style="max-width:800px;max-height:810px; ">
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="{{ 'UpdatePatientStageDialog.DataTab.Title' | translate }}">
+          <md-content class="md-padding">
+            <md-input-container class="md-block" flex-gt-sm="">
+              <label>{{ 'UpdatePatientStageDialog.DataTab.NutritionType' | translate }}</label>
+              <md-select ng-model="dialogStage.Nutrition">
+                <md-option ng-repeat="foodSupplyType in foodSupplyTypes" value="{{foodSupplyType.value}}">
+                  {{foodSupplyType.nameKey| translate }}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <div layout-gt-sm="row">
+              <md-input-container class="md-icon-float md-icon-right md-block">
+                <label> {{'UpdatePatientStageDialog.DataTab.Weight'| translate }}  </label>
+                <input ng-model="dialogStage.Weight" name="weight" type="number" step="0.01"  min="{{weightBounds.min}}" max="{{weightBounds.max}}">
+                <div ng-messages="stageUpdate.weight.$error" multiple md-auto-hide="false">
+                  <div ng-message="min">
+                     {{ 'Warnings.NumberError' | translate:weightBounds }}
+                  </div>
+                  <div ng-message="max">
+                     {{ 'Warnings.NumberError' | translate:weightBounds }}
+                  </div>
+                </div>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-icon-right md-block">
+                <label> {{'UpdatePatientStageDialog.DataTab.Height'| translate }}  </label>
+                <input ng-model="dialogStage.Size"  name="size" type="number" step="0.01" min="{{sizeBounds.min}}" max="{{sizeBounds.max}}">
+                <div ng-messages="stageUpdate.size.$error" multiple md-auto-hide="false">
+                  <div ng-message="min">
+                     {{ 'Warnings.NumberError' | translate:sizeBounds }}
+                  </div>
+                  <div ng-message="max">
+                     {{ 'Warnings.NumberError' | translate:sizeBounds }}
+                  </div>
+                </div>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-icon-right md-block">
+                <label> {{'UpdatePatientStageDialog.DataTab.HeadPerim'| translate }}  </label>
+                <input ng-model="dialogStage.HeadPerim" name="headPerim" type="number" step="0.01" min="{{headBounds.min}}" max="{{headBounds.max}}">
+                <div ng-messages="stageUpdate.headPerim.$error" multiple md-auto-hide="false">
+                  <div ng-message="min">
+                     {{ 'Warnings.NumberError' | translate:headBounds }}
+                  </div>
+                  <div ng-message="max">
+                     {{ 'Warnings.NumberError' | translate:headBounds }}
+                  </div>
+                </div>
+              </md-input-container>
+            </div>
+            <md-list ng-cloak>
+              <md-list-item>
+                <p> {{'UpdatePatientStageDialog.DataTab.HadUrgencyAppointment'| translate }} </p>
+                <md-checkbox class="md-secondary" ng-model="dialogStage.HadUrgencyAppointment"></md-checkbox>
+              </md-list-item>
+              <md-list-item>
+                <p> {{'UpdatePatientStageDialog.DataTab.HasRiskFactors'| translate }} </p>
+                <md-checkbox class="md-secondary" ng-model="dialogStage.HasRiskFactors"></md-checkbox>
+              </md-list-item>
+            </md-list ng-cloak>
+          </md-content>
+        </md-tab>
+        <md-tab label="{{ 'UpdatePatientStageDialog.ExamsVaccinesTab.Title' | translate }}">
+          <md-content class="md-padding">
+            <md-input-container class="md-block" flex-gt-sm="">
+              <label>{{ 'UpdatePatientStageDialog.ExamsVaccinesTab.Vaccines' | translate }}</label>
+              <md-select ng-model="vaccines" multiple="true">
+                <md-option ng-repeat="vaccineType in vaccineTypes" value="{{vaccineType.value}}">
+                  {{vaccineType.nameKey| translate }}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm="">
+              <label>{{ 'UpdatePatientStageDialog.ExamsVaccinesTab.Exams' | translate }}</label>
+              <md-select ng-model="exams" multiple="true">
+                <md-option ng-repeat="examType in examTypes" value="{{examType.value}}">
+                  {{examType.nameKey| translate }}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button class="md-raised md-primary" ng-click="save()" ng-disabled="stageUpdate.$invalid">
+        <md-icon>save</md-icon>
+      </md-button>
+      <md-button class="md-raised md-primary" ng-hide="dialogStage.Complete" ng-click="saveAndComplete()" ng-disabled="stageUpdate.$invalid || !stagePatient">
+        {{'UpdatePatientStageDialog.MarkAsCompleted' | translate}}
+      </md-button>
+    </md-dialog-actions>
+
+
+  </form>
+</md-dialog>

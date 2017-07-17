@@ -1,0 +1,11 @@
+<md-toolbar>
+	<div class="md-toolbar-tools">
+	  <md-button class="md-icon-button" ng-click="toggleLeft()" class="md-primary md-raised" hide-gt-md="">
+		<i class="material-icons">apps</i>
+	  </md-button>
+	  <h1 class="centralToolbar md-toolbar-tools">{{ title | translate }}</h1>
+	</div>
+</md-toolbar>
+<div display="row">
+    <md-progress-linear md-mode="indeterminate" ng-show="topLoading"></md-progress-linear>
+</div>

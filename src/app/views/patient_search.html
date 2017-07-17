@@ -1,0 +1,124 @@
+<div id="popupContainer" layout="column" style="height:100%;" ng-cloak>
+  <section layout="row" flex="">
+    <div ng-controller="SidenavCtrl" ng-include="navbartemplate.url">
+    </div>
+    <md-content flex="">
+      <div ng-controller="TopbarCtrl" ng-include="topbartemplate.url">
+  		</div>
+      <md-card>
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="(options.rowSelection && selected.length) || filter.show || showModified">
+          <div class="md-toolbar-tools">
+            <span>{{ 'PatientSearch.Actions' | translate }}</span>
+            <div flex></div>
+            <md-button class="md-icon-button" ng-click="loadStuff()">
+              <md-icon>refresh</md-icon>
+            </md-button>
+            <button class="md-icon-button md-button md-ink-ripple" type="button" ng-click="filter.show = true">
+              <md-icon>search</md-icon>
+            <div class="md-ripple-container"></div></button>
+          </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-table-toolbar md-default" ng-show="filter.show &amp;&amp; !selected.length" aria-hidden="false" style="">
+          <div class="md-toolbar-tools">
+            <md-icon>search</md-icon>
+            <form flex="" name="filter.form" class="ng-pristine ng-valid flex">
+              <input class="search-box" type="text" ng-model="query.filter" ng-model-options="filter.options" placeholder="{{ 'PatientSearch.SearchPlaceHolder' | translate }}" class="ng-pristine ng-valid ng-touched" aria-invalid="false" style="">
+            </form>
+            <button class="md-icon-button md-button md-ink-ripple" type="button" ng-click="removeFilter()" aria-label="close">
+              <md-icon>close</md-icon>
+            <div class="md-ripple-container"></div></button>
+          </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-table-toolbar md-accent" ng-show="options.rowSelection &amp;&amp; selected.length">
+          <div class="md-toolbar-tools">
+            <span>{{selected.length}} {{ 'PatientSearch.Selection' | translate }}</span>
+            <div flex></div>
+            <md-button class="md-icon-button" ng-click="delete($event)">
+              <md-icon>delete</md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-table-toolbar alternate" ng-show="showModified">
+          <div class="md-toolbar-tools">
+            <span>{{modifiedQty}} {{ 'PatientSearch.Modification' | translate }}</span>
+            <div flex></div>
+            <md-button class="md-icon-button" ng-click="save($event)">
+              <md-icon>save</md-icon>
+            </md-button>
+            <button class="md-icon-button md-button md-ink-ripple" type="button" ng-click="cancelSave()" aria-label="close">
+              <md-icon>close</md-icon>
+            <div class="md-ripple-container"></div></button>
+          </div>
+        </md-toolbar>
+
+        <md-table-container>
+          <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
+            <thead ng-if="!options.decapitate" md-head md-order="query.order" md-on-reorder="logOrder">
+              <tr md-row>
+                <th md-column>
+                  <span>{{ 'PatientSearch.Colums.Actions' | translate }}</span>
+                </th>
+                <th md-column md-numeric md-order-by="doc.PATIENT.HistoryConsecutive">
+                  <md-icon>child_friedly</md-icon>
+                  <span>{{ 'PatientSearch.Colums.HistoryConsecutive' | translate }}</span>
+                </th>
+                <th md-column md-numeric md-order-by="doc.PATIENT.SocialRegistry">
+                  <md-icon>child_friedly</md-icon>
+                  <span>{{ 'PatientSearch.Colums.Register' | translate }}</span>
+                </th>
+                <th md-column md-order-by="doc.RESPONSABLE.Name"><span>{{ 'PatientSearch.Colums.Name' | translate }}</span></th>
+                <th md-column md-order-by="doc.PATIENT.BirthDate" md-desc>
+                  <md-icon>date_range</md-icon>
+                  <span>{{ 'PatientSearch.Colums.BirthDate' | translate }}</span>
+                </th>
+                <th md-column md-numeric md-order-by="doc.PATIENT.GestationalAge">
+                  <md-icon>pregnant_woman</md-icon>
+                  <span>{{ 'PatientSearch.Colums.GestAge' | translate }}</span>
+                </th>
+                <th md-column md-order-by="doc.PATIENT.Sex">
+                  <md-icon>wc</md-icon>
+                  <span>{{ 'PatientSearch.Colums.Gender' | translate }}</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row md-select="patient" md-auto-select="options.autoSelect" ng-repeat="patient in patients | filter: query.filter | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                <td md-cell ng-click="viewPatient($event, patient)">
+                  <md-icon style="color:rgb(0,150,136);">visibility</md-icon>
+                </td>
+                <td md-cell>
+                  {{patient.doc.PATIENT.HistoryConsecutive}}
+                </td>
+                <td md-cell>
+                  {{patient.doc.PATIENT.SocialRegistry}}
+                </td>
+                <td md-cell>
+                  {{patient.doc.RESPONSABLE.Name || ( 'PatientSearch.Colums.AddName' | translate)}}
+                </td>
+                <td md-cell>
+                  {{patient.doc.PATIENT.BirthDate}}
+                </td>
+                <td md-cell>
+                  {{patient.doc.PATIENT.GestationalAge || ( 'PatientSearch.Colums.AddGestAge' | translate)}}
+                </td>
+                <td md-cell>
+                  <md-select aria-label="G" ng-model="patient.doc.PATIENT.Sex" disabled>
+                    <md-option ng-repeat="gender in sexTypes" value="{{gender.value}}">
+                      {{ gender.nameKey | translate }}
+                    </md-option>
+                  </md-select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+
+        <md-table-pagination md-label="{{paginationLabels}}" md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{patients.length}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
+      </md-card>
+    </md-content>
+
+  </section>
+</div>

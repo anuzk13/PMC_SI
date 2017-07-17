@@ -1,0 +1,74 @@
+<md-toolbar layout="row" ng-class='correctGrowthStyle'>
+    <div  class="md-toolbar-tools">
+      <span>{{ title | translate }} ({{stage.DateStageReached}})</span>
+      <md-button class="md-icon-button" ng-show="stage.HadUrgencyAppointment" >
+        <md-tooltip md-direction="top">
+          {{  'StageOverview.HadUrgencyAppointment' | translate }}
+        </md-tooltip>
+        <md-icon style="color:white;width:30px;height:30px;"md-svg-src="assets/img/medical_appointment.svg"></md-icon>
+      </md-button>
+      <md-button class="md-icon-button" ng-show="stage.WasHospitalized" >
+        <md-tooltip md-direction="top">
+          {{  'StageOverview.WasRehospitalized' | translate }}
+        </md-tooltip>
+        <md-icon style="color:white;width:30px;height:30px;"  md-svg-src="assets/img/rehospitalized.svg"></md-icon>
+      </md-button>
+      <md-button class="md-icon-button" ng-show="stage.HasRiskFactors" >
+        <md-tooltip md-direction="top">
+          {{  'StageOverview.HasRiskFactors' | translate }}
+        </md-tooltip>
+        <md-icon style="color:white;width:30px;height:30px;">warning</md-icon>
+      </md-button>
+      <div flex></div>
+      <md-button class="md-fab md-mini md-primary md-hue-3" ng-click="editStage()" md-theme="dark-grey">
+        <md-icon style="color:black;">edit</md-icon>
+      </md-button>
+    </div>
+</md-toolbar>
+
+<md-content ng-class='correctGrowthBorder' class="statusList md-whiteframe-z2">
+  <div layout-gt-sm="row" layout="column">
+    <div flex-gt-sm="50" flex>
+      <md-list class="md-dense" flex>
+        <md-subheader class="md-no-sticky">{{ 'StageOverview.GrowthVars' | translate}}</md-subheader>
+        <md-list-item class="md-3-line" ng-repeat="growthVar in growthVars" >
+          <md-icon style="{{growthVar.style}}" md-svg-src="{{growthVar.icon}}"></md-icon>
+          <div class="md-list-item-text" class="md-offset">
+            <h3> {{ growthVar.nameKey | translate}}</h3>
+            <p> {{ growthVar.value}}</p>
+            <p> {{ 'StageOverview.MeanValue' | translate}} {{ growthVar.meanValue | number:0}}</p>
+          </div>
+        </md-list-item>
+        <md-divider ></md-divider>
+       </md-list>
+    </div>
+    <div flex-gt-sm="50" flex class="gray-left-line">
+      <md-list flex>
+        <md-subheader class="md-no-sticky">{{ 'StageOverview.Nutrition' | translate}}</md-subheader>
+        <md-list-item class="md-2-line" ng-repeat="nutritionType in foodSupplyTypes" ng-show="stage.Nutrition.localeCompare(nutritionType.value) == 0">
+          <md-icon style="color:rgb(0,150,136);width:30px;height:30px;" md-svg-src="assets/img/nutrition.svg"></md-icon>
+          <div class="md-list-item-text" layout="column">
+              <h3>{{ nutritionType.nameKey | translate}}</h3>
+          </div>
+        </md-list-item>
+        <md-divider ></md-divider>
+        <md-subheader class="md-no-sticky">{{ 'StageOverview.Vaccines' | translate}}</md-subheader>
+        <md-list-item class="md-2-line" ng-repeat="vaccine in vaccineTypes" ng-show="stage.StageVaccines.hasOwnProperty(vaccine.value)">
+          <md-icon style="color:rgb(0,150,136);width:30px;height:30px;" md-svg-src="assets/img/vaccines.svg"></md-icon>
+          <div class="md-list-item-text" layout="column">
+              <h3>{{ vaccine.nameKey | translate}}</h3>
+          </div>
+        </md-list-item>
+        <md-divider ></md-divider>
+        <md-subheader class="md-no-sticky">{{ 'StageOverview.Exams' | translate}}</md-subheader>
+        <md-list-item class="md-3-line" ng-repeat="exam in examTypes" ng-show="stage.StageExamns.hasOwnProperty(exam.value)">
+          <md-icon style="color:rgb(0,150,136);width:30px;height:30px;" md-svg-src="assets/img/exams.svg"></md-icon>
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ exam.nameKey | translate}}</h3>
+          </div>
+        </md-list-item>
+        <md-divider ></md-divider>
+      </md-list>
+    </div>
+  </div>
+</md-content>

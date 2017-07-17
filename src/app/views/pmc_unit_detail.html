@@ -1,0 +1,73 @@
+<form name="forms.PMCUnitForm">
+  <section layout="row" flex="">
+    <div ng-controller="SidenavCtrl" ng-include="navbartemplate.url">
+    </div>
+    <md-content flex="">
+      <div ng-controller="TopbarCtrl" ng-include="topbartemplate.url">
+      </div>
+      <md-content>
+
+         <md-tabs md-dynamic-height md-border-bottom>
+           <md-tab label="{{ 'PMCUnitDetail.DataTab.LabelTitle' | translate }}">
+             <md-toolbar class="md-table-toolbar md-default actions-bar">
+               <div class="md-toolbar-tools">
+                 <span> {{ 'PMCUnitDetail.Actions'| translate }}</span>
+                 <div flex></div>
+                 <md-button class="md-icon-button" ng-show="disabled" ng-click="enterEditMode()">
+                   <md-icon>edit</md-icon>
+                 </md-button>
+                 <md-button ng-disabled="forms.PMCUnitForm.$invalid" class="md-icon-button edit" ng-hide="disabled" ng-click="save()">
+                   <md-icon>save</md-icon>
+                 </md-button>
+                 <md-button  class="md-icon-button" ng-hide="disabled" ng-click="cancelEdit()">
+                   <md-icon>close</md-icon>
+                 </md-button>
+               </div>
+             </md-toolbar>
+             <md-content class="md-padding">
+               <md-input-container class="md-block">
+           	    <label>{{ 'PMCUnitRegister.RegisterSection.PMCUnitNameFld' | translate }}</label>
+           	    <input ng-disabled="disabled" required md-no-asterisk  name="hospname" ng-model="pmcUnit.Name">
+           	    <div ng-messages="forms.PMCUnitForm.hospname.$error">
+           	      <div ng-message="required">{{ 'Warnings.RequiredMssg' | translate }}</div>
+           	    </div>
+           	  </md-input-container>
+           	  <md-input-container class="md-block">
+           	    <label>{{ 'PMCUnitRegister.RegisterSection.PMCUnitAddressFld' | translate }}</label>
+           	    <input ng-disabled="disabled" required md-no-asterisk name="hospaddr" ng-model="pmcUnit.Address">
+           	    <div ng-messages="forms.PMCUnitForm.hospaddr.$error">
+           	      <div ng-message="required">{{ 'Warnings.RequiredMssg' | translate }}</div>
+           	    </div>
+           	  </md-input-container>
+               <h2>{{ 'PMCUnitRegister.RegisterSection.QualityIndicators.Title' | translate }}</h2>
+               <md-input-container class="md-block">
+                 <label> {{'PMCUnitRegister.RegisterSection.QualityIndicators.ParentAccess'| translate }}  </label>
+                 <input ng-disabled="disabled" required name="hourAccess" ng-model="pmcUnit.ParentAccess" type="number" step="0.01" min="{{hourAccessBounds.min}}" max="{{hourAccessBounds.max}}">
+                 <div ng-messages="forms.PMCUnitForm.hourAccess.$error" multiple md-auto-hide="false">
+                   <div ng-message="min">
+                      {{ 'Warnings.NumberError' | translate:hourAccessBounds }}
+                   </div>
+                   <div ng-message="max">
+                      {{ 'Warnings.NumberError' | translate:hourAccessBounds }}
+                   </div>
+                   <div ng-message="required">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                 </div>
+               </md-input-container>
+               <h2>{{ 'PMCUnitRegister.RegisterSection.PMCConfiguration.Title' | translate }}</h2>
+               <md-input-container class="md-block">
+                 <label>{{ 'PMCUnitRegister.RegisterSection.PMCConfiguration.Stages' | translate }}</label>
+                 <md-select  ng-disabled="disabled" required name="defaultStages" ng-model="defaultStages" required multiple="true">
+                   <md-option ng-repeat="stage in stages track by stage.key" value="{{stage.key}}">{{stage.nameKey| translate}}</md-option>
+                 </md-select>
+                 <div class="errors" ng-messages="forms.hospitalForm.defaultStages.$error">
+                   <div ng-message="required">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                 </div>
+               </md-input-container>
+             </md-content>
+           </md-tab>
+
+         </md-tabs>
+       </md-content>
+    </md-content>
+  </section>
+</form>

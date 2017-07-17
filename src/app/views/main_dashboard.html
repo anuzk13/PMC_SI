@@ -1,0 +1,17 @@
+<div id="popupContainer" layout="column" style="height:100%;" ng-cloak>
+  <section layout="row" flex="">
+    <div ng-controller="SidenavCtrl" ng-include="navbartemplate.url">
+    </div>
+    <md-content flex="">
+      <div ng-controller="TopbarCtrl" ng-include="topbartemplate.url">
+      </div>
+      <section class="stagesSection">
+        <div layout="row" layout-sm="column" ng-repeat="row in stages">
+          <div flex class="statusFrame" ng-repeat="col in row">
+               <div patient-stage info="col"></div>
+          </div>
+        </div>
+      </section>
+    </md-content>
+  </section>
+</div>

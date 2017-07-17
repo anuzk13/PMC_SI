@@ -1,0 +1,1424 @@
+{
+	"update": false,
+	"properties": [
+		{
+			"_id": "data_collector_settings",
+			"DefaultStages": [
+				"40WEEKS_G",
+				"12WEEKS_C",
+				"24WEEKS_C",
+				"48WEEKS_C"
+			],
+			"ImportDataTypes": [
+				"PATIENT",
+				"OBSERVATION",
+				"RESPONSABLE",
+				"AMBULATORY_PROGRAM",
+				"INTRAHOSPITALARY_PROGRAM",
+				"STAGE_40WEEKS_G",
+				"STAGE_48WEEKS_C",
+				"STAGE_12WEEKS_C",
+				"STAGE_24WEEKS_C",
+				"DECEASE",
+				"DESERTION",
+				"TRASLATION"
+			]
+		},
+		{
+			"_id": "language_settings",
+			"languajes": [
+				"es",
+				"en"
+			]
+		},
+		{
+			"_id": "saved_custom_cols",
+			"UsedCols": [],
+			"UnusedCols": []
+		},
+		{
+			"_id": "unique_values",
+			"uniqueValues": [
+				{
+					"name": "DX",
+					"nameKey": "Indicators.TypeNames.DX",
+					"type": "SELECT",
+					"values": [
+						{
+							"nameKey": "Indicators.DX.PreTermn",
+							"value": "DX_01",
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.DX.FullTermn",
+							"value": "DX_02",
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "WEIGHT_40W",
+					"nameKey": "Indicators.TypeNames.WEIGHT_40W",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "DIED",
+					"nameKey": "Indicators.TypeNames.DIED",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "HOSPITALIZED",
+					"nameKey": "Indicators.TypeNames.HOSPITALIZED",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "DESERTED",
+					"nameKey": "Indicators.TypeNames.DESERTED",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "PATIENT_ID_TYPE",
+					"nameKey": "Indicators.TypeNames.PATIENT_ID_TYPE",
+					"type": "SELECT",
+					"values": [
+						{
+							"nameKey": "Indicators.PatientIDType.Register",
+							"value": "PATID1",
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.PatientIDType.MS",
+							"value": "PATID2",
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "DEATH_PLACE",
+					"nameKey": "Indicators.TypeNames.DEATH_PLACE",
+					"type": "SELECT",
+					"values": [
+						{
+							"nameKey": "Indicators.DeathPlace.Home",
+							"value": "DPL01",
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.DeathPlace.Hospital",
+							"value": "DPL0",
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "FOOD_SUPPLY",
+					"nameKey": "Indicators.TypeNames.FOOD_SUPPLY",
+					"type": "SELECT",
+					"values": [
+						{
+							"nameKey": "Indicators.Nutrition.LME",
+							"value": "FS01",
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.Nutrition.Mixed",
+							"value": "FS02",
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.Nutrition.Artificial",
+							"value": "FS03",
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "STAGE",
+					"nameKey": "Indicators.TypeNames.STAGE",
+					"type": "SELECT",
+					"values": [
+						{
+							"nameKey": "Indicators.Stages.12WEEKS",
+							"value": "STAGE_12WEEKS_C",
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.Stages.24WEEKS",
+							"value": "STAGE_24WEEKS_C",
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.Stages.36WEEKS",
+							"value": "STAGE_36WEEKS_C",
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.Stages.48WEEKS",
+							"value": "STAGE_48WEEKS_C",
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.Stages.40WEEKS",
+							"value": "STAGE_40WEEKS_G",
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "ID_TYPE",
+					"nameKey": "Indicators.TypeNames.ID_TYPE",
+					"type": "SELECT",
+					"values": [
+						{
+							"nameKey": "Indicators.DocumentType.IdentityCard",
+							"value": "DOC01",
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.DocumentType.ID",
+							"value": "DOC02",
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.DocumentType.Passport",
+							"value": "DOC03",
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "SEX",
+					"nameKey": "Indicators.TypeNames.SEX",
+					"type": "SELECT",
+					"values": [
+						{
+							"nameKey": "Indicators.PatientSex.Girl",
+							"value": "SX01",
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.PatientSex.Boy",
+							"value": "SX02",
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "RISK_FACTOR",
+					"nameKey": "Indicators.TypeNames.RISK_FACTOR",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "NEUROLOGICAL_ALTERATIONS",
+					"nameKey": "Indicators.TypeNames.NEUROLOGICAL_ALTERATIONS",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "FIRSTSTLEVEL",
+					"nameKey": "Indicators.TypeNames.FIRSTSTLEVEL",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "OPTOMETRY",
+					"nameKey": "Indicators.TypeNames.OPTOMETRY",
+					"group_key": "EXAMS",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "OFTALMOLOGY",
+					"nameKey": "Indicators.TypeNames.OFTALMOLOGY",
+					"group_key": "EXAMS",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "BRAINSCAN",
+					"nameKey": "Indicators.TypeNames.BRAINSCAN",
+					"group_key": "EXAMS",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "NEUROEVAL",
+					"nameKey": "Indicators.TypeNames.NEUROEVAL",
+					"group_key": "EXAMS",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "AUDIOMETRY",
+					"nameKey": "Indicators.TypeNames.AUDIOMETRY",
+					"group_key": "EXAMS",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "PSMOTOREVAL",
+					"nameKey": "Indicators.TypeNames.PSMOTOREVAL",
+					"group_key": "EXAMS",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "BCG",
+					"nameKey": "Indicators.TypeNames.BCG",
+					"group_key": "VACCINES",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "HEPB",
+					"nameKey": "Indicators.TypeNames.HEPB",
+					"group_key": "VACCINES",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "COMPLETE_SCHEME",
+					"nameKey": "Indicators.TypeNames.COMPLETE_SCHEME",
+					"group_key": "VACCINES",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "WEIGHT_GAIN",
+					"nameKey": "Indicators.TypeNames.WEIGHT_GAIN",
+					"group_key": "EXIT_CRITERIA",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "SBD_COORDINATION",
+					"nameKey": "Indicators.TypeNames.SBD_COORDINATION",
+					"group_key": "EXIT_CRITERIA",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "TREATMENTS_FINISHED",
+					"nameKey": "Indicators.TypeNames.TREATMENTS_FINISHED",
+					"group_key": "EXIT_CRITERIA",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "OXYGEN_LEVEL",
+					"nameKey": "Indicators.TypeNames.OXYGEN_LEVEL",
+					"group_key": "EXIT_CRITERIA",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "TEMP_REGULATION",
+					"nameKey": "Indicators.TypeNames.TEMP_REGULATION",
+					"group_key": "EXIT_CRITERIA",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "PMC_ACCESS",
+					"nameKey": "Indicators.TypeNames.PMC_ACCESS",
+					"group_key": "EXIT_CRITERIA",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "LATE_ACCESS",
+					"nameKey": "Indicators.TypeNames.LATE_ACCESS",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "URGENCY_APPOINTMENT",
+					"nameKey": "Indicators.TypeNames.URGENCY_APPOINTMENT",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "WAS_HOSPITALIZED",
+					"nameKey": "Indicators.TypeNames.WAS_HOSPITALIZED",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				},
+				{
+					"name": "CORRECT_GROWTH",
+					"nameKey": "Indicators.TypeNames.CORRECT_GROWTH",
+					"type": "BOOLEAN",
+					"values": [
+						{
+							"nameKey": "Indicators.BooleanStrings.True",
+							"value": true,
+							"description": ""
+						},
+						{
+							"nameKey": "Indicators.BooleanStrings.False",
+							"value": false,
+							"description": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"_id": "patient_stages",
+			"Desciption": "Stages in which reports can be made of patients",
+			"Stages": {
+				"12WEEKS_C": {
+					"durationMonths": 3,
+					"correctedAge": 3,
+					"nameKey": "Indicators.Stages.12WEEKS",
+					"typeNameKey": "Indicators.Stages.Corrected",
+					"dataType": "STAGE_12WEEKS_C",
+					"typeLabel": "Indicators.StagesLabels.12WEEKS",
+					"exportLabel": "Indicators.ExportLabels.12WEEKS"
+				},
+				"24WEEKS_C": {
+					"durationMonths": 6,
+					"correctedAge": 6,
+					"nameKey": "Indicators.Stages.24WEEKS",
+					"typeNameKey": "Indicators.Stages.Corrected",
+					"dataType": "STAGE_24WEEKS_C",
+					"typeLabel": "Indicators.StagesLabels.24WEEKS",
+					"exportLabel": "Indicators.ExportLabels.24WEEKS"
+				},
+				"36WEEKS_C": {
+					"durationMonths": 9,
+					"correctedAge": 9,
+					"nameKey": "Indicators.Stages.36WEEKS",
+					"typeNameKey": "Indicators.Stages.Corrected",
+					"dataType": "STAGE_36WEEKS_C",
+					"typeLabel": "Indicators.StagesLabels.36WEEKS",
+					"exportLabel": "Indicators.ExportLabels.36WEEKS"
+				},
+				"40WEEKS_G": {
+					"correctedAge": 0,
+					"nameKey": "Indicators.Stages.40WEEKS",
+					"typeNameKey": "Indicators.Stages.Gestational",
+					"dataType": "STAGE_40WEEKS_G",
+					"typeLabel": "Indicators.StagesLabels.40WEEKS",
+					"exportLabel": "Indicators.ExportLabels.40WEEKS"
+				},
+				"48WEEKS_C": {
+					"durationWeeks": 48,
+					"durationMonths": 12,
+					"correctedAge": 12,
+					"nameKey": "Indicators.Stages.48WEEKS",
+					"typeNameKey": "Indicators.Stages.Corrected",
+					"dataType": "STAGE_48WEEKS_C",
+					"typeLabel": "Indicators.StagesLabels.48WEEKS",
+					"exportLabel": "Indicators.ExportLabels.48WEEKS"
+				}
+			}
+		},
+		{
+			"_id": "growth_charts",
+			"Description": "Metadata of Growth Charts",
+			"Charts": {
+				"SX02": [
+					{
+						"file": "hcfa_boys_0_1_y_zscores",
+						"var": "HeadPerim",
+						"nameKey": "Indicators.GrowthVariables.HeadPerim",
+						"icon": "assets/img/head_perim.svg"
+					},
+					{
+						"file": "lhfa_boys_0_1_y_zscores",
+						"var": "Size",
+						"nameKey": "Indicators.GrowthVariables.Size",
+						"icon": "assets/img/height.svg"
+					},
+					{
+						"file": "wfa_boys_0_1_y_zscores",
+						"var": "Weight",
+						"nameKey": "Indicators.GrowthVariables.Weight",
+						"icon": "assets/img/weight.svg"
+					}
+				],
+				"SX01": [
+					{
+						"file": "hcfa_girls_0_1_y_zscores",
+						"var": "HeadPerim",
+						"nameKey": "Indicators.GrowthVariables.HeadPerim",
+						"icon": "assets/img/head_perim.svg"
+					},
+					{
+						"file": "lhfa_girls_0_1_y_zscores",
+						"var": "Size",
+						"nameKey": "Indicators.GrowthVariables.Size",
+						"icon": "assets/img/height.svg"
+					},
+					{
+						"file": "wfa_girls_0_1_y_zscores",
+						"var": "Weight",
+						"nameKey": "Indicators.GrowthVariables.Weight",
+						"icon": "assets/img/weight.svg"
+					}
+				]
+			}
+		},
+		{
+			"_id": "data_types",
+			"Description": "Types of data used in the application",
+			"Types": {
+				"OBSERVATION": {
+					"nameKey": "Indicators.DataTypes.OBSERVATION",
+					"columns": [
+						{
+							"title": "Columns.OBSERVATION.Died",
+							"property": "Died",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "DIED",
+							"tip": "ColumnTips.OBSERVATION.Died",
+							"exportTitle": "ColumnExports.OBSERVATION.Died"
+						},
+						{
+							"title": "Columns.OBSERVATION.Deserted",
+							"property": "Deserted",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "DESERTED",
+							"tip": "ColumnTips.OBSERVATION.Deserted",
+							"exportTitle": "ColumnExports.OBSERVATION.Deserted"
+						},
+						{
+							"title": "Columns.OBSERVATION.HasHospitalization",
+							"property": "HasHospitalization",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "HOSPITALIZED",
+							"tip": "ColumnTips.OBSERVATION.HasHospitalization",
+							"exportTitle": "ColumnExports.OBSERVATION.HasHospitalization"
+						},
+						{
+							"title": "Columns.OBSERVATION.Weight40Weeks",
+							"property": "Weight40Weeks",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "WEIGHT_40W",
+							"tip": "ColumnTips.OBSERVATION.Weight40Weeks",
+							"exportTitle": "ColumnExports.OBSERVATION.Weight40Weeks"
+						},
+						{
+							"title": "Columns.OBSERVATION.TSH",
+							"property": "TSH",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.OBSERVATION.TSH",
+							"exportTitle": "ColumnExports.OBSERVATION.TSH"
+						},
+						{
+							"title": "Columns.OBSERVATION.E_SNC",
+							"property": "E_SNC",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.OBSERVATION.E_SNC",
+							"exportTitle": "ColumnExports.OBSERVATION.E_SNC"
+						},
+						{
+							"title": "Columns.OBSERVATION.ECOCARDIO",
+							"property": "ECOCARDIO",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.OBSERVATION.ECOCARDIO",
+							"exportTitle": "ColumnExports.OBSERVATION.ECOCARDIO"
+						},
+						{
+							"title": "Columns.OBSERVATION.OFTALMOLO",
+							"property": "OFTALMOLO",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.OBSERVATION.OFTALMOLO",
+							"exportTitle": "ColumnExports.OBSERVATION.OFTALMOLO"
+						},
+						{
+							"title": "Columns.OBSERVATION.DBP",
+							"property": "DBP",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.OBSERVATION.DBP",
+							"exportTitle": "ColumnExports.OBSERVATION.DBP"
+						},
+						{
+							"title": "Columns.OBSERVATION.EPS",
+							"property": "EPS",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.OBSERVATION.EPS",
+							"exportTitle": "ColumnExports.OBSERVATION.EPS"
+						},
+						{
+							"title": "Columns.OBSERVATION.Observations",
+							"property": "Observations",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.OBSERVATION.Observations",
+							"exportTitle": "ColumnExports.OBSERVATION.Observations"
+						},
+						{
+							"title": "Columns.OBSERVATION.DX",
+							"property": "DX",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "DX",
+							"tip": "ColumnTips.OBSERVATION.DX",
+							"exportTitle": "ColumnExports.OBSERVATION.DX"
+						}
+					]
+				},
+				"PMC_UNIT": {
+					"nameKey": "Indicators.DataTypes.PMC_UNIT",
+					"columns": [
+						{
+							"title": "Columns.PMC_UNIT.Name",
+							"property": "Name",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.PMC_UNIT.Name",
+							"exportTitle": "ColumnExports.PMC_UNIT.Name"
+						},
+						{
+							"title": "Columns.PMC_UNIT.Address",
+							"property": "Address",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.PMC_UNIT.Address",
+							"exportTitle": "ColumnExports.PMC_UNIT.Address"
+						},
+						{
+							"title": "Columns.PMC_UNIT.ParentAccess",
+							"property": "ParentAccess",
+							"required": "false",
+							"type": "NUMBER",
+							"format": "0-25",
+							"tip": "ColumnTips.PMC_UNIT.ParentAccess",
+							"exportTitle": "ColumnExports.PMC_UNIT.ParentAccess"
+						}
+					]
+				},
+				"PATIENT": {
+					"nameKey": "Indicators.DataTypes.PATIENT",
+					"dateColumns": [
+						"BirthDate"
+					],
+					"columns": [
+						{
+							"title": "Columns.PATIENT.HistoryConsecutive",
+							"property": "HistoryConsecutive",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.PATIENT.HistoryConsecutive",
+							"exportTitle": "ColumnExports.PATIENT.HistoryConsecutive"
+						},
+						{
+							"title": "Columns.PATIENT.BornWeight",
+							"property": "BornWeight",
+							"required": "false",
+							"type": "NUMBER",
+							"format": "0-8000",
+							"tip": "ColumnTips.PATIENT.BornWeight",
+							"exportTitle": "ColumnExports.PATIENT.BornWeight"
+						},
+						{
+							"title": "Columns.PATIENT.SocialRegistry",
+							"property": "SocialRegistry",
+							"required": "true",
+							"type": "STRING",
+							"tip": "ColumnTips.PATIENT.SocialRegistry",
+							"exportTitle": "ColumnExports.PATIENT.SocialRegistry"
+						},
+						{
+							"title": "Columns.PATIENT.RegType",
+							"property": "RegType",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "PATIENT_ID_TYPE",
+							"tip": "ColumnTips.PATIENT.RegType",
+							"exportTitle": "ColumnExports.PATIENT.RegType"
+						},
+						{
+							"title": "Columns.PATIENT.BirthDate",
+							"property": "BirthDate",
+							"required": "true",
+							"type": "DATE",
+							"format": "DD/MM/YYYY",
+							"tip": "ColumnTips.PATIENT.BirthDate",
+							"exportTitle": "ColumnExports.PATIENT.BirthDate"
+						},
+						{
+							"title": "Columns.PATIENT.Sex",
+							"property": "Sex",
+							"type": "SELECT",
+							"required": "false",
+							"uniqueValues": "SEX",
+							"tip": "ColumnTips.PATIENT.Sex",
+							"exportTitle": "ColumnExports.PATIENT.Sex"
+						},
+						{
+							"title": "Columns.PATIENT.NeurologicalAlterations",
+							"property": "NeurologicalAlterations",
+							"type": "SELECT",
+							"required": "false",
+							"uniqueValues": "NEUROLOGICAL_ALTERATIONS",
+							"tip": "ColumnTips.PATIENT.NeurologicalAlterations",
+							"exportTitle": "ColumnExports.PATIENT.NeurologicalAlterations"
+						},
+						{
+							"title": "Columns.PATIENT.GestationalAge",
+							"property": "GestationalAge",
+							"required": "true",
+							"type": "NUMBER",
+							"format": "0-40",
+							"tip": "ColumnTips.PATIENT.GestationalAge",
+							"exportTitle": "ColumnExports.PATIENT.GestationalAge"
+						},
+						{
+							"title": "Columns.PATIENT.Name",
+							"property": "Name",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.PATIENT.Name",
+							"exportTitle": "ColumnExports.PATIENT.Name"
+						}
+					]
+				},
+				"RESPONSABLE": {
+					"nameKey": "Indicators.DataTypes.RESPONSABLE",
+					"belongsTo": "PATIENT",
+					"columns": [
+						{
+							"title": "Columns.RESPONSABLE.Name",
+							"property": "Name",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.RESPONSABLE.Name",
+							"exportTitle": "ColumnExports.RESPONSABLE.Name"
+						},
+						{
+							"title": "Columns.RESPONSABLE.Age",
+							"property": "Age",
+							"required": "false",
+							"type": "NUMBER",
+							"format": "0-100",
+							"tip": "ColumnTips.RESPONSABLE.Age",
+							"exportTitle": "ColumnExports.RESPONSABLE.Age"
+						},
+						{
+							"title": "Columns.RESPONSABLE.Document",
+							"property": "Document",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.RESPONSABLE.Document",
+							"exportTitle": "ColumnExports.RESPONSABLE.Document"
+						},
+						{
+							"title": "Columns.RESPONSABLE.Contact",
+							"property": "Contact",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.RESPONSABLE.Contact",
+							"exportTitle": "ColumnExports.RESPONSABLE.Contact"
+						},
+						{
+							"title": "Columns.RESPONSABLE.DocumentType",
+							"property": "DocumentType",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "ID_TYPE",
+							"tip": "ColumnTips.RESPONSABLE.DocumentType",
+							"exportTitle": "ColumnExports.RESPONSABLE.DocumentType"
+						}
+					]
+				},
+				"AMBULATORY_PROGRAM": {
+					"nameKey": "Indicators.DataTypes.AMBULATORY_PROGRAM",
+					"belongsTo": "PATIENT",
+					"dateColumns": [
+						"DateAccess"
+					],
+					"columns": [
+						{
+							"title": "Columns.AMBULATORY_PROGRAM.Opportunity",
+							"property": "Opportunity",
+							"required": "false",
+							"type": "NUMBER",
+							"format": "0-100",
+							"tip": "ColumnTips.AMBULATORY_PROGRAM.Opportunity",
+							"exportTitle": "ColumnExports.AMBULATORY_PROGRAM.Opportunity"
+						},
+						{
+							"title": "Columns.AMBULATORY_PROGRAM.DateAccess",
+							"property": "DateAccess",
+							"required": "false",
+							"type": "DATE",
+							"format": "DD/MM/YYYY",
+							"tip": "ColumnTips.AMBULATORY_PROGRAM.DateAccess",
+							"exportTitle": "ColumnExports.AMBULATORY_PROGRAM.DateAccess"
+						},
+						{
+							"title": "Columns.AMBULATORY_PROGRAM.GestationalAgeCorrected",
+							"property": "GestationalAgeCorrected",
+							"required": "false",
+							"type": "NUMBER",
+							"format": "0-43",
+							"tip": "ColumnTips.AMBULATORY_PROGRAM.GestationalAgeCorrected",
+							"exportTitle": "ColumnExports.AMBULATORY_PROGRAM.GestationalAgeCorrected"
+						}
+					]
+				},
+				"INTRAHOSPITALARY_PROGRAM": {
+					"nameKey": "Indicators.DataTypes.INTRAHOSPITALARY_PROGRAM",
+					"belongsTo": "",
+					"dateColumns": [
+						"DateAccess",
+						"DateExit"
+					],
+					"columns": [
+						{
+							"title": "Columns.INTRAHOSPITALARY_PROGRAM.Origin",
+							"property": "Origin",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.INTRAHOSPITALARY_PROGRAM.Origin",
+							"exportTitle": "ColumnExports.INTRAHOSPITALARY_PROGRAM.Origin"
+						},
+						{
+							"title": "Columns.INTRAHOSPITALARY_PROGRAM.Nutrition",
+							"property": "Nutrition",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "FOOD_SUPPLY",
+							"tip": "ColumnTips.INTRAHOSPITALARY_PROGRAM.Nutrition",
+							"exportTitle": "ColumnExports.INTRAHOSPITALARY_PROGRAM.Nutrition"
+						},
+						{
+							"title": "Columns.INTRAHOSPITALARY_PROGRAM.AvgTimeInPos",
+							"property": "AvgTimeInPos",
+							"required": "false",
+							"type": "NUMBER",
+							"format": "0-24",
+							"tip": "ColumnTips.INTRAHOSPITALARY_PROGRAM.AvgTimeInPos",
+							"exportTitle": "ColumnExports.INTRAHOSPITALARY_PROGRAM.AvgTimeInPos",
+							"default": 24
+						},
+						{
+							"title": "Columns.INTRAHOSPITALARY_PROGRAM.DateExit",
+							"property": "DateExit",
+							"required": "false",
+							"type": "DATE",
+							"format": "DD/MM/YYYY",
+							"tip": "ColumnTips.INTRAHOSPITALARY_PROGRAM.DateExit",
+							"exportTitle": "ColumnExports.INTRAHOSPITALARY_PROGRAM.DateExit"
+						},
+						{
+							"title": "Columns.INTRAHOSPITALARY_PROGRAM.AccessCriteria.WeightGain",
+							"property": "AccessCriteria.WEIGHT_GAIN",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "WEIGHT_GAIN",
+							"tip": "ColumnTips.INTRAHOSPITALARY_PROGRAM.AccessCriteria.WeightGain",
+							"exportTitle": "ColumnExports.INTRAHOSPITALARY_PROGRAM.AccessCriteria.WeightGain"
+						},
+						{
+							"title": "Columns.INTRAHOSPITALARY_PROGRAM.AccessCriteria.SBDCoordination",
+							"property": "AccessCriteria.SBD_COORDINATION",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "SBD_COORDINATION",
+							"tip": "ColumnTips.INTRAHOSPITALARY_PROGRAM.AccessCriteria.SBDCoordination",
+							"exportTitle": "ColumnExports.INTRAHOSPITALARY_PROGRAM.AccessCriteria.SBDCoordination"
+						},
+						{
+							"title": "Columns.INTRAHOSPITALARY_PROGRAM.AccessCriteria.TreatmentsEnded",
+							"property": "AccessCriteria.TREATMENTS_FINISHED",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "TREATMENTS_FINISHED",
+							"tip": "ColumnTips.INTRAHOSPITALARY_PROGRAM.AccessCriteria.TreatmentsEnded",
+							"exportTitle": "ColumnExports.INTRAHOSPITALARY_PROGRAM.AccessCriteria.TreatmentsEnded"
+						},
+						{
+							"title": "Columns.INTRAHOSPITALARY_PROGRAM.AccessCriteria.LevelOfOxygen",
+							"property": "AccessCriteria.OXYGEN_LEVEL",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "OXYGEN_LEVEL",
+							"tip": "ColumnTips.INTRAHOSPITALARY_PROGRAM.AccessCriteria.LevelOfOxygen",
+							"exportTitle": "ColumnExports.INTRAHOSPITALARY_PROGRAM.AccessCriteria.LevelOfOxygen"
+						},
+						{
+							"title": "Columns.INTRAHOSPITALARY_PROGRAM.AccessCriteria.TempRegulation",
+							"property": "AccessCriteria.TEMP_REGULATION",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "TEMP_REGULATION",
+							"tip": "ColumnTips.INTRAHOSPITALARY_PROGRAM.AccessCriteria.TempRegulation",
+							"exportTitle": "ColumnExports.INTRAHOSPITALARY_PROGRAM.AccessCriteria.TempRegulation"
+						},
+						{
+							"title": "Columns.INTRAHOSPITALARY_PROGRAM.AccessCriteria.AccessToPMC",
+							"property": "AccessCriteria.PMC_ACCESS",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "PMC_ACCESS",
+							"tip": "ColumnTips.INTRAHOSPITALARY_PROGRAM.AccessCriteria.AccessToPMC",
+							"exportTitle": "ColumnExports.INTRAHOSPITALARY_PROGRAM.AccessCriteria.AccessToPMC"
+						}
+					]
+				},
+				"DECEASE": {
+					"nameKey": "Indicators.DataTypes.DECEASE",
+					"belongsTo": "PATIENT",
+					"dateColumns": [
+						"Date"
+					],
+					"columns": [
+						{
+							"title": "Columns.DECEASE.Date",
+							"property": "Date",
+							"required": "false",
+							"type": "DATE",
+							"format": "DD/MM/YYYY",
+							"tip": "ColumnTips.DECEASE.Date",
+							"exportTitle": "ColumnExports.DECEASE.Date"
+						},
+						{
+							"title": "Columns.DECEASE.Stage",
+							"property": "Stage",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "STAGE",
+							"tip": "ColumnTips.DECEASE.Stage",
+							"exportTitle": "ColumnExports.DECEASE.Stage"
+						},
+						{
+							"title": "Columns.DECEASE.Place",
+							"property": "Place",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "DEATH_PLACE",
+							"tip": "ColumnTips.DECEASE.Place",
+							"exportTitle": "ColumnExports.DECEASE.Place"
+						}
+					]
+				},
+				"DESERTION": {
+					"nameKey": "Indicators.DataTypes.DESERTION",
+					"belongsTo": "PATIENT",
+					"dateColumns": [
+						"Date"
+					],
+					"columns": [
+						{
+							"title": "Columns.DESERTION.Date",
+							"property": "Date",
+							"required": "false",
+							"type": "DATE",
+							"format": "DD/MM/YYYY",
+							"tip": "ColumnTips.DESERTION.Date",
+							"exportTitle": "ColumnExports.DESERTION.Date"
+						},
+						{
+							"title": "Columns.DESERTION.Stage",
+							"property": "Stage",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "STAGE",
+							"tip": "ColumnTips.DESERTION.Stage",
+							"exportTitle": "ColumnExports.DESERTION.Stage"
+						}
+					]
+				},
+				"TRASLATION": {
+					"nameKey": "Indicators.DataTypes.TRASLATION",
+					"belongsTo": "PATIENT",
+					"dateColumns": [
+						"Date"
+					],
+					"columns": [
+						{
+							"title": "Columns.TRASLATION.Date",
+							"property": "Date",
+							"required": "false",
+							"type": "DATE",
+							"format": "DD/MM/YYYY",
+							"tip": "ColumnTips.TRASLATION.Date",
+							"exportTitle": "ColumnExports.TRASLATION.Date"
+						},
+						{
+							"title": "Columns.TRASLATION.Stage",
+							"property": "Stage",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "STAGE",
+							"tip": "ColumnTips.TRASLATION.Stage",
+							"exportTitle": "ColumnExports.TRASLATION.Stage"
+						}
+					]
+				},
+				"STAGES": {
+					"nameKey": "Indicators.DataTypes.STAGES",
+					"belongsTo": "PATIENT",
+					"dateColumns": [
+						"DateStageReached"
+					],
+					"columns": [
+						{
+							"title": "Columns.STAGES.MonthReachedName",
+							"property": "MonthReachedName",
+							"required": "false",
+							"type": "STRING",
+							"tip": "ColumnTips.STAGES.MonthReachedName",
+							"exportTitle": "ColumnExports.STAGES.MonthReachedName"
+						},
+						{
+							"title": "Columns.STAGES.DateStageReached",
+							"property": "DateStageReached",
+							"required": "false",
+							"type": "DATE",
+							"format": "DD/MM/YYYY",
+							"tip": "ColumnTips.STAGES.DateStageReached",
+							"exportTitle": "ColumnExports.STAGES.DateStageReached"
+						},
+						{
+							"title": "Columns.STAGES.Nutrition",
+							"property": "Nutrition",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "FOOD_SUPPLY",
+							"tip": "ColumnTips.STAGES.Nutrition",
+							"exportTitle": "ColumnExports.STAGES.Nutrition"
+						},
+						{
+							"title": "Columns.STAGES.Weight",
+							"property": "Weight",
+							"required": "false",
+							"type": "NUMBER",
+							"format": "0-14000",
+							"tip": "ColumnTips.STAGES.Weight",
+							"exportTitle": "ColumnExports.STAGES.Weight"
+						},
+						{
+							"title": "Columns.STAGES.Size",
+							"property": "Size",
+							"required": "false",
+							"type": "NUMBER",
+							"format": "0-130",
+							"tip": "ColumnTips.STAGES.Size",
+							"exportTitle": "ColumnExports.STAGES.Size"
+						},
+						{
+							"title": "Columns.STAGES.HeadPerim",
+							"property": "HeadPerim",
+							"required": "false",
+							"type": "NUMBER",
+							"format": "0-60",
+							"tip": "ColumnTips.STAGES.HeadPerim",
+							"exportTitle": "ColumnExports.STAGES.HeadPerim"
+						},
+						{
+							"title": "Columns.STAGES.HasRiskFactors",
+							"property": "HasRiskFactors",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "RISK_FACTOR",
+							"tip": "ColumnTips.STAGES.HasRiskFactors",
+							"exportTitle": "ColumnExports.STAGES.HasRiskFactors"
+						},
+						{
+							"title": "Columns.STAGES.HadUrgencyAppointment",
+							"property": "HadUrgencyAppointment",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "URGENCY_APPOINTMENT",
+							"tip": "ColumnTips.STAGES.HadUrgencyAppointment",
+							"exportTitle": "ColumnExports.STAGES.HadUrgencyAppointment"
+						},
+						{
+							"title": "Columns.STAGES.WasHospitalized",
+							"property": "WasHospitalized",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "WAS_HOSPITALIZED",
+							"tip": "ColumnTips.STAGES.WasHospitalized",
+							"exportTitle": "ColumnExports.STAGES.WasHospitalized"
+						},
+						{
+							"title": "Columns.STAGES.StageExamns.Oftalmology",
+							"property": "StageExamns.OFTALMOLOGY",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "OFTALMOLOGY",
+							"tip": "ColumnTips.STAGES.StageExamns.Oftalmology",
+							"exportTitle": "ColumnExports.STAGES.StageExamns.Oftalmology"
+						},
+						{
+							"title": "Columns.STAGES.StageExamns.BrainScan",
+							"property": "StageExamns.BRAINSCAN",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "BRAINSCAN",
+							"tip": "ColumnTips.STAGES.StageExamns.BrainScan",
+							"exportTitle": "ColumnExports.STAGES.StageExamns.BrainScan"
+						},
+						{
+							"title": "Columns.STAGES.StageExamns.NeuroEval",
+							"property": "StageExamns.NEUROEVAL",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "NEUROEVAL",
+							"tip": "ColumnTips.STAGES.StageExamns.NeuroEval",
+							"exportTitle": "ColumnExports.STAGES.StageExamns.NeuroEval"
+						},
+						{
+							"title": "Columns.STAGES.StageExamns.Optometry",
+							"property": "StageExamns.OPTOMETRY",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "OPTOMETRY",
+							"tip": "ColumnTips.STAGES.StageExamns.Optometry",
+							"exportTitle": "ColumnExports.STAGES.StageExamns.Optometry"
+						},
+						{
+							"title": "Columns.STAGES.StageExamns.Audiometry",
+							"property": "StageExamns.AUDIOMETRY",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "AUDIOMETRY",
+							"tip": "ColumnTips.STAGES.StageExamns.Audiometry",
+							"exportTitle": "ColumnExports.STAGES.StageExamns.Audiometry"
+						},
+						{
+							"title": "Columns.STAGES.StageExamns.PsMotEval",
+							"property": "StageExamns.PSMOTOREVAL",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "PSMOTOREVAL",
+							"tip": "ColumnTips.STAGES.StageExamns.PsMotEval",
+							"exportTitle": "ColumnExports.STAGES.StageExamns.PsMotEval"
+						},
+						{
+							"title": "Columns.STAGES.StageVaccines.BCG",
+							"property": "StageVaccines.BCG",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "BCG",
+							"tip": "ColumnTips.STAGES.StageVaccines.BCG",
+							"exportTitle": "ColumnExports.STAGES.StageVaccines.BCG"
+						},
+						{
+							"title": "Columns.STAGES.StageVaccines.HepatitisB",
+							"property": "StageVaccines.HEPB",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "HEPB",
+							"tip": "ColumnTips.STAGES.StageVaccines.HepatitisB",
+							"exportTitle": "ColumnExports.STAGES.StageVaccines.HepatitisB"
+						},
+						{
+							"title": "Columns.STAGES.StageVaccines.CompleteScheme",
+							"property": "StageVaccines.COMPLETE_SCHEME",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "COMPLETE_SCHEME",
+							"tip": "ColumnTips.STAGES.StageVaccines.CompleteScheme",
+							"exportTitle": "ColumnExports.STAGES.StageVaccines.CompleteScheme"
+						},
+						{
+							"title": "Columns.STAGES.HasCorrectGrowth",
+							"property": "HasCorrectGrowth",
+							"required": "false",
+							"type": "SELECT",
+							"uniqueValues": "CORRECT_GROWTH",
+							"tip": "ColumnTips.STAGES.HasCorrectGrowth",
+							"exportTitle": "ColumnExports.STAGES.HasCorrectGrowth"
+						}
+					]
+				}
+			}
+		}
+	]
+}

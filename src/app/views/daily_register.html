@@ -1,0 +1,101 @@
+<div id="popupContainer" layout="column" style="height:100%;" ng-cloak>
+  <section layout="row" flex="">
+    <div ng-controller="SidenavCtrl" ng-include="navbartemplate.url">
+    </div>
+    <md-content flex="">
+      <div ng-controller="TopbarCtrl" ng-include="topbartemplate.url">
+  		</div>
+      <md-card md-theme="orange" ng-show="saveError">
+        <div layout="row" layout-align="center center">
+          <div flex>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{ saveError.title | translate}}</span>
+                <span class="md-subhead">{{ saveError.message | translate}}</span>
+              </md-card-title-text>
+            </md-card-title>
+          </div>
+          <div layout-align="end end">
+            <md-button class="md-icon-button" aria-label="Settings" ng-click="closeError()">
+              <md-icon>close</md-icon>
+            </md-button>
+          </div>
+        </div>
+      </md-card>
+
+      <md-card md-theme="green" ng-show="saveSuccess">
+        <div layout="row" layout-align="center center">
+          <div flex>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{ saveSuccess.title | translate}}</span>
+                <span class="md-subhead">{{ saveSuccess.message | translate}}</span>
+              </md-card-title-text>
+            </md-card-title>
+          </div>
+          <div layout-align="end end">
+            <md-button class="md-icon-button" aria-label="Settings" ng-click="closeSuccess()">
+              <md-icon>close</md-icon>
+            </md-button>
+          </div>
+        </div>
+      </md-card>
+
+      <md-content class="md-padding">
+          <md-autocomplete id="patientAC"
+                           md-selected-item="selectedItem"
+                           md-search-text="searchText"
+                           md-selected-item-change="selectedItemChange(item)"
+                           md-items="item in querySearch(searchText)"
+                           md-item-text="item.name"
+                           md-min-length="0"
+                           md-no-cache="true"
+                           placeholder="{{ 'DailyRegs.SearchPatient' | translate}}">
+            <md-item-template>
+              <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.key}}</span>
+            </md-item-template>
+            <md-not-found>
+              {{ 'DailyRegs.NotFound' | translate}}".
+            </md-not-found>
+          </md-autocomplete>
+          <div layout="row" style="padding-top:1em">
+            <div style="padding: 1em;" flex="50">
+              <md-toolbar layout="row" class="md-hue-3">
+                <div class="md-toolbar-tools">
+                  <span>{{ 'DailyRegs.SelectedPatients'| translate }}</span>
+                </div>
+              </md-toolbar>
+              <md-content style="max-height: 300px;" >
+                <md-list flex="" class="md-dense">
+                  <md-list-item class="md-3-line" ng-repeat="patient in patientsSelected">
+                    <div class="md-list-item-text" layout="column">
+                      <h2>{{ patient.key }} </h3>
+                    </div>
+                    <md-button class="md-secondary md-icon-button" ng-click="patientsSelectedRemove(patient);">
+                      <md-icon>delete</md-icon>
+                    </md-button>
+                  </md-list-item>
+                </md-list>
+              </md-content>
+            </div>
+            <div style="padding: 1em;" flex="50">
+              <form name="forms.registerForm">
+                <div layout="row">
+                  <div class="md-block" flex="60">
+                    <md-datepicker name="attentionDate" ng-model="attentionDate" md-placeholder="{{'DailyRegs.AttentionDate'| translate}}">
+                    </md-datepicker>
+                    <div class="validation-messages" ng-show="forms.registerForm.attentionDate.$error" ng-messages="forms.registerForm.attentionDate.$error">
+                       <div ng-message="valid">{{ 'Warnings.DateFormatIncorrect' | translate }}</div>
+                    </div>
+                  </div>
+                  <md-button flex ="40"  class="md-raised md-primary" ng-disabled="forms.registerForm.attentionDate.$error.valid" ng-click="saveAttentions();">
+                    {{'DailyRegs.RegisterAttentions'| translate}}
+                  </md-button>
+                </div>
+              </form>
+            </div>
+          </div>
+      </md-content>
+    </md-content>
+  </section>
+</div>

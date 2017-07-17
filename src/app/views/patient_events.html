@@ -1,0 +1,262 @@
+<md-tabs md-dynamic-height md-border-bottom>
+   <md-tab label="{{ 'PatientDetail.EventsTab.HospitalaryAccessTab.LabelTitle' | translate }}">
+     <md-toolbar class="actions-bar md-table-toolbar md-default" ng-show="hAccessEditMode || accessEditMode">
+       <div class="md-toolbar-tools" >
+         <span> {{ 'PatientDetail.EventsTab.AccessTab.Actions'| translate }}</span>
+         <div flex></div>
+         <md-button ng-disabled="eventForms.haccessForm.$invalid || eventForms.accessForm.$invalid" class="md-icon-button edit" ng-show="hAccessEditMode || accessEditMode" ng-click="saveAccessTab()">
+          <md-icon>save</md-icon>
+         </md-button>
+         <md-button  class="md-icon-button" ng-click="cancelAccessTabEdit()">
+          <md-icon>close</md-icon>
+         </md-button>
+       </div>
+     </md-toolbar>
+     <section ng-show="hAccess || hAccessEditMode">
+
+       <form name="eventForms.haccessForm">
+        <h1  class="md-display-1" style="font-size: 20px;">{{ 'PatientDetail.EventsTab.HospitalaryAccessTab.Title2'| translate }}</h1>
+        <div layout-gt-sm="row">
+          <div layout-gt-sm="row" flex="50" >
+           <div layout="row">
+             <div flex flex="50" >
+               <h4 style="font-size: medium;font-weight: 100;color: rgba(0,0,0,0.54);">
+                  {{ 'PatientDetail.EventsTab.HospitalaryAccessTab.AccessData.ExitDate' | translate }}
+               </h4>
+             </div>
+             <div flex flex="50" >
+               <md-datepicker  ng-change="hExitDateChanged()" md-max-date="maxDate" name="haccessDate" ng-model="HDateExit" md-placeholder="{{ 'PatientDetail.EventsTab.HospitalaryAccessTab.AccessData.ExitDate' | translate }}" ></md-datepicker>
+               <div class="validation-messages" ng-messages="eventForms.haccessForm.haccessDate.$error" ng-show="eventForms.haccessForm.haccessDate.$touched">
+                  <div ng-message="valid">{{ 'Warnings.DateFormatIncorrect' | translate }}</div>
+               </div>
+             </div>
+           </div>
+          </div>
+          <md-input-container class="md-block" flex-gt-xs="50" >
+             <label>{{ 'PatientDetail.EventsTab.HospitalaryAccessTab.AccessData.NutritionTypeFld' | translate }}</label>
+             <md-select ng-change="editHAccess()" ng-model="hAccess.Nutrition">
+                <md-option ng-repeat="foodType in foodSupplyTypes" value="{{foodType.value}}">
+                   {{ foodType.nameKey | translate }}
+                </md-option>
+             </md-select>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container flex-gt-xs="50" class="md-icon-float md-icon-right md-block">
+             <label> {{'PatientDetail.EventsTab.HospitalaryAccessTab.AccessData.AvgTimeInPos'| translate }}  </label>
+             <input ng-change="editHAccess()"  name="hoursInPos" ng-model="hAccess.AvgTimeInPos" type="number" step="0.01" min="{{hoursInPosBounds.min}}" max="{{hoursInPosBounds.max}}">
+             <div style="font-size: 0.7em;" class="hint"> ( {{ 'PatientDetail.EventsTab.HospitalaryAccessTab.AccessData.AvgTimeClue' | translate:hoursInPosBounds }} )</div>
+             <div ng-messages="eventForms.haccessForm.hoursInPos.$error" multiple md-auto-hide="false">
+                <div ng-message="min">
+                   {{ 'Warnings.NumberError' | translate:hoursInPosBounds }}
+                </div>
+                <div ng-message="max">
+                   {{ 'Warnings.NumberError' | translate:hoursInPosBounds }}
+                </div>
+             </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-xs="50" >
+             <label>{{ 'PatientDetail.EventsTab.HospitalaryAccessTab.AccessCriteriaFld.Title'  | translate }}</label>
+             <md-select name="criteria" ng-model="accessCriteria" multiple="true">
+               <md-button layout-fill value="all" ng-click="selectAllAC()">{{ 'PatientDetail.EventsTab.HospitalaryAccessTab.AccessCriteriaFld.All'  | translate }}</md-button>
+                <md-option ng-repeat="exitItem in exitCriteria" value="{{exitItem.value}}">
+                   {{ exitItem.nameKey | translate }}
+                </md-option>
+             </md-select>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-xs="50">
+            <label>{{ 'PatientDetail.EventsTab.HospitalaryAccessTab.AccessData.Origin' | translate }}</label>
+            <input name="patientOrigin" ng-model="hAccess.Origin" ng-change="editHAccess()">
+          </md-input-container>
+        </div>
+       </form>
+       <form name="eventForms.accessForm">
+          <h1 class="md-display-1" style="font-size: 20px;">{{ 'PatientDetail.EventsTab.AccessTab.Title'| translate }}</h1>
+          <div layout-gt-sm="row">
+            <div layout-gt-sm="row" flex="50" >
+             <div layout="row">
+               <div flex flex="50" >
+                 <h4 style="font-size: medium;font-weight: 100;color: rgba(0,0,0,0.54);">
+                    {{ 'PatientDetail.EventsTab.AccessTab.AccessData.AccessDate' | translate }}
+                 </h4>
+               </div>
+               <div flex flex="50" >
+                 <md-datepicker  ng-change="accessDateChanged()" md-max-date="maxDate" name="accessDate" ng-model="DateAccess" md-placeholder="{{ 'PatientDetail.EventsTab.AccessTab.AccessData.AccessDate' | translate }}" ></md-datepicker>
+                 <div class="validation-messages" ng-messages="eventForms.accessForm.accessDate.$error" ng-show="eventForms.accessForm.accessDate.$touched">
+                    <div ng-message="valid">{{ 'Warnings.DateFormatIncorrect' | translate }}</div>
+                 </div>
+               </div>
+             </div>
+            </div>
+            <md-input-container flex-gt-xs="50" class="md-icon-float md-icon-right md-block">
+               <label> {{'PatientDetail.EventsTab.AccessTab.AccessData.Opportunity'| translate }}  </label>
+               <input ng-change="editAccess()" ng-model="access.Opportunity" name="opportunity" type="number" step="1">
+            </md-input-container>
+          </div>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex="50">
+              <label>{{ 'Patientregister.PatientData.GestAgeFldC' | translate }}</label>
+              <input md-no-asterisk  name="gestAgeC" ng-model="access.GestationalAgeCorrected" type="number" step="1"  min="{{gestationalAgeBoundsC.min}}" max="{{gestationalAgeBoundsC.max}}">
+              <div ng-messages="eventForms.accessForm.gestAgeC.$error" multiple md-auto-hide="false">
+                <div ng-message="min">
+                   {{ 'Warnings.NumberError' | translate:gestationalAgeBoundsC }}
+                </div>
+                <div ng-message="max">
+                   {{ 'Warnings.NumberError' | translate:gestationalAgeBoundsC }}
+                </div>
+              </div>
+            </md-input-container>
+          </div>
+       </form>
+     </section>
+   </md-tab>
+   <md-tab label="{{ 'PatientDetail.EventsTab.DeceaseTab.LabelTitle' | translate }}">
+     <md-toolbar class="actions-bar md-table-toolbar md-default" ng-show="deceaseEditMode" >
+       <div class="md-toolbar-tools">
+         <span> {{ 'PatientDetail.EventsTab.AccessTab.Actions'| translate }}</span>
+         <div flex></div>
+         <md-button ng-disabled="eventForms.deceaseForm.$invalid" class="md-icon-button edit" ng-click="saveDecease()">
+          <md-icon>save</md-icon>
+         </md-button>
+         <md-button  class="md-icon-button" ng-show="deceaseEditMode" ng-click="cancelDecease()">
+          <md-icon>close</md-icon>
+         </md-button>
+       </div>
+     </md-toolbar>
+     <section ng-show="decease || deceaseEditMode">
+       <form name="eventForms.deceaseForm">
+         <h1 class="md-display-1" style="font-size: 20px;">{{ 'PatientDetail.EventsTab.DeceaseTab.Title'| translate }}</h1>
+         <div layout-gt-sm="row">
+           <div layout-gt-sm="row" flex="50" >
+            <div layout="row" flex="100">
+              <div flex flex="50" >
+                <h4 style="font-size: medium;font-weight: 100;color: rgba(0,0,0,0.54);">
+                   {{ 'PatientDetail.EventsTab.DeceaseTab.DeceaseData.DeceaseDate' | translate }}
+                </h4>
+              </div>
+              <div flex flex="50" >
+                <md-datepicker required ng-change="editDecease()" md-max-date="maxDate" name="deceaseDate" ng-model="DeceaseDate" md-placeholder="{{ 'PatientDetail.EventsTab.DeceaseTab.DeceaseData.DeceaseDate'| translate }}" ></md-datepicker>
+                <div class="validation-messages" ng-messages="eventForms.deceaseForm.deceaseDate.$error" ng-show="eventForms.deceaseForm.deceaseDate.$touched">
+                   <div ng-message="valid">{{ 'Warnings.DateFormatIncorrect' | translate }}</div>
+                   <div ng-message="required" class="my-message">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                </div>
+              </div>
+            </div>
+           </div>
+           <md-input-container class="md-block" flex-gt-sm="50" >
+              <label>{{ 'PatientDetail.EventsTab.DeceaseTab.DeceaseData.DeceasePlace' | translate }}</label>
+              <md-select ng-change="editDecease()" ng-model="decease.Place">
+                 <md-option ng-repeat="deathPlace in dathPlaces" value="{{deathPlace.value}}">
+                    {{ deathPlace.nameKey | translate }}
+                 </md-option>
+              </md-select>
+           </md-input-container>
+         </div>
+         <div layout-gt-sm="row" flex="50" >
+          <div layout="row">
+            <div flex flex="50" >
+              <h4 style="font-size: medium;font-weight: 100;color: rgba(0,0,0,0.54);">
+                {{ 'PatientDetail.EventsTab.DeceaseTab.DeceaseData.DeceaseStage' | translate }}
+              </h4>
+            </div>
+            <div flex="50"  ng-repeat="stage in stages" ng-show="decease.Stage == stage.dataType" >
+              {{ stage.nameKey | translate }}
+            </div>
+          </div>
+         </div>
+       </form>
+     </section>
+   </md-tab>
+   <md-tab label="{{ 'PatientDetail.EventsTab.DesertionTab.LabelTitle' | translate }}">
+     <div layout="row">
+       <div flex="50">
+         <md-toolbar class="actions-bar md-table-toolbar md-default" ng-show="desertionEditMode">
+           <div class="md-toolbar-tools">
+             <span> {{ 'PatientDetail.EventsTab.AccessTab.Actions'| translate }}</span>
+             <div flex></div>
+             <md-button ng-disabled="eventForms.desertionForm.$invalid" class="md-icon-button edit"  ng-click="saveDesertion()">
+              <md-icon>save</md-icon>
+             </md-button>
+             <md-button  class="md-icon-button" ng-show="desertionEditMode" ng-click="cancelDesertion()">
+              <md-icon>close</md-icon>
+             </md-button>
+           </div>
+         </md-toolbar>
+         <section ng-show="desertion || desertionEditMode">
+           <form name="eventForms.desertionForm">
+             <h1 class="md-display-1" style="font-size: 20px;">{{ 'PatientDetail.EventsTab.DesertionTab.Title'| translate }}</h1>
+             <div layout="row">
+               <div flex flex="50" >
+                 <h4 style="font-size: medium;font-weight: 100;color: rgba(0,0,0,0.54);">
+                   {{ 'PatientDetail.EventsTab.DesertionTab.DesertionData.DesertionDate' | translate }}
+                 </h4>
+               </div>
+               <div flex flex="50" >
+                 <md-datepicker ng-change="editDesertion()" md-max-date="maxDate" name="desertioneDate" ng-model="DesertionDate" md-placeholder="{{ 'PatientDetail.EventsTab.DesertionTab.DesertionData.DesertionDate' | translate }}" ></md-datepicker>
+                 <div required class="validation-messages" ng-messages="eventForms.desertionForm.desertioneDate.$error" ng-show="eventForms.desertionForm.desertioneDate.$touched">
+                    <div ng-message="valid">{{ 'Warnings.DateFormatIncorrect' | translate }}</div>
+                    <div ng-message="required" class="my-message">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                 </div>
+               </div>
+             </div>
+             <div layout="row">
+               <div flex flex="50" >
+                 <h4 style="font-size: medium;font-weight: 100;color: rgba(0,0,0,0.54);">
+                   {{  'PatientDetail.EventsTab.DesertionTab.DesertionData.DesertionStage' | translate }}
+                 </h4>
+               </div>
+               <div flex="50"  ng-repeat="stage in stages" ng-show="desertion.Stage == stage.dataType" >
+                 {{ stage.nameKey | translate }}
+               </div>
+             </div>
+           </form>
+         </section>
+       </div>
+       <div flex="50">
+         <md-toolbar class="actions-bar md-table-toolbar md-default" ng-show="traslateEditMode">
+           <div class="md-toolbar-tools">
+             <span> {{ 'PatientDetail.EventsTab.AccessTab.Actions'| translate }}</span>
+             <div flex></div>
+             <md-button ng-disabled="eventForms.traslateForm.$invalid" class="md-icon-button edit"  ng-click="saveTraslate()">
+              <md-icon>save</md-icon>
+             </md-button>
+             <md-button  class="md-icon-button" ng-show="traslateEditMode" ng-click="cancelTraslate()">
+              <md-icon>close</md-icon>
+             </md-button>
+           </div>
+         </md-toolbar>
+         <section ng-show="traslate || traslateEditMode">
+           <form name="eventForms.traslateForm">
+             <h1 class="md-display-1" style="font-size: 20px;">{{ 'PatientDetail.EventsTab.DesertionTab.Title2'| translate }}</h1>
+             <div layout="row">
+               <div flex flex="50" >
+                 <h4 style="font-size: medium;font-weight: 100;color: rgba(0,0,0,0.54);">
+                   {{ 'PatientDetail.EventsTab.DesertionTab.TraslateData.TraslateDate' | translate }}
+                 </h4>
+               </div>
+               <div flex flex="50" >
+                 <md-datepicker ng-change="editTraslate()" md-max-date="maxDate" name="traslateDate" ng-model="TraslateDate" md-placeholder="{{ 'PatientDetail.EventsTab.DesertionTab.TraslateData.TraslateDate' | translate }}" ></md-datepicker>
+                 <div required class="validation-messages" ng-messages="eventForms.traslateForm.traslateDate.$error" ng-show="eventForms.traslateForm.traslateDate.$touched">
+                    <div ng-message="valid">{{ 'Warnings.DateFormatIncorrect' | translate }}</div>
+                    <div ng-message="required" class="my-message">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                 </div>
+               </div>
+             </div>
+             <div layout="row">
+               <div flex flex="50" >
+                 <h4 style="font-size: medium;font-weight: 100;color: rgba(0,0,0,0.54);">
+                   {{  'PatientDetail.EventsTab.DesertionTab.TraslateData.TraslateStage' | translate }}
+                 </h4>
+               </div>
+               <div flex="50"  ng-repeat="stage in stages" ng-show="traslate.Stage == stage.dataType" >
+                 {{ stage.nameKey | translate }}
+               </div>
+             </div>
+           </form>
+         </section>
+       </div>
+     </div>
+   </md-tab>
+</md-tabs>

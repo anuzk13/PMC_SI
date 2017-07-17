@@ -1,0 +1,106 @@
+<div layout="column" style="height:100%;" ng-cloak>
+  <section layout="row" flex="">
+    <div ng-controller="SidenavCtrl" ng-include="navbartemplate.url">
+    </div>
+      <md-content flex="">
+
+        <div ng-controller="TopbarCtrl" ng-include="topbartemplate.url">
+        </div>
+
+        <section layout="row" ng-hide="showSelect" class="import-box" layout-sm="column" layout-align="center center" layout-wrap>
+          <md-button class="md-raised md-primary" ng-click="importData()">{{ 'ImportData.ImportOption' | translate}}</md-button>
+          <md-button class="md-raised md-primary" ng-click="exportData()">{{ 'ImportData.ExportOption' | translate}}</md-button>
+        </section>
+
+        <section layout="row" ng-hide="showSelect" class="import-box" layout-sm="column" layout-align="center center" layout-wrap>
+          <md-input-container>
+            <label>{{ 'ImportData.Year' | translate}}</label>
+            <md-select ng-model="exportYear">
+              <md-option ng-repeat="year in years" ng-value="year">
+                {{year}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          <md-input-container>
+            <label>{{ 'ImportData.Month' | translate}}</label>
+            <md-select ng-model="exportMonth">
+              <md-option ng-repeat="month in months" ng-value="month.value">
+                {{month.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          <md-button class="md-raised md-primary" ng-disabled="!exportYear || !exportMonth" ng-click="exportCustomData()">{{ 'ImportData.ExportCustomOption' | translate}}</md-button>
+        </section>
+
+        <md-toolbar ng-show="showSelect" class="sub-title-nav" layout layout-align="center center">
+            <span>{{ 'ImportData.ImportOption' | translate}}</span>
+            <span flex></span>
+            <button class="md-icon-button md-button md-ink-ripple" type="button" ng-click="closeLog()" aria-label="close">
+              <md-icon>close</md-icon>
+            <div class="md-ripple-container"></div></button>
+        </md-toolbar>
+
+        <section ng-show="showSelect">
+          <md-content flex layout-padding>
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+              <si-importer si-id="headers"></si-importer>
+              <si-column-manager si-id="headers"
+                               si-change="showLogs(data)"
+                               si-columns="columns">
+              </si-column-manager>
+            </section>
+          </md-content>
+        </section>
+        <!-- Warnings Section -->
+
+
+        <md-toolbar style="margin-top: 0px" ng-show="rowSuccess" class="success-box" layout layout-align="center center">
+            <span>{{ 'ImportData.ImportReport.RowSuccess' | translate:rowSuccess }} . {{ 'ImportData.ImportReport.RowFail' | translate:rowFail }}</span>
+            <span flex></span>
+        </md-toolbar>
+        <div layout="row" layout-xs="column" ng-show="errorLog" layout-md="column" layout-sm="column">
+          <div flex-gt-md="70" flex="100">
+            <md-toolbar layout="row" class="md-warn" layout-align="center center">
+              <div flex=5></div>
+              <div flex=40 class="white-border centered">{{'ImportData.ImportReport.ErrorDescription' | translate}}</div>
+              <div flex=50 class="white-right centered">{{'ImportData.ImportReport.ColumnsWithError' | translate}}</div>
+              <div flex=5></div>
+            </md-toolbar>
+            <md-content flex="" layout-padding="" class="report-table ">
+              <div layout="row" ng-repeat="(name, log) in errorLog">
+                <div flex=5></div>
+                <div flex=40 class="white-right">{{name | translate}} {{log.errorDetails}}</div>
+                <div flex=55 >
+                  <div layout="row" ng-repeat="(colName, rowObjct) in log">
+                    <button ng-repeat="(label, colData) in rowObjct" class="error-col" ng-click="setSelectedReport(colData)">
+                      {{colName | translate}} <i ng-show="label"> {{label | translate}} </i>  <i ng-show="colData.errorDetails"> ({{colData.errorDetails}}) </i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </md-content>
+          </div>
+          <div flex-gt-md="30" flex="100">
+            <md-toolbar layout="row" class="md-warn" layout-align="center center">
+              <div flex=5></div>
+              <div flex=90 class="white-right centered">{{'ImportData.ImportReport.RowsWithError' | translate}}</div>
+              <div flex=5></div>
+            </md-toolbar>
+            <p ng-hide="selectedReport"><i> {{'ImportData.ImportReport.Help' | translate}} </i></p>
+            <md-whiteframe ng-show="selectedReport"  class="md-whiteframe-8dp warn-box" flex=90 layout="row" layout-align="center center">
+              <md-content flex="" layout-padding="" class="report-table ">
+                <md-list>
+                  <md-list-item  ng-repeat="reportRow in selectedReport.rows"  ng-class="{warnitem: $index+1 < selectedReport.rows.length }">
+                    <p> {{'ImportData.ImportReport.RowSuffix' | translate}} {{ reportRow.row }} </p>
+                    <p> {{'ImportData.ImportReport.Value' | translate}} : {{ reportRow.value || 'faltante'}} </p>
+                  </md-list-item>
+                </md-list>
+              </md-content>
+            </md-whiteframe>
+          </div>
+        </div>
+
+      </md-content>
+
+  </section>
+</div>

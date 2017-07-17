@@ -1,0 +1,104 @@
+<header class="si-column-manager-actions">
+  <md-toolbar display="row">
+      <div class="md-toolbar-tools">
+        <md-switch ng-hide="saving || loading || !selectedSheet" ng-model="hasHeader" aria-label="'ImportData.FirstRowIsHeader' | translate">
+          {{"ImportData.FirstRowIsHeader" | translate}}
+        </md-switch>
+        <md-switch ng-hide="saving || loading || !selectedSheet" ng-model="replaceOriginal" aria-label="'ImportData.ReplaceOriginal' | translate">
+          {{"ImportData.ReplaceOriginal" | translate}}
+        </md-switch>
+        <h2 ng-show="saving">
+          <span>{{"ImportData.Saving" | translate}} ... </span>
+        </h2>
+        <h2 ng-show="loading">
+          <span>{{"ImportData.Loading" | translate}} ... </span>
+        </h2>
+        <div flex></div>
+        <button ng-disabled="saving || loading" class="md-icon-button md-button md-ink-ripple" type="button" ng-click="vm.cancel()" aria-label="close">
+          <md-icon>close</md-icon>
+        <div class="md-ripple-container"></div></button>
+      </div>
+  </md-toolbar>
+</header>
+<ul class="si-column-manager-columns">
+
+    <div ng-hide="selectedSheet">
+      <div display="row" layout-align="center center" style="padding: 3em;">
+        <div class="select-group">
+          <span>{{"ImportData.SheetList" | translate}}</span>
+          <select ng-model="sheetId" style="min-width: 50%;">
+            <option
+              ng-repeat="sheet in selectSheets"
+              value= "{{sheet}}">{{sheet}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div display="row" layout-align="center center" >
+        <md-button ng-click="selectSheet()" ng-disabled="!sheetId" class="md-raised md-primary">{{"ImportData.SelectSheet" | translate}}</md-button>
+      </div>
+    </div>
+    <div ng-show="selectedSheet">
+      <div display="row">
+          <md-progress-linear md-mode="indeterminate" ng-show="saving || loading"></md-progress-linear>
+      </div>
+      <li ng-repeat="column in preview track by $index" class="si-column-manager-column"
+          ng-class="{'si-column-ignored': column.mapping.property === '$skip$'}">
+
+          <ul class="si-column-manager-samples">
+              <li class="si-column-manager-sample-header"></li>
+              <li class="si-column-manager-sample si-column-manager-sample-title">{{column.header}}</li>
+              <li ng-repeat="sample in column.sample track by $index" class="si-column-manager-sample">
+                  {{sample}}
+              </li>
+          </ul>
+          <div class="si-column-manager-editor" style="background: white;">
+              <label>{{"ImportData.ImportAs" | translate}} </label>
+
+              <div class="select-group" id="{{'col' +  $index}}" ng-mouseover="showMapping(column, $event);  $event.stopPropagation();">
+                <span>{{column.mapping.title | translate }}</span>
+                <select ng-if="column.showMapping" ng-model="column.mapping" ng-change="updateMapping(column, '{{column.mapping.property}}')">
+                  <option value= "{{ignoreOption}}" >{{ ignoreOption.title | translate}}</option>
+                  <optgroup ng-repeat="(key,importCol) in columns" label="{{importCol.nameKey  | translate}}">
+                    <option
+                      ng-repeat="titleCol in importCol.columns"
+                      ng-disabled="(takenProperties.hasOwnProperty(titleCol.property) && column.prop !=titleCol.property) || (titleCol.property != '$skip$' && (titleCol.uniqueValues && !column.uniqueValues) )"
+                      value= "{{titleCol}}"
+                      title="{{titleCol.tip | translate}}">{{titleCol.title | translate}}
+                    </option>
+                  </optgroup>
+                </select>
+              </div>
+              <div ng-repeat="importCol in columns" ng-if="column.mapping.property != '$skip$'">
+                <div ng-repeat="title in importCol.columns" ng-if="column.mapping.property === title.property && title.uniqueValues">
+                  <div ng-repeat="(key, value) in column.uniqueValues">
+                    <div layout="row">
+                      <div ng-show="key" flex>{{key}}</div>
+                      <div flex ng-hide="key">{{'ImportData.EmptyValue' | translate}}</div>
+                      <div flex>
+                        <div class="select-group">
+                            <span>{{column.uniqueValues[key].nameKey | translate}}</span>
+                            <select ng-options="uniqueVal.nameKey | translate for uniqueVal in title.uniqueValues"
+                                    ng-model="column.uniqueValues[key]">
+                                    <option value= "">{{ 'ImportData.IgnoreValue' | translate}}</option>
+                            </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+      </li>
+    </div>
+
+</ul>
+<footer class="si-column-manager-actions">
+    <div class="md-toolbar-tools" style="width:80%">
+      <md-switch ng-hide="saving || loading || !selectedSheet" ng-model="importAsComplete" aria-label="'ImportData.ImportAsComplete' | translate" style="color:white">
+        {{"ImportData.ImportAsComplete" | translate}}
+      </md-switch>
+    </div>
+    <md-button class="md-raised" ng-disabled="saving || loading" ng-click="vm.remap(preview)">{{"ImportData.Import" | translate}}</md-button>
+</footer>

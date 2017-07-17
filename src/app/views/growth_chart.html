@@ -1,0 +1,8 @@
+<md-card md-theme="dark-grey" class="md-hue-2" md-theme-watch ng-show="showWarning">
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">{{ 'PatientDetail.GrowthChart.NoStages' | translate }}</span>
+    </md-card-title-text>
+  </md-card-title>
+</md-card>
+<div  ng-hide="showWarning" id="stagesPlot" ></div>

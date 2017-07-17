@@ -1,0 +1,22 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-z4" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+  <md-toolbar class="md-whiteframe-z4">
+	<div class="md-toolbar-tools">
+	  <h1 class="md-toolbar-tools">{{hospital}}</h1>
+	  <md-button ng-click="sidenav_close()" hide-gt-md="">
+	    <i class="material-icons">clear</i>
+	  </md-button>
+	</div>
+  </md-toolbar>
+  <md-content layout-padding="" >
+	<h2>{{ 'Right_Menu.PMCPatients.Title' | translate }}</h2>
+  <md-button ng-click="goDailyRegs()" md-no-ink class="md-primary">{{ 'Right_Menu.PMCPatients.DailyRegs' | translate }}</md-button>
+  <md-button ng-click="goRegister()" md-no-ink class="md-primary">{{ 'Right_Menu.PMCPatients.RegisterPatient' | translate }}</md-button>
+	<md-button ng-click="goSearch()" md-no-ink class="md-primary">{{ 'Right_Menu.PMCPatients.SearchPatient' | translate }}</md-button>
+  <md-button ng-click="goStagesControl()" md-no-ink class="md-primary">{{ 'Right_Menu.PMCPatients.StagesControlPanel' | translate }}</md-button>
+  <md-button ng-click="goVisualizations()" md-no-ink class="md-primary">{{ 'Right_Menu.PMCPatients.Indicators' | translate }}</md-button>
+	<h2>{{ 'Right_Menu.PMCUnit.Title' | translate }}</h2>
+	<md-button ng-click="goPMCOverview()" md-no-ink class="md-primary">{{ 'Right_Menu.PMCUnit.PMCData' | translate }}</md-button>
+	<md-button ng-click="goImport()" md-no-ink class="md-primary">{{ 'Right_Menu.PMCUnit.ImportData' | translate }}</md-button>
+	<md-button ng-click="goConfiguration()" md-no-ink class="md-primary">{{ 'Right_Menu.PMCUnit.SystemConfig' | translate }}</md-button>
+  </md-content>
+</md-sidenav>

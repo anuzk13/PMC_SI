@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pmcDataCollectorApp">
+<head>
+    <title>Sistema Indicadores PMC</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- build:css assets/css/app.css -->
+    <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="../bower_components/angular-material-data-table/dist/md-data-table.min.css"/>
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/growthchart.css" />
+    <link rel="stylesheet" href="assets/css/data_importer.css" />
+    <!-- endbuild -->
+</head>
+<body>
+    <div class="sampleContainer" id="initWait">
+        <div class="loader">
+            <span class="dot dot_1"></span>
+            <span class="dot dot_2"></span>
+            <span class="dot dot_3"></span>
+            <span class="dot dot_4"></span>
+        </div>
+    </div>
+    <ng-view></ng-view>
+    <!-- build:js scripts/vendor.js -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../bower_components/es6-promise/es6-promise.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../bower_components/angular-aria/angular-aria.js"></script>
+    <script src="../bower_components/angular-material/angular-material.js"></script>
+    <script src="../bower_components/angular-translate/angular-translate.js"></script>
+    <script src="../bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="../bower_components/angular-messages/angular-messages.js"></script>
+    <script src="../bower_components/angular-password/angular-password.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../bower_components/pouchdb/dist/pouchdb.js"></script>
+    <script src="../bower_components/angular-pouchdb/angular-pouchdb.js"></script>
+    <script src="../bower_components/pouchdb-upsert/dist/pouchdb.upsert.js"></script>
+    <script src="../bower_components/pouchdb-authentication/dist/pouchdb.authentication.js"></script>
+    <script src="../bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="../bower_components/js-xlsx-style/dist/xlsx.full.min.js"></script>
+    <script src="../bower_components/papaparse/papaparse.min.js"></script>
+    <script src="../bower_components/js-xlsx/dist/ods.js"></script>
+    <script src="../bower_components/crypto-js/crypto-js.js"></script>
+    <script src="../bower_components/moment/moment.js"></script>
+    <script src="../bower_components/moment/locale/es.js"></script>
+    <script src="../bower_components/angular-material-data-table/dist/md-data-table.js"></script>
+    <script src="../bower_components/d3/d3.js"></script>
+    <script src="../bower_components/angular-ui-sortable/sortable.min.js"></script>
+    <script src="FileSaver.js"></script>
+    <!-- endbuild -->
+    <!-- build:app scripts/app.js -->
+    <script src="./scripts/app.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/pmc_unit_register.js"></script>
+    <script src="scripts/controllers/main_dashboard.js"></script>
+    <script src="scripts/services/database_connection_service.js"></script>
+    <script src="scripts/services/pmc_unit_service.js"></script>
+    <script src="scripts/services/user_service.js"></script>
+    <script src="scripts/services/pouchdb_service.js"></script>
+    <script src="scripts/controllers/sidenav_controller.js"></script>
+    <script src="scripts/controllers/topbar.js"></script>
+    <script src="scripts/controllers/stage_panel.js"></script>
+    <script src="scripts/services/system_config_service.js"></script>
+    <script src="scripts/services/patient_service.js"></script>
+    <script src="scripts/directives/patientsstagepanel.js"></script>
+    <script src="scripts/controllers/patient_register.js"></script>
+    <script src="scripts/controllers/patient_search.js"></script>
+    <script src="scripts/controllers/patient_detail.js"></script>
+    <script src="scripts/directives/growth_chart.js"></script>
+    <script src="scripts/directives/stage_overview.js"></script>
+    <script src="scripts/services/patient_growth_service.js"></script>
+    <script src="scripts/controllers/stage_edit_dialog.js"></script>
+    <script src="scripts/directives/data_importer/column_manager.js"></script>
+    <script src="scripts/directives/data_importer/file_select.js"></script>
+    <script src="scripts/directives/data_importer/importer.js"></script>
+    <script src="scripts/controllers/data_import.js"></script>
+    <script src="scripts/services/data_export_service.js"></script>
+    <script src="scripts/services/indicators_service.js"></script>
+    <script src="scripts/controllers/indicators_visualization.js"></script>
+    <script src="scripts/services/remote_service.js"></script>
+    <script src="scripts/controllers/pmc_unit_detail.js"></script>
+    <script src="scripts/services/data_utilities.js"></script>
+    <script src="scripts/directives/patient_events.js"></script>
+    <script src="scripts/controllers/program_settings.js"></script>
+    <script src="scripts/controllers/alert_dialog.js"></script>
+    <script src="scripts/controllers/daily_register.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

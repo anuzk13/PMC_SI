@@ -1,0 +1,1343 @@
+{
+	"update": false,
+	"indicators_meta": {
+		"_id": "indicators_meta",
+		"indexes": [
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_ambulatoryAccess",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_ambulatoryAccess",
+					"views": {
+						"m_ambulatoryAccess": {
+							"map": "  function(doc) {    if (doc.type == \"PATIENT\" && doc.AMBULATORY_PROGRAM && doc.AMBULATORY_PROGRAM.DateAccess) {        var date = doc.AMBULATORY_PROGRAM.DateAccess.split(\"/\");        if (date) { emit ([date[2], date[1]], null); }     }  };",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_intrahospitalaryExit",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_intrahospitalaryExit",
+					"views": {
+						"m_intrahospitalaryExit": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\" && doc.INTRAHOSPITALARY_PROGRAM && doc.INTRAHOSPITALARY_PROGRAM.DateExit) {    var date = doc.INTRAHOSPITALARY_PROGRAM.DateExit.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }  }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_stageIEnd",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_stageIEnd",
+					"views": {
+						"m_stageIEnd": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"  && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }   }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_shouldEndStageI",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_shouldEndStageI",
+					"views": {
+						"m_shouldEndStageI": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"  && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }   }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_accessInTime",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_accessInTime",
+					"views": {
+						"m_accessInTime": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && doc.AMBULATORY_PROGRAM && doc.AMBULATORY_PROGRAM.DateAccess && doc.AMBULATORY_PROGRAM.Opportunity && doc.AMBULATORY_PROGRAM.Opportunity <= 3) {      var date = doc.AMBULATORY_PROGRAM.DateAccess.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }   }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_phaseIHospitalization",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_phaseIHospitalization",
+					"views": {
+						"m_phaseIHospitalization": {
+							"map": "function(doc) {     if (doc.type == \"PATIENT\" && doc.PATIENT.hospitalizations) {         var emmitedDates = [];         doc.PATIENT.hospitalizations.forEach (function (hospitalization) {           var date = hospitalization.hospitalizationDate.split(\"/\");           var dateS= date[2] +\"-\"+ date[1];           var found = false;           for (var i = emmitedDates.length - 1; i >= 0; i--) {             if (emmitedDates[i] == dateS){               found = true;               break;  }             };           if (!found && hospitalization.hospitalizationStage == \"STAGE_40WEEKS_G\" ) {             emit([date[2], date[1]], null);             emmitedDates.push(dateS)           }         })     } }",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_phaseIAttended",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_phaseIAttended",
+					"views": {
+						"m_phaseIAttended": {
+							"map": "function(doc) {     if (doc.type == \"PATIENT\" && doc.PATIENT.attentions) {         var emmitedDates = [];  doc.PATIENT.attentions.forEach (function (attention) {    var date = attention.attentionDate.split(\"/\");     var dateS= date[2] +\"-\"+ date[1];     var found = false;    for (var i = emmitedDates.length - 1; i >= 0; i--) {          if (emmitedDates[i] == dateS){      found = true;       break;  }         };    if (!found && attention.attentionStage == \"STAGE_40WEEKS_G\") {      emit([date[2], date[1]], null);       emmitedDates.push(dateS)    }   })     } }",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_phaseIDecease",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_phaseIDecease",
+					"views": {
+						"m_phaseIDecease": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && doc.DECEASE && doc.DECEASE.Date && doc.DECEASE.Stage && doc.AMBULATORY_PROGRAM) {    if (doc.DECEASE.Stage == \"STAGE_40WEEKS_G\") {      var date = doc.DECEASE.Date.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_phaseIIHospitalization",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_phaseIIHospitalization",
+					"views": {
+						"m_phaseIIHospitalization": {
+							"map": "function(doc) {     if (doc.type == \"PATIENT\" && doc.PATIENT.hospitalizations) {         var emmitedDates = [];         doc.PATIENT.hospitalizations.forEach (function (hospitalization) {  var date = hospitalization.hospitalizationDate.split(\"/\"); var dateS= date[2] +\"-\"+ date[1]; var found = false; for (var i = emmitedDates.length - 1; i >= 0; i--) {  if (emmitedDates[i] == dateS){ found = true;  break;  }             };           if (!found && (hospitalization.hospitalizationStage == \"STAGE_12WEEKS_C\" || hospitalization.hospitalizationStage == \"STAGE_24WEEKS_C\") ) {             emit([date[2], date[1]], null);             emmitedDates.push(dateS)           }         })     } }",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_phaseIIAttended",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_phaseIIAttended",
+					"views": {
+						"m_phaseIIAttended": {
+							"map": "function(doc) {     if (doc.type == \"PATIENT\" && doc.PATIENT.attentions) {         var emmitedDates = [];   doc.PATIENT.attentions.forEach (function (attention) {    var date = attention.attentionDate.split(\"/\");     var dateS= date[2] +\"-\"+ date[1];     var found = false;    for (var i = emmitedDates.length - 1; i >= 0; i--) {          if (emmitedDates[i] == dateS){      found = true;       break;  }         };    if (!found && (attention.attentionStage == \"STAGE_12WEEKS_C\" || attention.attentionStage == \"STAGE_24WEEKS_C\")) {       emit([date[2], date[1]], null);       emmitedDates.push(dateS)    }   })     } }",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_phaseIIDecease",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_phaseIIDecease",
+					"views": {
+						"m_phaseIIDecease": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && doc.DECEASE && doc.DECEASE.Date && doc.DECEASE.Stage) {    if (doc.DECEASE.Stage == \"STAGE_12WEEKS_C\" ||        doc.DECEASE.Stage == \"STAGE_24WEEKS_C\" ) {      var date = doc.DECEASE.Date.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_phaseIIIHospitalization",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_phaseIIIHospitalization",
+					"views": {
+						"m_phaseIIIHospitalization": {
+							"map": "function(doc) {     if (doc.type == \"PATIENT\" && doc.PATIENT.hospitalizations) {         var emmitedDates = [];         doc.PATIENT.hospitalizations.forEach (function (hospitalization) {  var date = hospitalization.hospitalizationDate.split(\"/\"); var dateS= date[2] +\"-\"+ date[1]; var found = false; for (var i = emmitedDates.length - 1; i >= 0; i--) {  if (emmitedDates[i] == dateS){ found = true;  break;  }             };           if (!found && (hospitalization.hospitalizationStage == \"STAGE_36WEEKS_C\" || hospitalization.hospitalizationStage == \"STAGE_48WEEKS_C\") ) {             emit([date[2], date[1]], null);             emmitedDates.push(dateS)           }         })     } }",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_phaseIIIAttended",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_phaseIIIAttended",
+					"views": {
+						"m_phaseIIIAttended": {
+							"map": "function(doc) {     if (doc.type == \"PATIENT\"  && doc.PATIENT.attentions) {         var emmitedDates = [];   doc.PATIENT.attentions.forEach (function (attention) {    var date = attention.attentionDate.split(\"/\");     var dateS= date[2] +\"-\"+ date[1];     var found = false;    for (var i = emmitedDates.length - 1; i >= 0; i--) {          if (emmitedDates[i] == dateS){      found = true;       break;  }         };    if (!found && (attention.attentionStage == \"STAGE_36WEEKS_C\" || attention.attentionStage == \"STAGE_48WEEKS_C\")) {       emit([date[2], date[1]], null);       emmitedDates.push(dateS)    }   })     } }",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_phaseIIIDecease",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_phaseIIIDecease",
+					"views": {
+						"m_phaseIIIDecease": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && doc.DECEASE && doc.DECEASE.Date && doc.DECEASE.Stage) {    if (doc.DECEASE.Stage == \"STAGE_36WEEKS_C\" ||        doc.DECEASE.Stage == \"STAGE_48WEEKS_C\") {      var date = doc.DECEASE.Date.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_phaseIIIEnded",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_phaseIIIEnded",
+					"views": {
+						"m_phaseIIIEnded": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && !doc.DESERTION && !doc.DECEASE && !doc.TRASLATION && doc.STAGES.STAGE_48WEEKS_C && doc.STAGES.STAGE_48WEEKS_C.DateStageReached) {      var date = doc.STAGES.STAGE_48WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }   }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_kidsWithAlterationsPhaseIII",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_kidsWithAlterationsPhaseIII",
+					"views": {
+						"m_kidsWithAlterationsPhaseIII": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && !doc.DESERTION && !doc.DECEASE && !doc.TRASLATION && doc.STAGES.STAGE_48WEEKS_C && doc.STAGES.STAGE_48WEEKS_C.DateStageReached && doc.PATIENT.NeurologicalAlterations) {      var date = doc.STAGES.STAGE_48WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }   }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.MeissenIndexes.m_kidsUnderweightPhaseIII",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/m_kidsUnderweightPhaseIII",
+					"views": {
+						"m_kidsUnderweightPhaseIII": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && !doc.DESERTION  && !doc.TRASLATION && !doc.DECEASE &&  doc.STAGES.STAGE_48WEEKS_C && doc.STAGES.STAGE_48WEEKS_C.DateStageReached) {    if ( doc.STAGES.STAGE_48WEEKS_C.Weight < 7) {      var date = doc.STAGES.STAGE_48WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.accessByWeight",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/accessByWeight",
+					"views": {
+						"accessByWeight": {
+							"map": "function(doc) {   if (doc.type == \"PATIENT\"   && doc.AMBULATORY_PROGRAM && doc.AMBULATORY_PROGRAM.DateAccess && doc.PATIENT.BornWeight) {    if (doc.PATIENT.BornWeight < 1.8) {      var date = doc.AMBULATORY_PROGRAM.DateAccess.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.exitByWeight",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/exitByWeight",
+					"views": {
+						"exitByWeight": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && doc.INTRAHOSPITALARY_PROGRAM && doc.INTRAHOSPITALARY_PROGRAM.DateExit  && doc.PATIENT.BornWeight) {    if (doc.PATIENT.BornWeight < 1.8) {      var date = doc.INTRAHOSPITALARY_PROGRAM.DateExit.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.accessByGestAge",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/accessByGestAge",
+					"views": {
+						"accessByGestAge": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && doc.AMBULATORY_PROGRAM && doc.AMBULATORY_PROGRAM.DateAccess) {    if (doc.PATIENT.GestationalAge <= 34) {      var date = doc.AMBULATORY_PROGRAM.DateAccess.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.exitByGestAge",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/exitByGestAge",
+					"views": {
+						"exitByGestAge": {
+							"map": "function(doc) {    if (doc.type == \"PATIENT\"   && doc.INTRAHOSPITALARY_PROGRAM && doc.INTRAHOSPITALARY_PROGRAM.DateExit) {      if (doc.PATIENT.GestationalAge <= 34) {        var date = doc.INTRAHOSPITALARY_PROGRAM.DateExit.split(\"/\");        if (date) { emit ([date[2], date[1]], null); }       }    }  };",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.ambulatoryAccess",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/ambulatoryAccess",
+					"views": {
+						"ambulatoryAccess": {
+							"map": "  function(doc) {    if (doc.type == \"PATIENT\"   && doc.AMBULATORY_PROGRAM && doc.AMBULATORY_PROGRAM.DateAccess) {        var date = doc.AMBULATORY_PROGRAM.DateAccess.split(\"/\");        if (date) { emit ([date[2], date[1]], null); }     }  };",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.intrahorpitalaryExit",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/intrahorpitalaryExit",
+					"views": {
+						"intrahorpitalaryExit": {
+							"map": "function(doc) {    if (doc.type == \"PATIENT\"   && doc.INTRAHOSPITALARY_PROGRAM && doc.INTRAHOSPITALARY_PROGRAM.DateExit) {        var date = doc.INTRAHOSPITALARY_PROGRAM.DateExit.split(\"/\");        if (date) { emit ([date[2], date[1]], null); }     }  };",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.lateAmbulatoryAccess",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/lateAmbulatoryAccess",
+					"views": {
+						"lateAmbulatoryAccess": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && doc.AMBULATORY_PROGRAM && doc.AMBULATORY_PROGRAM.DateAccess && doc.AMBULATORY_PROGRAM.Opportunity && doc.AMBULATORY_PROGRAM.Opportunity > 2) {      var date = doc.AMBULATORY_PROGRAM.DateAccess.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }   }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.exitWithoutCriteria",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/exitWithoutCriteria",
+					"views": {
+						"exitWithoutCriteria": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && doc.INTRAHOSPITALARY_PROGRAM && doc.AMBULATORY_PROGRAM && doc.AMBULATORY_PROGRAM.DateAccess && doc.INTRAHOSPITALARY_PROGRAM.AccessCriteria) {    if (!doc.INTRAHOSPITALARY_PROGRAM.AccessCriteria.WEIGHT_GAIN ||        !doc.INTRAHOSPITALARY_PROGRAM.AccessCriteria.SBD_COORDINATION ||        !doc.INTRAHOSPITALARY_PROGRAM.AccessCriteria.TREATMENTS_FINISHED ||        !doc.INTRAHOSPITALARY_PROGRAM.AccessCriteria.OXYGEN_LEVEL ||        !doc.INTRAHOSPITALARY_PROGRAM.AccessCriteria.TEMP_REGULATION ||        !doc.INTRAHOSPITALARY_PROGRAM.AccessCriteria.PMC_ACCESS){      var date = doc.AMBULATORY_PROGRAM.DateAccess.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.parentAccess",
+				"type": "FIXED",
+				"index": {
+					"_id": "_design/parentAccess",
+					"views": {
+						"parentAccess": {
+							"map": "function (doc) {  if (doc.type == \"PMC_UNIT\" && doc.ParentAccess) {    emit (1, doc.ParentAccess);  }}",
+							"reduce": "_stats"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.intrahospExitWithLME",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/intrahospExitWithLME",
+					"views": {
+						"intrahospExitWithLME": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\"   && doc.INTRAHOSPITALARY_PROGRAM && doc.INTRAHOSPITALARY_PROGRAM.DateExit && doc.INTRAHOSPITALARY_PROGRAM.Nutrition) {    if (doc.INTRAHOSPITALARY_PROGRAM.Nutrition == \"FS01\"){      var date = doc.INTRAHOSPITALARY_PROGRAM.DateExit.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.timeInPos",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/timeInPos",
+					"views": {
+						"timeInPos": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\"   && doc.INTRAHOSPITALARY_PROGRAM  && doc.INTRAHOSPITALARY_PROGRAM.AvgTimeInPos && doc.INTRAHOSPITALARY_PROGRAM.DateExit) {      var date = doc.INTRAHOSPITALARY_PROGRAM.DateExit.split(\"/\");      emit ([date[2], date[1]], doc.INTRAHOSPITALARY_PROGRAM.AvgTimeInPos);  }}",
+							"reduce": "_stats"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.stageIDesertion",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/stageIDesertion",
+					"views": {
+						"stageIDesertion": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\"   && doc.DESERTION  && doc.DESERTION.Date && doc.DESERTION.Stage) {    if ( doc.DESERTION.Stage == \"STAGE_40WEEKS_G\")      var date = doc.DESERTION.Date.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }   }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.stageIOftamology34Weeks",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/stageIOftamology34Weeks",
+					"views": {
+						"stageIOftamology34Weeks": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"  && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached && doc.STAGES.STAGE_40WEEKS_G.StageExamns) {    if (doc.PATIENT.GestationalAge < 34 && doc.STAGES.STAGE_40WEEKS_G.StageExamns.OFTALMOLOGY) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.endedStageOne34Weeks",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/endedStageOne34Weeks",
+					"views": {
+						"endedStageOne34Weeks": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\"  && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\"))  && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) &&  doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {    if (doc.PATIENT.GestationalAge < 34) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.stageIOftamologyByRisk34",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/stageIOftamologyByRisk34",
+					"views": {
+						"stageIOftamologyByRisk34": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"  && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) &&  doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached && doc.STAGES.STAGE_40WEEKS_G.StageExamns) {    if (doc.PATIENT.GestationalAge >= 34 && doc.STAGES.STAGE_40WEEKS_G.StageExamns.OFTALMOLOGY  && doc.STAGES.STAGE_40WEEKS_G.HasRiskFactors) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.endedStageOneByRisk34",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/endedStageOneByRisk34",
+					"views": {
+						"endedStageOneByRisk34": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\"  && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) &&  doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {    if (doc.PATIENT.GestationalAge >= 34 && doc.STAGES.STAGE_40WEEKS_G.HasRiskFactors) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.stageIOftamology32Weeks",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/stageIOftamology32Weeks",
+					"views": {
+						"stageIOftamology32Weeks": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"  && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) &&  doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached && doc.STAGES.STAGE_40WEEKS_G.StageExamns) {    if (doc.PATIENT.GestationalAge < 32 && doc.STAGES.STAGE_40WEEKS_G.StageExamns.OFTALMOLOGY) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.endedStageOne32Weeks",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/endedStageOne32Weeks",
+					"views": {
+						"endedStageOne32Weeks": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\"  && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) &&  doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {    if (doc.PATIENT.GestationalAge < 32) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.stageIOftamologyByRisk32",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/stageIOftamologyByRisk32",
+					"views": {
+						"stageIOftamologyByRisk32": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\" && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\"))  && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached && doc.STAGES.STAGE_40WEEKS_G.StageExamns) {    if (doc.PATIENT.GestationalAge >= 32 && doc.STAGES.STAGE_40WEEKS_G.StageExamns.OFTALMOLOGY  && doc.STAGES.STAGE_40WEEKS_G.HasRiskFactors) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.endedStageOneByRisk32",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/endedStageOneByRisk32",
+					"views": {
+						"endedStageOneByRisk32": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\" && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\"))  && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) &&  doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {    if (doc.PATIENT.GestationalAge >= 32 && doc.STAGES.STAGE_40WEEKS_G.HasRiskFactors) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.ecographyStageI",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/ecographyStageI",
+					"views": {
+						"ecographyStageI": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\" && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\"))  && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached && doc.STAGES.STAGE_40WEEKS_G.StageExamns) {    if (doc.STAGES.STAGE_40WEEKS_G.StageExamns.BRAINSCAN) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.stageIEnded",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/stageIEnded",
+					"views": {
+						"stageIEnded": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\" && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\"))  && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }   }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.neuroEvalStageI",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/neuroEvalStageI",
+					"views": {
+						"neuroEvalStageI": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\" && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\"))  && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached && doc.STAGES.STAGE_40WEEKS_G.StageExamns) {    if (doc.STAGES.STAGE_40WEEKS_G.StageExamns.NEUROEVAL) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.vaccinesStageI",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/vaccinesStageI",
+					"views": {
+						"vaccinesStageI": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"  && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached && doc.STAGES.STAGE_40WEEKS_G.StageVaccines) {    if (doc.STAGES.STAGE_40WEEKS_G.StageVaccines.BCG && doc.STAGES.STAGE_40WEEKS_G.StageVaccines.HEPB) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.LME40Weeks",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/LME40Weeks",
+					"views": {
+						"LME40Weeks": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\" && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\"))  && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {    if (doc.STAGES.STAGE_40WEEKS_G.Nutrition == \"FS01\") {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.IStageRehospitalized",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/IStageRehospitalized",
+					"views": {
+						"IStageRehospitalized": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"  && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\"))   && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {    if (doc.STAGES.STAGE_40WEEKS_G.WasHospitalized) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.40WeeksDeath",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/40WeeksDeath",
+					"views": {
+						"40WeeksDeath": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && doc.DECEASE && doc.DECEASE.Date && doc.DECEASE.Stage && doc.AMBULATORY_PROGRAM) {    if (doc.DECEASE.Stage == \"STAGE_40WEEKS_G\") {      var date = doc.DECEASE.Date.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.40WeeksDeathHome",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/40WeeksDeathHome",
+					"views": {
+						"40WeeksDeathHome": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && doc.DECEASE && doc.DECEASE.Date && doc.DECEASE.Stage && doc.DECEASE.Place) {    if (doc.DECEASE.Stage == \"STAGE_40WEEKS_G\" && doc.DECEASE.Place == \"DPL01\") {      var date = doc.DECEASE.Date.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.40WeeksBoysGrowth",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/40WeeksBoysGrowth",
+					"views": {
+						"40WeeksBoysGrowth": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\" && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\"))    && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {    if ( doc.STAGES.STAGE_40WEEKS_G.Weight >= 2.5 &&          doc.STAGES.STAGE_40WEEKS_G.Size >= 46.1 &&          doc.STAGES.STAGE_40WEEKS_G.HeadPerim >= 31.9 &&          doc.PATIENT.Sex == \"SX02\") {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.40WeeksGrowth",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/40WeeksGrowth",
+					"views": {
+						"40WeeksGrowth": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"  && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\"))   && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {    if ( doc.STAGES.STAGE_40WEEKS_G.Weight >= 2.5 ) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.40WeeksBoys",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/40WeeksBoys",
+					"views": {
+						"40WeeksBoys": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\" && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\"))     && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {    if ( doc.PATIENT.Sex == \"SX02\") {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.40WeeksGirlsGrowth",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/40WeeksGirlsGrowth",
+					"views": {
+						"40WeeksGirlsGrowth": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\" && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\"))    && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {    if ( doc.STAGES.STAGE_40WEEKS_G.Weight >= 2.4 &&          doc.STAGES.STAGE_40WEEKS_G.Size >= 42.4 &&          doc.STAGES.STAGE_40WEEKS_G.HeadPerim >= 31.5 &&          doc.PATIENT.Sex == \"SX01\") {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.40WeeksGirls",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/40WeeksGirls",
+					"views": {
+						"40WeeksGirls": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"  && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\"))   && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\")) && (!doc.DECEASE || (doc.DECEASE && doc.DECEASE.Stage != \"STAGE_40WEEKS_G\")) && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {    if ( doc.PATIENT.Sex == \"SX01\") {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.UrgencyStageI",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/UrgencyStageI",
+					"views": {
+						"UrgencyStageI": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\" && doc.STAGES.STAGE_40WEEKS_G && doc.STAGES.STAGE_40WEEKS_G.DateStageReached) {    if ( doc.STAGES.STAGE_40WEEKS_G.HadUrgencyAppointment) {      var date = doc.STAGES.STAGE_40WEEKS_G.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.StageIIDesertion",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/StageIIDesertion",
+					"views": {
+						"StageIIDesertion": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\"   && doc.DESERTION  && doc.DESERTION.Date && doc.DESERTION.Stage) {    if (  doc.DESERTION.Stage == \"STAGE_12WEEKS_C\" ||          doc.DESERTION.Stage == \"STAGE_24WEEKS_C\" ||          doc.DESERTION.Stage == \"STAGE_36WEEKS_C\" ||          doc.DESERTION.Stage == \"STAGE_48WEEKS_C\") {      var date = doc.DESERTION.Date.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.stageIIEnded",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/stageIIEnded",
+					"views": {
+						"stageIIEnded": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"  && !doc.TRASLATION  && !doc.DESERTION && !doc.DECEASE && doc.STAGES.STAGE_48WEEKS_C && doc.STAGES.STAGE_48WEEKS_C.DateStageReached) {      var date = doc.STAGES.STAGE_48WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }   }};",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.OptometryStageII",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/OptometryStageII",
+					"views": {
+						"OptometryStageII": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\"  && !doc.TRASLATION && !doc.DESERTION && !doc.DECEASE && doc.STAGES ) {    if (  (doc.STAGES.STAGE_12WEEKS_C && doc.STAGES.STAGE_12WEEKS_C.StageExamns && doc.STAGES.STAGE_12WEEKS_C.StageExamns.OPTOMETRY) ||          (doc.STAGES.STAGE_24WEEKS_C && doc.STAGES.STAGE_24WEEKS_C.StageExamns && doc.STAGES.STAGE_24WEEKS_C.StageExamns.OPTOMETRY) ||          (doc.STAGES.STAGE_36WEEKS_C && doc.STAGES.STAGE_36WEEKS_C.StageExamns && doc.STAGES.STAGE_36WEEKS_C.StageExamns.OPTOMETRY) ||          (doc.STAGES.STAGE_48WEEKS_C && doc.STAGES.STAGE_48WEEKS_C.StageExamns && doc.STAGES.STAGE_48WEEKS_C.StageExamns.OPTOMETRY)) {      var date = doc.STAGES.STAGE_48WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.AudiometryStageII",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/AudiometryStageII",
+					"views": {
+						"AudiometryStageII": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\" && !doc.TRASLATION  && !doc.DESERTION && !doc.DECEASE && doc.STAGES ) {    if (  (doc.STAGES.STAGE_12WEEKS_C && doc.STAGES.STAGE_12WEEKS_C.StageExamns && doc.STAGES.STAGE_12WEEKS_C.StageExamns.AUDIOMETRY) ||          (doc.STAGES.STAGE_24WEEKS_C && doc.STAGES.STAGE_24WEEKS_C.StageExamns && doc.STAGES.STAGE_24WEEKS_C.StageExamns.AUDIOMETRY) ||          (doc.STAGES.STAGE_36WEEKS_C && doc.STAGES.STAGE_36WEEKS_C.StageExamns && doc.STAGES.STAGE_36WEEKS_C.StageExamns.AUDIOMETRY) ||          (doc.STAGES.STAGE_48WEEKS_C && doc.STAGES.STAGE_48WEEKS_C.StageExamns && doc.STAGES.STAGE_48WEEKS_C.StageExamns.AUDIOMETRY)) {      var date = doc.STAGES.STAGE_48WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.PsicoMotorStageII",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/PsicoMotorStageII",
+					"views": {
+						"PsicoMotorStageII": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\" && !doc.TRASLATION  && !doc.DESERTION && !doc.DECEASE && doc.STAGES ) {    if (  (doc.STAGES.STAGE_12WEEKS_C && doc.STAGES.STAGE_12WEEKS_C.StageExamns && doc.STAGES.STAGE_12WEEKS_C.StageExamns.PSMOTOREVAL) ||          (doc.STAGES.STAGE_24WEEKS_C && doc.STAGES.STAGE_24WEEKS_C.StageExamns && doc.STAGES.STAGE_24WEEKS_C.StageExamns.PSMOTOREVAL) ||          (doc.STAGES.STAGE_36WEEKS_C && doc.STAGES.STAGE_36WEEKS_C.StageExamns && doc.STAGES.STAGE_36WEEKS_C.StageExamns.PSMOTOREVAL) ||          (doc.STAGES.STAGE_48WEEKS_C && doc.STAGES.STAGE_48WEEKS_C.StageExamns && doc.STAGES.STAGE_48WEEKS_C.StageExamns.PSMOTOREVAL)) {      var date = doc.STAGES.STAGE_48WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.VaccinesCompleteStageII",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/VaccinesCompleteStageII",
+					"views": {
+						"VaccinesCompleteStageII": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\" && !doc.TRASLATION  && !doc.DESERTION && !doc.DECEASE && doc.STAGES ) {    if (  (doc.STAGES.STAGE_12WEEKS_C && doc.STAGES.STAGE_12WEEKS_C.StageVaccines && doc.STAGES.STAGE_12WEEKS_C.StageVaccines.COMPLETE_SCHEME) ||          (doc.STAGES.STAGE_24WEEKS_C && doc.STAGES.STAGE_24WEEKS_C.StageVaccines && doc.STAGES.STAGE_24WEEKS_C.StageVaccines.COMPLETE_SCHEME) ||          (doc.STAGES.STAGE_36WEEKS_C && doc.STAGES.STAGE_36WEEKS_C.StageVaccines && doc.STAGES.STAGE_36WEEKS_C.StageVaccines.COMPLETE_SCHEME) ||          (doc.STAGES.STAGE_48WEEKS_C && doc.STAGES.STAGE_48WEEKS_C.StageVaccines && doc.STAGES.STAGE_48WEEKS_C.StageVaccines.COMPLETE_SCHEME)) {      var date = doc.STAGES.STAGE_48WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.LME3Months",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/LME3Months",
+					"views": {
+						"LME3Months": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\"   && doc.STAGES && doc.STAGES.STAGE_12WEEKS_C && (!doc.TRASLATION || ( doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\" && doc.TRASLATION.Stage != \"STAGE_12WEEKS_C\") ) && (!doc.DESERTION || ( doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\" && doc.DESERTION.Stage != \"STAGE_12WEEKS_C\") ) && (!doc.DECEASE || ( doc.DECEASE &&  doc.DECEASE.Stage != \"STAGE_40WEEKS_G\" && doc.DECEASE.Stage != \"STAGE_12WEEKS_C\")) && doc.STAGES.STAGE_12WEEKS_C.DateStageReached ) {    if ( doc.STAGES.STAGE_12WEEKS_C.Nutrition == \"FS01\") {      var date = doc.STAGES.STAGE_12WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.12WeeksPatients",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/12WeeksPatients",
+					"views": {
+						"12WeeksPatients": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\"   && doc.STAGES && doc.STAGES.STAGE_12WEEKS_C && (!doc.TRASLATION || ( doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\" && doc.TRASLATION.Stage != \"STAGE_12WEEKS_C\") ) && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\" && doc.DESERTION.Stage != \"STAGE_12WEEKS_C\") ) && (!doc.DECEASE || (doc.DECEASE &&  doc.DECEASE.Stage != \"STAGE_40WEEKS_G\" && doc.DECEASE.Stage != \"STAGE_12WEEKS_C\")) && doc.STAGES.STAGE_12WEEKS_C.DateStageReached ) {      var date = doc.STAGES.STAGE_12WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }   }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.LME6Months",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/LME6Months",
+					"views": {
+						"LME6Months": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\"   && doc.STAGES && doc.STAGES.STAGE_24WEEKS_C && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\" && doc.TRASLATION.Stage != \"STAGE_12WEEKS_C\" && doc.TRASLATION.Stage != \"STAGE_24WEEKS_C\") ) && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\" && doc.DESERTION.Stage != \"STAGE_12WEEKS_C\" && doc.DESERTION.Stage != \"STAGE_24WEEKS_C\") ) && (!doc.DECEASE || ( doc.DECEASE &&  doc.DECEASE.Stage != \"STAGE_40WEEKS_G\" && doc.DECEASE.Stage != \"STAGE_12WEEKS_C\" && doc.DECEASE.Stage != \"STAGE_24WEEKS_C\")) && doc.STAGES.STAGE_24WEEKS_C.DateStageReached ) {    if ( doc.STAGES.STAGE_24WEEKS_C.Nutrition == \"FS01\") {      var date = doc.STAGES.STAGE_24WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.24WeeksPatients",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/24WeeksPatients",
+					"views": {
+						"24WeeksPatients": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\"   && doc.STAGES && doc.STAGES.STAGE_24WEEKS_C && (!doc.TRASLATION || (doc.TRASLATION && doc.TRASLATION.Stage != \"STAGE_40WEEKS_G\" && doc.TRASLATION.Stage != \"STAGE_12WEEKS_C\" && doc.TRASLATION.Stage != \"STAGE_24WEEKS_C\") ) && (!doc.DESERTION || (doc.DESERTION && doc.DESERTION.Stage != \"STAGE_40WEEKS_G\" && doc.DESERTION.Stage != \"STAGE_12WEEKS_C\" && doc.DESERTION.Stage != \"STAGE_24WEEKS_C\") ) && (!doc.DECEASE || ( doc.DECEASE &&  doc.DECEASE.Stage != \"STAGE_40WEEKS_G\" && doc.DECEASE.Stage != \"STAGE_12WEEKS_C\" && doc.DECEASE.Stage != \"STAGE_24WEEKS_C\")) && doc.STAGES.STAGE_24WEEKS_C.DateStageReached ) {      var date = doc.STAGES.STAGE_24WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }   }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.IIStageRehospitalized",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/IIStageRehospitalized",
+					"views": {
+						"IIStageRehospitalized": {
+							"map": "function (doc) {  if (doc.type == \"PATIENT\"  && !doc.TRASLATION  && !doc.DESERTION && !doc.DECEASE && doc.STAGES ) {    if (  (doc.STAGES.STAGE_12WEEKS_C && doc.STAGES.STAGE_12WEEKS_C.WasHospitalized ) ||          (doc.STAGES.STAGE_24WEEKS_C && doc.STAGES.STAGE_24WEEKS_C.WasHospitalized ) ||          (doc.STAGES.STAGE_36WEEKS_C && doc.STAGES.STAGE_36WEEKS_C.WasHospitalized ) ||          (doc.STAGES.STAGE_48WEEKS_C && doc.STAGES.STAGE_48WEEKS_C.WasHospitalized )) {      var date = doc.STAGES.STAGE_48WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.DeathStageII",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/DeathStageII",
+					"views": {
+						"DeathStageII": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"   && doc.DECEASE && doc.DECEASE.Date && doc.DECEASE.Stage) {    if (doc.DECEASE.Stage == \"STAGE_12WEEKS_C\" ||        doc.DECEASE.Stage == \"STAGE_24WEEKS_C\" ||        doc.DECEASE.Stage == \"STAGE_36WEEKS_C\" ||        doc.DECEASE.Stage == \"STAGE_48WEEKS_C\") {      var date = doc.DECEASE.Date.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.48WeeksBoysGrowth",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/48WeeksBoysGrowth",
+					"views": {
+						"48WeeksBoysGrowth": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\"  && !doc.TRASLATION  && !doc.DESERTION && !doc.DECEASE &&  doc.STAGES.STAGE_48WEEKS_C && doc.STAGES.STAGE_48WEEKS_C.DateStageReached) {    if ( doc.STAGES.STAGE_48WEEKS_C.Weight >= 7.7 &&          doc.STAGES.STAGE_48WEEKS_C.Size >= 71 &&          doc.STAGES.STAGE_48WEEKS_C.HeadPerim >= 43.5 ) {      var date = doc.STAGES.STAGE_48WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.48WeeksBoys",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/48WeeksBoys",
+					"views": {
+						"48WeeksBoys": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\" && !doc.TRASLATION    && !doc.DESERTION && !doc.DECEASE &&  doc.STAGES.STAGE_48WEEKS_C && doc.STAGES.STAGE_48WEEKS_C.DateStageReached) {    if ( doc.PATIENT.Sex == \"SX02\") {      var date = doc.STAGES.STAGE_48WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.48WeeksGirlsGrowth",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/48WeeksGirlsGrowth",
+					"views": {
+						"48WeeksGirlsGrowth": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\" && !doc.TRASLATION   && !doc.DESERTION && !doc.DECEASE &&  doc.STAGES.STAGE_48WEEKS_C && doc.STAGES.STAGE_48WEEKS_C.DateStageReached) {    if ( doc.STAGES.STAGE_48WEEKS_C.Weight >= 7 &&          doc.STAGES.STAGE_48WEEKS_C.Size >= 68.9 &&          doc.STAGES.STAGE_48WEEKS_C.HeadPerim >= 42.2 &&          doc.PATIENT.Sex == \"SX01\") {      var date = doc.STAGES.STAGE_48WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			},
+			{
+				"nameKey": "Indicators.Indexes.48WeeksGirls",
+				"type": "TIME",
+				"index": {
+					"_id": "_design/48WeeksGirls",
+					"views": {
+						"48WeeksGirls": {
+							"map": "function(doc) {  if (doc.type == \"PATIENT\" && !doc.TRASLATION   && !doc.DESERTION && !doc.DECEASE && doc.STAGES.STAGE_48WEEKS_C && doc.STAGES.STAGE_48WEEKS_C.DateStageReached) {    if ( doc.PATIENT.Sex == \"SX01\") {      var date = doc.STAGES.STAGE_48WEEKS_C.DateStageReached.split(\"/\");      if (date) { emit ([date[2], date[1]], null); }     }  }}",
+							"reduce": "_count"
+						}
+					}
+				}
+			}
+		],
+		"indicators": [
+			{
+				"indexA": "m_ambulatoryAccess",
+				"indexB": "m_intrahospitalaryExit",
+				"indexAName": "Indicators.MeissenIndexes.m_ambulatoryAccess",
+				"indexBName": "Indicators.MeissenIndexes.m_intrahospitalaryExit",
+				"owner": "Meissen",
+				"type": "TIME",
+				"name": "Indicators.MeissenIndicators.Names.AccessPercentage",
+				"description": "Indicators.MeissenIndicators.Descriptions.AccessPercentage"
+			},
+			{
+				"indexA": "m_stageIEnd",
+				"indexB": "m_shouldEndStageI",
+				"indexAName": "Indicators.MeissenIndexes.m_stageIEnd",
+				"indexBName": "Indicators.MeissenIndexes.m_shouldEndStageI",
+				"owner": "Meissen",
+				"type": "TIME",
+				"name": "Indicators.MeissenIndicators.Names.AdherencePercentage",
+				"description": "Indicators.MeissenIndicators.Descriptions.AdherencePercentage"
+			},
+			{
+				"indexA": "m_accessInTime",
+				"indexB": "m_ambulatoryAccess",
+				"indexAName": "Indicators.MeissenIndexes.m_accessInTime",
+				"indexBName": "Indicators.MeissenIndexes.m_ambulatoryAccess",
+				"owner": "Meissen",
+				"type": "TIME",
+				"name": "Indicators.MeissenIndicators.Names.OportunityPercentage",
+				"description": "Indicators.MeissenIndicators.Descriptions.OportunityPercentage"
+			},
+			{
+				"indexA": "m_phaseIHospitalization",
+				"indexB": "m_phaseIAttended",
+				"indexAName": "Indicators.MeissenIndexes.m_phaseIHospitalization",
+				"indexBName": "Indicators.MeissenIndexes.m_phaseIAttended",
+				"owner": "Meissen",
+				"type": "TIME",
+				"name": "Indicators.MeissenIndicators.Names.PhaseIHospitalization",
+				"description": "Indicators.MeissenIndicators.Descriptions.PhaseIHospitalization"
+			},
+			{
+				"indexA": "m_phaseIDecease",
+				"indexB": "m_phaseIAttended",
+				"indexAName": "Indicators.MeissenIndexes.m_phaseIDecease",
+				"indexBName": "Indicators.MeissenIndexes.m_phaseIAttended",
+				"owner": "Meissen",
+				"type": "TIME",
+				"name": "Indicators.MeissenIndicators.Names.PhaseIMortality",
+				"description": "Indicators.MeissenIndicators.Descriptions.PhaseIMortality"
+			},
+			{
+				"indexA": "m_phaseIIHospitalization",
+				"indexB": "m_phaseIIAttended",
+				"indexAName": "Indicators.MeissenIndexes.m_phaseIIHospitalization",
+				"indexBName": "Indicators.MeissenIndexes.m_phaseIIAttended",
+				"owner": "Meissen",
+				"type": "TIME",
+				"name": "Indicators.MeissenIndicators.Names.PhaseIIHospitalization",
+				"description": "Indicators.MeissenIndicators.Descriptions.PhaseIIHospitalization"
+			},
+			{
+				"indexA": "m_phaseIIDecease",
+				"indexB": "m_phaseIIAttended",
+				"indexAName": "Indicators.MeissenIndexes.m_phaseIIDecease",
+				"indexBName": "Indicators.MeissenIndexes.m_phaseIIAttended",
+				"owner": "Meissen",
+				"type": "TIME",
+				"name": "Indicators.MeissenIndicators.Names.PhaseIIMortality",
+				"description": "Indicators.MeissenIndicators.Descriptions.PhaseIIMortality"
+			},
+			{
+				"indexA": "m_phaseIIIHospitalization",
+				"indexB": "m_phaseIIIAttended",
+				"indexAName": "Indicators.MeissenIndexes.m_phaseIIIHospitalization",
+				"indexBName": "Indicators.MeissenIndexes.m_phaseIIIAttended",
+				"owner": "Meissen",
+				"type": "TIME",
+				"name": "Indicators.MeissenIndicators.Names.PhaseIIIHospitalization",
+				"description": "Indicators.MeissenIndicators.Descriptions.PhaseIIIHospitalization"
+			},
+			{
+				"indexA": "m_phaseIIIDecease",
+				"indexB": "m_phaseIIIAttended",
+				"indexAName": "Indicators.MeissenIndexes.m_phaseIIIDecease",
+				"indexBName": "Indicators.MeissenIndexes.m_phaseIIIAttended",
+				"owner": "Meissen",
+				"type": "TIME",
+				"name": "Indicators.MeissenIndicators.Names.PhaseIIIMortality",
+				"description": "Indicators.MeissenIndicators.Descriptions.PhaseIIIMortality"
+			},
+			{
+				"indexA": "m_kidsWithAlterationsPhaseIII",
+				"indexB": "m_phaseIIIEnded",
+				"owner": "Meissen",
+				"indexAName": "Indicators.MeissenIndexes.m_kidsWithAlterationsPhaseIII",
+				"indexBName": "Indicators.MeissenIndexes.m_phaseIIIEnded",
+				"type": "TIME",
+				"name": "Indicators.MeissenIndicators.Names.NeuroDevSquels",
+				"description": "Indicators.MeissenIndicators.Descriptions.NeuroDevSquels"
+			},
+			{
+				"indexA": "m_kidsUnderweightPhaseIII",
+				"indexB": "m_phaseIIIEnded",
+				"indexAName": "Indicators.MeissenIndexes.m_kidsUnderweightPhaseIII",
+				"indexBName": "Indicators.MeissenIndexes.m_phaseIIIEnded",
+				"owner": "Meissen",
+				"type": "TIME",
+				"name": "Indicators.MeissenIndicators.Names.Desnutrition",
+				"description": "Indicators.MeissenIndicators.Descriptions.Desnutrition"
+			},
+			{
+				"indexA": "40WeeksGrowth",
+				"indexB": "stageIEnded",
+				"indexAName": "Indicators.Indexes.40WeeksGrowth",
+				"indexBName": "Indicators.Indexes.stageIEnded",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIGrowth",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIGrowth"
+			},
+			{
+				"indexA": "accessByWeight",
+				"indexB": "exitByWeight",
+				"indexAName": "Indicators.Indexes.accessByWeight",
+				"indexBName": "Indicators.Indexes.exitByWeight",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.InitialDesertionWeight",
+				"description": "Indicators.KMCIndicators.Descriptions.InitialDesertionWeight"
+			},
+			{
+				"indexA": "accessByGestAge",
+				"indexB": "exitByGestAge",
+				"indexAName": "Indicators.Indexes.accessByGestAge",
+				"indexBName": "Indicators.Indexes.exitByGestAge",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.InitialDesertionGestAge",
+				"description": "Indicators.KMCIndicators.Descriptions.InitialDesertionGestAge"
+			},
+			{
+				"indexA": "ambulatoryAccess",
+				"indexB": "intrahorpitalaryExit",
+				"indexAName": "Indicators.Indexes.ambulatoryAccess",
+				"indexBName": "Indicators.Indexes.intrahorpitalaryExit",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.InitialDesertionTotal",
+				"description": "Indicators.KMCIndicators.Descriptions.InitialDesertionTotal"
+			},
+			{
+				"indexA": "lateAmbulatoryAccess",
+				"indexB": "intrahorpitalaryExit",
+				"indexAName": "Indicators.Indexes.lateAmbulatoryAccess",
+				"indexBName": "Indicators.Indexes.intrahorpitalaryExit",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.InitialDelay",
+				"description": "Indicators.KMCIndicators.Descriptions.InitialDelay"
+			},
+			{
+				"indexA": "exitWithoutCriteria",
+				"indexB": "intrahorpitalaryExit",
+				"indexAName": "Indicators.Indexes.exitWithoutCriteria",
+				"indexBName": "Indicators.Indexes.intrahorpitalaryExit",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.ExitWithoutCriteria",
+				"description": "Indicators.KMCIndicators.Descriptions.ExitWithoutCriteria"
+			},
+			{
+				"indexA": "parentAccess",
+				"numberB": 24,
+				"typeB": "Indicators.Types.Hours",
+				"indexAName": "Indicators.Indexes.parentAccess",
+				"indexBName": "24",
+				"owner": "KMC",
+				"type": "FIXED",
+				"name": "Indicators.KMCIndicators.Names.ParentAccess",
+				"description": "Indicators.KMCIndicators.Descriptions.ParentAccess"
+			},
+			{
+				"indexA": "timeInPos",
+				"numberB": 24,
+				"typeB": "Indicators.Types.Hours",
+				"indexAName": "Indicators.Indexes.timeInPos",
+				"indexBName": "24",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.PositionExposition",
+				"description": "Indicators.KMCIndicators.Descriptions.PositionExposition"
+			},
+			{
+				"indexA": "intrahospExitWithLME",
+				"indexB": "intrahorpitalaryExit",
+				"indexAName": "Indicators.Indexes.intrahospExitWithLME",
+				"indexBName": "Indicators.Indexes.intrahorpitalaryExit",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.IntraHospExitLME",
+				"description": "Indicators.KMCIndicators.Descriptions.IntraHospExitLME"
+			},
+			{
+				"indexA": "stageIDesertion",
+				"indexB": "ambulatoryAccess",
+				"indexAName": "Indicators.Indexes.stageIDesertion",
+				"indexBName": "Indicators.Indexes.ambulatoryAccess",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIDesertion",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIDesertion"
+			},
+			{
+				"indexA": "stageIOftamology34Weeks",
+				"indexB": "endedStageOne34Weeks",
+				"indexAName": "Indicators.Indexes.stageIOftamology34Weeks",
+				"indexBName": "Indicators.Indexes.endedStageOne34Weeks",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIOftamology34Weeks",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIOftamology34Weeks"
+			},
+			{
+				"indexA": "stageIOftamologyByRisk34",
+				"indexB": "endedStageOneByRisk34",
+				"indexAName": "Indicators.Indexes.stageIOftamologyByRisk34",
+				"indexBName": "Indicators.Indexes.endedStageOneByRisk34",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIOftamologyByRisk34",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIOftamologyByRisk34"
+			},
+			{
+				"indexA": "stageIOftamology32Weeks",
+				"indexB": "endedStageOne32Weeks",
+				"indexAName": "Indicators.Indexes.stageIOftamology32Weeks",
+				"indexBName": "Indicators.Indexes.endedStageOne32Weeks",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIOftamology32Weeks",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIOftamology32Weeks"
+			},
+			{
+				"indexA": "stageIOftamologyByRisk32",
+				"indexB": "endedStageOneByRisk32",
+				"indexAName": "Indicators.Indexes.stageIOftamologyByRisk32",
+				"indexBName": "Indicators.Indexes.endedStageOneByRisk32",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIOftamologyByRisk32",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIOftamologyByRisk32"
+			},
+			{
+				"indexA": "ecographyStageI",
+				"indexB": "stageIEnded",
+				"indexAName": "Indicators.Indexes.ecographyStageI",
+				"indexBName": "Indicators.Indexes.stageIEnded",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIEcography",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIEcography"
+			},
+			{
+				"indexA": "neuroEvalStageI",
+				"indexB": "stageIEnded",
+				"indexAName": "Indicators.Indexes.neuroEvalStageI",
+				"indexBName": "Indicators.Indexes.stageIEnded",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageINeuroEval",
+				"description": "Indicators.KMCIndicators.Descriptions.StageINeuroEval"
+			},
+			{
+				"indexA": "vaccinesStageI",
+				"indexB": "stageIEnded",
+				"indexAName": "Indicators.Indexes.vaccinesStageI",
+				"indexBName": "Indicators.Indexes.stageIEnded",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIVaccines",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIVaccines"
+			},
+			{
+				"indexA": "LME40Weeks",
+				"indexB": "stageIEnded",
+				"indexAName": "Indicators.Indexes.LME40Weeks",
+				"indexBName": "Indicators.Indexes.stageIEnded",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageILME",
+				"description": "Indicators.KMCIndicators.Descriptions.StageILME"
+			},
+			{
+				"indexA": "IStageRehospitalized",
+				"indexB": "stageIEnded",
+				"indexAName": "Indicators.Indexes.IStageRehospitalized",
+				"indexBName": "Indicators.Indexes.stageIEnded",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIHospitalization",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIHospitalization"
+			},
+			{
+				"indexA": "40WeeksDeath",
+				"indexB": "ambulatoryAccess",
+				"indexAName": "Indicators.Indexes.40WeeksDeath",
+				"indexBName": "Indicators.Indexes.ambulatoryAccess",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIDeath",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIDeath"
+			},
+			{
+				"indexA": "40WeeksDeathHome",
+				"indexB": "40WeeksDeath",
+				"indexAName": "Indicators.Indexes.40WeeksDeathHome",
+				"indexBName": "Indicators.Indexes.40WeeksDeath",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIDeathHome",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIDeathHome"
+			},
+			{
+				"indexA": "40WeeksBoysGrowth",
+				"indexB": "40WeeksBoys",
+				"indexAName": "Indicators.Indexes.40WeeksBoysGrowth",
+				"indexBName": "Indicators.Indexes.40WeeksBoys",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIBoysGrowth",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIBoysGrowth"
+			},
+			{
+				"indexA": "40WeeksGirlsGrowth",
+				"indexB": "40WeeksGirls",
+				"indexAName": "Indicators.Indexes.40WeeksGirlsGrowth",
+				"indexBName": "Indicators.Indexes.40WeeksGirls",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIGirlsGrowth",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIGirlsGrowth"
+			},
+			{
+				"indexA": "UrgencyStageI",
+				"indexB": "ambulatoryAccess",
+				"indexAName": "Indicators.Indexes.UrgencyStageI",
+				"indexBName": "Indicators.Indexes.ambulatoryAccess",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIUrgency",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIUrgency"
+			},
+			{
+				"indexA": "StageIIDesertion",
+				"indexB": "stageIEnded",
+				"indexAName": "Indicators.Indexes.StageIIDesertion",
+				"indexBName": "Indicators.Indexes.stageIEnded",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIIDesertion",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIIDesertion"
+			},
+			{
+				"indexA": "OptometryStageII",
+				"indexB": "stageIIEnded",
+				"indexAName": "Indicators.Indexes.OptometryStageII",
+				"indexBName": "Indicators.Indexes.stageIIEnded",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIIOptometry",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIIOptometry"
+			},
+			{
+				"indexA": "AudiometryStageII",
+				"indexB": "stageIIEnded",
+				"indexAName": "Indicators.Indexes.AudiometryStageII",
+				"indexBName": "Indicators.Indexes.stageIIEnded",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIIAudiometry",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIIAudiometry"
+			},
+			{
+				"indexA": "PsicoMotorStageII",
+				"indexB": "stageIIEnded",
+				"indexAName": "Indicators.Indexes.PsicoMotorStageII",
+				"indexBName": "Indicators.Indexes.stageIIEnded",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIIPsicoMotor",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIIPsicoMotor"
+			},
+			{
+				"indexA": "VaccinesCompleteStageII",
+				"indexB": "stageIIEnded",
+				"indexAName": "Indicators.Indexes.VaccinesCompleteStageII",
+				"indexBName": "Indicators.Indexes.stageIIEnded",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIIVaccines",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIIVaccines"
+			},
+			{
+				"indexA": "LME3Months",
+				"indexB": "12WeeksPatients",
+				"indexAName": "Indicators.Indexes.LME3Months",
+				"indexBName": "Indicators.Indexes.12WeeksPatients",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.LME3Months",
+				"description": "Indicators.KMCIndicators.Descriptions.LME3Months"
+			},
+			{
+				"indexA": "LME6Months",
+				"indexB": "24WeeksPatients",
+				"indexAName": "Indicators.Indexes.LME6Months",
+				"indexBName": "Indicators.Indexes.24WeeksPatients",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.LME6Months",
+				"description": "Indicators.KMCIndicators.Descriptions.LME6Months"
+			},
+			{
+				"indexA": "IIStageRehospitalized",
+				"indexB": "stageIIEnded",
+				"indexAName": "Indicators.Indexes.IIStageRehospitalized",
+				"indexBName": "Indicators.Indexes.stageIIEnded",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIIHospitalization",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIIHospitalization"
+			},
+			{
+				"indexA": "DeathStageII",
+				"indexB": "stageIEnded",
+				"indexAName": "Indicators.Indexes.DeathStageII",
+				"indexBName": "Indicators.Indexes.stageIEnded",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIIDeath",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIIDeath"
+			},
+			{
+				"indexA": "48WeeksBoysGrowth",
+				"indexB": "48WeeksBoys",
+				"indexAName": "Indicators.Indexes.48WeeksBoysGrowth",
+				"indexBName": "Indicators.Indexes.48WeeksBoys",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIIBoysGrowth",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIIBoysGrowth"
+			},
+			{
+				"indexA": "48WeeksGirlsGrowth",
+				"indexB": "48WeeksGirls",
+				"indexAName": "Indicators.Indexes.48WeeksGirlsGrowth",
+				"indexBName": "Indicators.Indexes.48WeeksGirls",
+				"owner": "KMC",
+				"type": "TIME",
+				"name": "Indicators.KMCIndicators.Names.StageIIGirlsGrowth",
+				"description": "Indicators.KMCIndicators.Descriptions.StageIIGirlsGrowth"
+			}
+		]
+	}
+}

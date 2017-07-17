@@ -1,0 +1,304 @@
+  <section layout="row" flex="">
+    <div ng-controller="SidenavCtrl" ng-include="navbartemplate.url">
+    </div>
+    <md-content flex="">
+      <div ng-controller="TopbarCtrl" ng-include="topbartemplate.url">
+      </div>
+      <md-content>
+         <md-tabs md-selected="tabNumber" md-dynamic-height md-border-bottom>
+           <md-tab label="{{ 'PatientDetail.PatientDataTab.LabelTitle' | translate }}">
+             <md-toolbar class="actions-bar md-table-toolbar md-default" ng-show="!disabled">
+               <div class="md-toolbar-tools">
+                 <span> {{ 'PatientDetail.Actions'| translate }}</span>
+                 <div flex></div>
+                 <md-button ng-disabled="forms.form1.$invalid" class="md-icon-button edit" ng-hide="disabled" ng-click="save()">
+                   <md-icon>save</md-icon>
+                 </md-button>
+                 <md-button  class="md-icon-button" ng-hide="disabled" ng-click="cancelEdit()">
+                   <md-icon>close</md-icon>
+                 </md-button>
+               </div>
+             </md-toolbar>
+             <form name="forms.form1">
+               <md-content class="md-padding">
+                 <section>
+                   <h1 class="md-display-1" style="font-size: 20px;"> {{ 'PatientDetail.PatientDataTab.Title'| translate }}</h1>
+                   <div layout-gt-sm="row">
+                      <md-input-container class="md-block" flex-gt-xs="30">
+                        <label>{{ 'PatientDetail.PatientDataTab.PatientData.NameFld' | translate }}</label>
+                        <input name="patientName" ng-model="patient.Name" ng-change="enterEditMode()">
+                      </md-input-container>
+                      <md-input-container class="md-block" flex-gt-xs="30">
+                         <label>{{ 'PatientDetail.PatientDataTab.PatientData.HistoryConsecutive' | translate }}</label>
+                         <input ng-model="patient.HistoryConsecutive" ng-change="enterEditMode()">
+                       </md-input-container>
+                       <md-input-container class="md-block" flex-gt-xs="30">
+                         <label>{{ 'PatientDetail.PatientDataTab.PatientData.RegisterNumberFld' | translate }}</label>
+                         <input required ng-model="patient.SocialRegistry" ng-change="changeID()" name="socialRegistry">
+                         <div class="validation-messages" ng-messages="forms.form1.socialRegistry.$error" ng-show="forms.form1.socialRegistry.$touched">
+                           <div ng-message="required">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                         </div>
+                       </md-input-container>
+                   </div>
+                   <div layout-gt-sm="row">
+                     <md-input-container class="md-block" flex-gt-xs="30" >
+                            <label>{{ 'PatientDetail.PatientDataTab.PatientData.RegisterType' | translate }}</label>
+                            <md-select ng-change="enterEditMode()" ng-model="patient.RegType">
+                              <md-option ng-repeat="regType in patRegTypes" value="{{regType.value}}">
+                                {{ regType.nameKey | translate }}
+                              </md-option>
+                            </md-select>
+                     </md-input-container>
+                     <md-input-container class="md-block" flex-gt-xs="30">
+                      <label>{{ 'PatientDetail.PatientDataTab.PatientData.GestationalAge' | translate }}</label>
+                      <input required ng-change="changeStages()" md-no-asterisk  ng-model="patient.GestationalAge" type="number" step="1"  min="{{gestationalAgeBounds.min}}" max="{{gestationalAgeBounds.max}}" name="gestAge">
+                      <div ng-messages="forms.form1.gestAge.$error" multiple md-auto-hide="false">
+                        <div ng-message="min">
+                           {{ 'Warnings.NumberError' | translate:gestationalAgeBoundsC }}
+                        </div>
+                        <div ng-message="max">
+                           {{ 'Warnings.NumberError' | translate:gestationalAgeBoundsC }}
+                        </div>
+                        <div ng-message="required">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                      </div>
+                     </md-input-container>
+                     <div class="md-block" flex="30" flex-sm="100" flex-xs="100">
+                         <md-datepicker ng-change="changeStages()" md-max-date="maxDate" name="birthDate" ng-model="BirthDate" md-placeholder="{{ 'PatientDetail.PatientDataTab.PatientData.BirthDateFld' | translate }}" required ></md-datepicker>
+                         <div class="validation-messages" ng-messages="forms.form1.birthDate.$error" ng-show="forms.form1.birthDate.$touched">
+                           <div ng-message="valid">{{ 'Warnings.DateFormatIncorrect' | translate }}</div>
+                           <div ng-message="required">{{ 'Warnings.RequiredMssg' | translate }}</div>
+                         </div>
+                     </div>
+
+                   </div>
+                   <div layout-gt-sm="row">
+
+                     <md-input-container class="md-block" flex-gt-xs="30" >
+                            <label>{{ 'PatientDetail.PatientDataTab.PatientData.GenderFld' | translate }}</label>
+                            <md-select ng-change="enterEditMode()" ng-model="patient.Sex">
+                              <md-option ng-repeat="gender in sexTypes" value="{{gender.value}}">
+                                {{ gender.nameKey | translate }}
+                              </md-option>
+                            </md-select>
+                     </md-input-container>
+                     <md-input-container flex-gt-xs="30" class="md-icon-float md-icon-right md-block">
+                        <label> {{'PatientDetail.PatientDataTab.PatientData.BornWeight'| translate }}  </label>
+                        <input ng-change="enterEditMode()" ng-model="patient.BornWeight" name="bweight" type="number" step="0.01"  min="{{weightBounds.min}}" max="{{weightBounds.max}}">
+                        <div ng-messages="forms.form1.bweight.$error" multiple>
+                           <div ng-message="min">
+                              {{ 'Warnings.NumberError' | translate:weightBounds }}
+                           </div>
+                           <div ng-message="max">
+                              {{ 'Warnings.NumberError' | translate:weightBounds }}
+                           </div>
+                        </div>
+                     </md-input-container>
+                   </div>
+                 </section>
+                 <md-divider ></md-divider>
+                 <section>
+                   <h1 class="md-display-1" style="font-size: 20px;"> {{ 'PatientDetail.PatientDataTab.ResponsableData.Title' | translate }}</h1>
+                   <div layout-gt-sm="row">
+                     <md-input-container class="md-block" flex-gt-xs="50">
+                       <label>{{ 'PatientDetail.PatientDataTab.ResponsableData.NameFld' | translate }}</label>
+                       <input ng-change="enterEditMode()" md-no-asterisk  name="respname" ng-model="responsable.Name">
+                     </md-input-container>
+                     <md-input-container class="md-block" flex-gt-xs="50">
+                       <label>{{ 'PatientDetail.PatientDataTab.ResponsableData.ContactFld' | translate }}</label>
+                       <input ng-change="enterEditMode()" md-no-asterisk  name="respcontact" ng-model="responsable.Contact">
+                     </md-input-container>
+                   </div>
+                   <div layout-gt-sm="row">
+                     <md-input-container class="md-block" flex-gt-xs="50">
+                       <label>{{ 'PatientDetail.PatientDataTab.ResponsableData.DocumentTypeFld' | translate }}</label>
+                       <md-select ng-change="enterEditMode()" ng-model="responsable.DocumentType">
+                         <md-option ng-repeat="docType in docTypes" value="{{docType.value}}">
+                           {{ docType.nameKey | translate }}
+                         </md-option>
+                       </md-select>
+                     </md-input-container>
+                     <md-input-container class="md-block" flex-gt-xs="50">
+                       <label>{{ 'PatientDetail.PatientDataTab.ResponsableData.DocumentFld' | translate }}</label>
+                       <input ng-change="enterEditMode()" md-no-asterisk  name="respdoc" ng-model="responsable.Document">
+                     </md-input-container>
+                   </div>
+                   <div layout-gt-sm="row">
+                     <md-input-container class="md-block" flex="50">
+                       <label>{{  'PatientDetail.PatientDataTab.ResponsableData.Age' | translate }}</label>
+                       <input md-no-asterisk ng-change="enterEditMode()" name="ageParent" ng-model="responsable.Age" type="number" step="1"  min="{{parentAgeBounds.min}}" max="{{parentAgeBounds.max}}">
+                       <div ng-messages="forms.form1.gestAge.$error" multiple md-auto-hide="false">
+                         <div ng-message="min">
+                            {{ 'Warnings.NumberError' | translate:parentAgeBounds }}
+                         </div>
+                         <div ng-message="max">
+                            {{ 'Warnings.NumberError' | translate:parentAgeBounds }}
+                         </div>
+                       </div>
+                     </md-input-container>
+                   </div>
+                 </section>
+                 <md-divider ></md-divider>
+                 <section>
+                   <h1 class="md-display-1" style="font-size: 20px;"> {{ 'PatientDetail.PatientDataTab.Observations' | translate }}</h1>
+                   <div layout-gt-sm="row">
+                     <md-input-container class="md-block" flex-gt-xs="30">
+                       <label>{{ 'PatientDetail.PatientDataTab.ObservationData.TSH' | translate }}</label>
+                       <input name="TSH" ng-model="observation.TSH" ng-change="enterEditMode()">
+                     </md-input-container>
+                     <md-input-container class="md-block" flex-gt-xs="30">
+                       <label>{{ 'PatientDetail.PatientDataTab.ObservationData.E_SNC' | translate }}</label>
+                       <input name="E_SNC" ng-model="observation.E_SNC" ng-change="enterEditMode()">
+                     </md-input-container>
+                     <md-input-container class="md-block" flex-gt-xs="30">
+                       <label>{{ 'PatientDetail.PatientDataTab.ObservationData.ECOCARDIO' | translate }}</label>
+                       <input name="ECOCARDIO" ng-model="observation.ECOCARDIO" ng-change="enterEditMode()">
+                     </md-input-container>
+                   </div>
+                   <div layout-gt-sm="row">
+                     <md-input-container class="md-block" flex-gt-xs="30">
+                       <label>{{ 'PatientDetail.PatientDataTab.ObservationData.EPS' | translate }}</label>
+                       <input name="EPS" ng-model="observation.EPS" ng-change="enterEditMode()">
+                     </md-input-container>
+                     <md-input-container class="md-block" flex-gt-xs="30">
+                       <label>{{ 'PatientDetail.PatientDataTab.ObservationData.Observations' | translate }}</label>
+                       <input name="observations" ng-model="observation.Observations" ng-change="enterEditMode()">
+                     </md-input-container>
+                     <md-input-container class="md-block" flex-gt-xs="30" >
+                            <label>{{ 'PatientDetail.PatientDataTab.ObservationData.DX' | translate }}</label>
+                            <md-select ng-change="enterEditMode()" ng-model="observation.DX">
+                              <md-option ng-repeat="dxType in dxTypes" value="{{dxType.value}}">
+                                {{ dxType.nameKey | translate }}
+                              </md-option>
+                            </md-select>
+                     </md-input-container>
+                   </div>
+                   <div layout-gt-sm="row">
+
+                     <md-input-container class="md-block" flex-gt-xs="30">
+                       <label>{{ 'PatientDetail.PatientDataTab.ObservationData.DBP' | translate }}</label>
+                       <input name="DBP" ng-model="observation.DBP" ng-change="enterEditMode()">
+                     </md-input-container>
+
+                     <md-list ng-cloak flex flex-gt-xs="60">
+                       <md-list-item class="small-list">
+                        <p class="custom-warn"> {{'PatientDetail.PatientDataTab.PatientData.NeurologicalAlterations'| translate }} </p>
+                        <md-checkbox ng-change="enterEditMode()" class="md-secondary" ng-model="patient.NeurologicalAlterations"></md-checkbox>
+                       </md-list-item>
+                     </md-list ng-cloak>
+
+                   </div>
+                 </section>
+              </md-content>
+             </form>
+           </md-tab>
+
+           <md-tab label="{{ 'PatientDetail.EventsTab.LabelTitle' | translate }}">
+             <md-content class="md-padding">
+               <div patient-events patient="patientId" stages-changed="stagesChanged" ></div>
+             </md-content>
+           </md-tab>
+
+          <md-tab label="{{ 'PatientDetail.HospitalizationTab.LabelTitle' | translate }}">
+            <form name="forms.form2">
+              <md-content class="md-padding">
+                <div layout="row" style="padding-top:1em">
+                  <div style="padding: 1em;" flex="50">
+                    <md-toolbar layout="row" class="md-hue-3">
+                      <div class="md-toolbar-tools">
+                        <span>{{ 'PatientDetail.HospitalizationTab.Attention.Title'| translate }}</span>
+                      </div>
+                    </md-toolbar>
+                    <md-content style="max-height: 300px;" >
+                      <md-list flex="" class="md-dense">
+                        <md-subheader>
+                          <div layout="row">
+                            <div class="md-block" flex>
+                              <md-datepicker name="attentionDate" ng-model="newAttention" md-placeholder="{{'PatientDetail.HospitalizationTab.Attention.ChangeDate'| translate}}">
+                              </md-datepicker>
+                              <div class="validation-messages" ng-show="forms.form2.attentionDate.$error" ng-messages="forms.form2.attentionDate.$error">
+                                 <div ng-message="valid">{{ 'Warnings.DateFormatIncorrect' | translate }}</div>
+                              </div>
+                            </div>
+                            <md-button class="md-secondary md-icon-button edit" ng-disabled="forms.form2.attentionDate.$error.valid" ng-click="addAttention();">
+                              <md-icon>save</md-icon>
+                            </md-button>
+                          </div>
+                        </md-subheader>
+                        <md-divider></md-divider>
+                        <md-list-item class="md-3-line" ng-repeat="date in patient.attentions track by $index">
+                          <div class="md-list-item-text" layout="column">
+                            <h2>{{ date.attentionDate }} <i ng-show="date.attentionStage">( {{ 'PatientDetail.HospitalizationTab.Stages.' + date.attentionStage | translate }}  )</i>  </h3>
+                          </div>
+                          <md-button class="md-secondary md-icon-button" ng-click="removeAttention($index);">
+                            <md-icon>delete</md-icon>
+                          </md-button>
+                        </md-list-item>
+                      </md-list>
+                    </md-content>
+                  </div>
+                  <div style="padding: 1em;" flex="50">
+                    <md-toolbar layout="row" class="md-hue-3">
+                      <div class="md-toolbar-tools">
+                        <span>{{ 'PatientDetail.HospitalizationTab.Hospitalization.Title'| translate }}</span>
+                      </div>
+                    </md-toolbar>
+                    <md-content style="max-height: 300px;" >
+                      <md-list flex="" class="md-dense">
+                        <md-subheader>
+                          <div layout="row">
+                            <div class="md-block" flex>
+                              <md-datepicker name="hospitalizationDate" ng-model="newHospitalization" md-placeholder="{{'PatientDetail.HospitalizationTab.Hospitalization.ChangeDate'| translate}}">
+                              </md-datepicker>
+                              <div class="validation-messages" ng-show="forms.form2.hospitalizationDate.$error" ng-messages="forms.form2.hospitalizationDate.$error">
+                                 <div ng-message="valid">{{ 'Warnings.DateFormatIncorrect' | translate }}</div>
+                              </div>
+                            </div>
+                            <md-button class="md-secondary md-icon-button edit" ng-disabled="forms.form2.hospitalizationDate.$error.valid" ng-click="addHospitalization();">
+                              <md-icon>save</md-icon>
+                            </md-button>
+                          </div>
+                        </md-subheader>
+                        <md-divider></md-divider>
+                        <md-list-item class="md-3-line" ng-repeat="date in patient.hospitalizations track by $index">
+                          <div class="md-list-item-text" layout="column">
+                            <h2>{{ date.hospitalizationDate }} <i ng-show="date.hospitalizationStage">( {{ 'PatientDetail.HospitalizationTab.Stages.' +  date.hospitalizationStage | translate  }} )</i> </h3>
+                          </div>
+                          <md-button class="md-secondary md-icon-button" ng-click="removeHospitalization($index);">
+                            <md-icon>delete</md-icon>
+                          </md-button>
+                        </md-list-item>
+                      </md-list>
+                    </md-content>
+                  </div>
+                </div>
+              </md-content>
+            </form>
+          </md-tab>
+
+           <md-tab label="{{ 'PatientDetail.GrowthChart.LabelTitle' | translate }}" ng-click="reloadPatientData()">
+             <md-content class="md-padding">
+               <h1 class="md-display-2">{{ 'PatientDetail.GrowthChart.Title' | translate }}</h1>
+               <md-card md-theme="dark-grey" class="md-hue-1" md-theme-watch ng-hide="patientData.Sex">
+                 <md-card-title>
+                   <md-card-title-text>
+                     <span class="md-headline">{{ 'PatientDetail.GrowthChart.NoSex' | translate }}</span>
+                   </md-card-title-text>
+                 </md-card-title>
+               </md-card>
+               <growth-chart ng-if="patientData.Sex" patient="patientId" patient-data="patientData" ></growth-chart>
+             </md-content>
+           </md-tab>
+           <md-tab label="{{ 'PatientDetail.StagesTab.LabelTitle' | translate }}">
+             <md-content class="md-padding">
+               <h1 class="md-display-2">{{ 'PatientDetail.StagesTab.Title' | translate }}</h1>
+               <div layout="row" layout-sm="column" ng-repeat="row in patientStages">
+                 <div flex class="statusFrame" ng-repeat="col in row">
+                      <div stage-overview info="col" ></div>
+                 </div>
+               </div>
+             </md-content>
+           </md-tab>
+         </md-tabs>
+       </md-content>
+    </md-content>
+  </section>
